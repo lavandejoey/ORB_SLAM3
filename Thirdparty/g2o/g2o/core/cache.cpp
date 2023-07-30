@@ -38,7 +38,7 @@ namespace g2o {
   {
   }
 
-  Cache::CacheKey::CacheKey(const std::string& type_, const ParameterVector& parameters_) :
+  Cache::CacheKey::CacheKey(const ::std::string& type_, const ParameterVector& parameters_) :
     _type(type_), _parameters(parameters_)
   {
   }
@@ -51,7 +51,7 @@ namespace g2o {
   bool Cache::CacheKey::operator<(const Cache::CacheKey& c) const{
     if (_type < c._type)
       return true;
-    return std::lexicographical_compare (_parameters.begin( ), _parameters.end( ),
+    return ::std::lexicographical_compare (_parameters.begin( ), _parameters.end( ),
            c._parameters.begin( ), c._parameters.end( ) );
   }
 
@@ -92,7 +92,7 @@ namespace g2o {
     _updateNeeded=false;
   }
 
-  Cache* Cache::installDependency(const std::string& type_, const std::vector<int>& parameterIndices){
+  Cache* Cache::installDependency(const ::std::string& type_, const ::std::vector<int>& parameterIndices){
     ParameterVector pv(parameterIndices.size());
     for (size_t i=0; i<parameterIndices.size(); i++){
       if (parameterIndices[i]<0 || parameterIndices[i] >=(int)_parameters.size())

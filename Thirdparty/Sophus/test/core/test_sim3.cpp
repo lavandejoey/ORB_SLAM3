@@ -244,14 +244,14 @@ class Tests {
     return passed;
   }
 
-  std::vector<Sim3Type, Eigen::aligned_allocator<Sim3Type>> sim3_vec_;
-  std::vector<Tangent, Eigen::aligned_allocator<Tangent>> tangent_vec_;
-  std::vector<Point, Eigen::aligned_allocator<Point>> point_vec_;
+  ::std::vector<Sim3Type, Eigen::aligned_allocator<Sim3Type>> sim3_vec_;
+  ::std::vector<Tangent, Eigen::aligned_allocator<Tangent>> tangent_vec_;
+  ::std::vector<Point, Eigen::aligned_allocator<Point>> point_vec_;
 };
 
 int test_sim3() {
-  using std::cerr;
-  using std::endl;
+  using ::std::cerr;
+  using ::std::endl;
 
   cerr << "Test Sim3" << endl << endl;
   cerr << "Double tests: " << endl;

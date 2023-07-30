@@ -34,11 +34,11 @@ class LieGroupTests {
   static int constexpr num_parameters = LieGroup::num_parameters;
 
   LieGroupTests(
-      std::vector<LieGroup, Eigen::aligned_allocator<LieGroup>> const&
+      ::std::vector<LieGroup, Eigen::aligned_allocator<LieGroup>> const&
           group_vec,
-      std::vector<Tangent, Eigen::aligned_allocator<Tangent>> const&
+      ::std::vector<Tangent, Eigen::aligned_allocator<Tangent>> const&
           tangent_vec,
-      std::vector<Point, Eigen::aligned_allocator<Point>> const& point_vec)
+      ::std::vector<Point, Eigen::aligned_allocator<Point>> const& point_vec)
       : group_vec_(group_vec),
         tangent_vec_(tangent_vec),
         point_vec_(point_vec) {}
@@ -133,9 +133,9 @@ class LieGroupTests {
 
   template <class G = LieGroup>
   enable_if_t<std::is_same<G, Sophus::SO2<Scalar>>::value ||
-                  std::is_same<G, Sophus::SO3<Scalar>>::value ||
-                  std::is_same<G, Sophus::SE2<Scalar>>::value ||
-                  std::is_same<G, Sophus::SE3<Scalar>>::value,
+                  ::std::is_same<G, Sophus::SO3<Scalar>>::value ||
+                  ::std::is_same<G, Sophus::SE2<Scalar>>::value ||
+                  ::std::is_same<G, Sophus::SE3<Scalar>>::value,
               bool>
   additionalDerivativeTest() {
     bool passed = true;
@@ -322,7 +322,7 @@ class LieGroupTests {
 
   bool interpolateAndMeanTest() {
     bool passed = true;
-    using std::sqrt;
+    using ::std::sqrt;
     Scalar const eps = Constants<Scalar>::epsilon();
     Scalar const sqrt_eps = sqrt(eps);
     // TODO: Improve accuracy of ``interpolate`` (and hence ``exp`` and ``log``)
@@ -406,7 +406,7 @@ class LieGroupTests {
         // test average({A, B}) == interp(A, B):
         LieGroup foo_T_quiz = interpolate(foo_T_bar, foo_T_baz, 0.5);
         optional<LieGroup> foo_T_iaverage = iterativeMean(
-            std::array<LieGroup, 2>({{foo_T_bar, foo_T_baz}}), 20);
+            ::std::array<LieGroup, 2>({{foo_T_bar, foo_T_baz}}), 20);
         optional<LieGroup> foo_T_average =
             average(std::array<LieGroup, 2>({{foo_T_bar, foo_T_baz}}));
         SOPHUS_TEST(passed, bool(foo_T_average),
@@ -440,7 +440,7 @@ class LieGroupTests {
 
   bool testRandomSmoke() {
     bool passed = true;
-    std::default_random_engine engine;
+    ::std::default_random_engine engine;
     for (int i = 0; i < 100; ++i) {
       LieGroup g = LieGroup::sampleUniform(engine);
       SOPHUS_TEST_EQUAL(passed, g.params(), g.params());
@@ -499,15 +499,15 @@ class LieGroupTests {
     return T * p;
   }
 
-  std::vector<LieGroup, Eigen::aligned_allocator<LieGroup>> group_vec_;
-  std::vector<Tangent, Eigen::aligned_allocator<Tangent>> tangent_vec_;
-  std::vector<Point, Eigen::aligned_allocator<Point>> point_vec_;
+  ::std::vector<LieGroup, Eigen::aligned_allocator<LieGroup>> group_vec_;
+  ::std::vector<Tangent, Eigen::aligned_allocator<Tangent>> tangent_vec_;
+  ::std::vector<Point, Eigen::aligned_allocator<Point>> point_vec_;
 };
 
 template <class Scalar>
 std::vector<SE3<Scalar>, Eigen::aligned_allocator<SE3<Scalar>>> getTestSE3s() {
   Scalar const kPi = Constants<Scalar>::pi();
-  std::vector<SE3<Scalar>, Eigen::aligned_allocator<SE3<Scalar>>> se3_vec;
+  ::std::vector<SE3<Scalar>, Eigen::aligned_allocator<SE3<Scalar>>> se3_vec;
   se3_vec.push_back(SE3<Scalar>(
       SO3<Scalar>::exp(Vector3<Scalar>(Scalar(0.2), Scalar(0.5), Scalar(0.0))),
       Vector3<Scalar>(Scalar(0), Scalar(0), Scalar(0))));
@@ -546,7 +546,7 @@ std::vector<SE3<Scalar>, Eigen::aligned_allocator<SE3<Scalar>>> getTestSE3s() {
 template <class T>
 std::vector<SE2<T>, Eigen::aligned_allocator<SE2<T>>> getTestSE2s() {
   T const kPi = Constants<T>::pi();
-  std::vector<SE2<T>, Eigen::aligned_allocator<SE2<T>>> se2_vec;
+  ::std::vector<SE2<T>, Eigen::aligned_allocator<SE2<T>>> se2_vec;
   se2_vec.push_back(SE2<T>());
   se2_vec.push_back(SE2<T>(SO2<T>(0.2), Vector2<T>(10, 0)));
   se2_vec.push_back(SE2<T>::transY(100));

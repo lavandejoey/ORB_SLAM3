@@ -50,7 +50,7 @@ namespace g2o {
     is >> cam2world[6];
 //    if (! is) {
 //      // if the scale is not specified we set it to 1;
-//      std::cerr << "!s";
+//      ::std::cerr << "!s";
 //      cam2world[6]=0.;
 //    }
 

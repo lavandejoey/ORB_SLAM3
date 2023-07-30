@@ -68,14 +68,14 @@ namespace Sophus {
 template <class... Args>
 SOPHUS_FUNC void defaultEnsure(char const* function, char const* file, int line,
                                char const* description, Args&&... args) {
-  std::printf("Sophus ensure failed in function '%s', file '%s', line %d.\n",
+  ::std::printf("Sophus ensure failed in function '%s', file '%s', line %d.\n",
               function, file, line);
 #ifdef __CUDACC__
-  std::printf("%s", description);
+  ::std::printf("%s", description);
 #else
-  std::cout << details::FormatString(description, std::forward<Args>(args)...)
-            << std::endl;
-  std::abort();
+  ::std::cout << details::FormatString(description, ::std::forward<Args>(args)...)
+            << ::std::endl;
+  ::std::abort();
 #endif
 }
 }  // namespace Sophus
@@ -94,7 +94,7 @@ struct Constants {
   SOPHUS_FUNC static Scalar epsilon() { return Scalar(1e-10); }
 
   SOPHUS_FUNC static Scalar epsilonSqrt() {
-    using std::sqrt;
+    using ::std::sqrt;
     return sqrt(epsilon());
   }
 
@@ -109,7 +109,7 @@ struct Constants<float> {
     return static_cast<float>(1e-5);
   }
 
-  SOPHUS_FUNC static float epsilonSqrt() { return std::sqrt(epsilon()); }
+  SOPHUS_FUNC static float epsilonSqrt() { return ::std::sqrt(epsilon()); }
 
   SOPHUS_FUNC static float constexpr pi() {
     return 3.141592653589793238462643383279502884f;
@@ -126,7 +126,7 @@ constexpr nullopt_t nullopt{};
 /// Lightweight optional implementation which requires ``T`` to have a
 /// default constructor.
 ///
-/// TODO: Replace with std::optional once Sophus moves to c++17.
+/// TODO: Replace with ::std::optional once Sophus moves to c++17.
 ///
 template <class T>
 class optional {
@@ -165,13 +165,13 @@ class optional {
 };
 
 template <bool B, class T = void>
-using enable_if_t = typename std::enable_if<B, T>::type;
+using enable_if_t = typename ::std::enable_if<B, T>::type;
 
 template <class G>
 struct IsUniformRandomBitGenerator {
-  static const bool value = std::is_unsigned<typename G::result_type>::value &&
-                            std::is_unsigned<decltype(G::min())>::value &&
-                            std::is_unsigned<decltype(G::max())>::value;
+  static const bool value = ::std::is_unsigned<typename G::result_type>::value &&
+                            ::std::is_unsigned<decltype(G::min())>::value &&
+                            ::std::is_unsigned<decltype(G::max())>::value;
 };
 }  // namespace Sophus
 

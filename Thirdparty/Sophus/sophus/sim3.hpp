@@ -221,7 +221,7 @@ class Sim3Base {
   ///   ``p_bar = bar_sR_foo * p_foo + t_bar``.
   ///
   template <typename PointDerived,
-            typename = typename std::enable_if<
+            typename = typename ::std::enable_if<
                 IsFixedSizeVector<PointDerived, 3>::value>::type>
   SOPHUS_FUNC PointProduct<PointDerived> operator*(
       Eigen::MatrixBase<PointDerived> const& p) const {
@@ -231,7 +231,7 @@ class Sim3Base {
   /// Group action on homogeneous 3-points. See above for more details.
   ///
   template <typename HPointDerived,
-            typename = typename std::enable_if<
+            typename = typename ::std::enable_if<
                 IsFixedSizeVector<HPointDerived, 4>::value>::type>
   SOPHUS_FUNC HomogeneousPointProduct<HPointDerived> operator*(
       Eigen::MatrixBase<HPointDerived> const& p) const {
@@ -257,8 +257,8 @@ class Sim3Base {
   /// type of the multiplication is compatible with this SO3's Scalar type.
   ///
   template <typename OtherDerived,
-            typename = typename std::enable_if<
-                std::is_same<Scalar, ReturnScalar<OtherDerived>>::value>::type>
+            typename = typename ::std::enable_if<
+                ::std::is_same<Scalar, ReturnScalar<OtherDerived>>::value>::type>
   SOPHUS_FUNC Sim3Base<Derived>& operator*=(
       Sim3Base<OtherDerived> const& other) {
     *static_cast<Derived*>(this) = *this * other;
@@ -596,7 +596,7 @@ class Sim3 : public Sim3Base<Sim3<Scalar_, Options>> {
   ///
   template <class UniformRandomBitGenerator>
   static Sim3 sampleUniform(UniformRandomBitGenerator& generator) {
-    std::uniform_real_distribution<Scalar> uniform(Scalar(-1), Scalar(1));
+    ::std::uniform_real_distribution<Scalar> uniform(Scalar(-1), Scalar(1));
     return Sim3(RxSO3<Scalar>::sampleUniform(generator),
                 Vector3<Scalar>(uniform(generator), uniform(generator),
                                 uniform(generator)));

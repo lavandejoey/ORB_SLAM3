@@ -77,13 +77,13 @@ public:
     void AddMapPoint(MapPoint* pMP);
     void EraseMapPoint(MapPoint* pMP);
     void EraseKeyFrame(KeyFrame* pKF);
-    void SetReferenceMapPoints(const std::vector<MapPoint*> &vpMPs);
+    void SetReferenceMapPoints(const ::std::vector<MapPoint*> &vpMPs);
     void InformNewBigChange();
     int GetLastBigChangeIdx();
 
-    std::vector<KeyFrame*> GetAllKeyFrames();
-    std::vector<MapPoint*> GetAllMapPoints();
-    std::vector<MapPoint*> GetReferenceMapPoints();
+    ::std::vector<KeyFrame*> GetAllKeyFrames();
+    ::std::vector<MapPoint*> GetAllMapPoints();
+    ::std::vector<MapPoint*> GetReferenceMapPoints();
 
     long unsigned int MapPointsInMap();
     long unsigned  KeyFramesInMap();
@@ -138,10 +138,10 @@ public:
     vector<KeyFrame*> mvpKeyFrameOrigins;
     vector<unsigned long int> mvBackupKeyFrameOriginsId;
     KeyFrame* mpFirstRegionKF;
-    std::mutex mMutexMapUpdate;
+    ::std::mutex mMutexMapUpdate;
 
     // This avoid that two points are created simultaneously in separate threads (id conflict)
-    std::mutex mMutexPointCreation;
+    ::std::mutex mMutexPointCreation;
 
     bool mbFail;
 
@@ -152,19 +152,19 @@ public:
     static long unsigned int nNextId;
 
     // DEBUG: show KFs which are used in LBA
-    std::set<long unsigned int> msOptKFs;
-    std::set<long unsigned int> msFixedKFs;
+    ::std::set<long unsigned int> msOptKFs;
+    ::std::set<long unsigned int> msFixedKFs;
 
 protected:
 
     long unsigned int mnId;
 
-    std::set<MapPoint*> mspMapPoints;
-    std::set<KeyFrame*> mspKeyFrames;
+    ::std::set<MapPoint*> mspMapPoints;
+    ::std::set<KeyFrame*> mspKeyFrames;
 
     // Save/load, the set structure is broken in libboost 1.58 for ubuntu 16.04, a vector is serializated
-    std::vector<MapPoint*> mvpBackupMapPoints;
-    std::vector<KeyFrame*> mvpBackupKeyFrames;
+    ::std::vector<MapPoint*> mvpBackupMapPoints;
+    ::std::vector<KeyFrame*> mvpBackupKeyFrames;
 
     KeyFrame* mpKFinitial;
     KeyFrame* mpKFlowerID;
@@ -172,7 +172,7 @@ protected:
     unsigned long int mnBackupKFinitialID;
     unsigned long int mnBackupKFlowerID;
 
-    std::vector<MapPoint*> mvpReferenceMapPoints;
+    ::std::vector<MapPoint*> mvpReferenceMapPoints;
 
     bool mbImuInitialized;
 
@@ -199,7 +199,7 @@ protected:
     bool mbIMU_BA2;
 
     // Mutex
-    std::mutex mMutexMap;
+    ::std::mutex mMutexMap;
 
 };
 

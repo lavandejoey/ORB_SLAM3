@@ -219,7 +219,7 @@ class Sim2Base {
   ///   ``p_bar = bar_sR_foo * p_foo + t_bar``.
   ///
   template <typename PointDerived,
-            typename = typename std::enable_if<
+            typename = typename ::std::enable_if<
                 IsFixedSizeVector<PointDerived, 2>::value>::type>
   SOPHUS_FUNC PointProduct<PointDerived> operator*(
       Eigen::MatrixBase<PointDerived> const& p) const {
@@ -229,7 +229,7 @@ class Sim2Base {
   /// Group action on homogeneous 2-points. See above for more details.
   ///
   template <typename HPointDerived,
-            typename = typename std::enable_if<
+            typename = typename ::std::enable_if<
                 IsFixedSizeVector<HPointDerived, 3>::value>::type>
   SOPHUS_FUNC HomogeneousPointProduct<HPointDerived> operator*(
       Eigen::MatrixBase<HPointDerived> const& p) const {
@@ -266,8 +266,8 @@ class Sim2Base {
   /// type of the multiplication is compatible with this SO2's Scalar type.
   ///
   template <typename OtherDerived,
-            typename = typename std::enable_if<
-                std::is_same<Scalar, ReturnScalar<OtherDerived>>::value>::type>
+            typename = typename ::std::enable_if<
+                ::std::is_same<Scalar, ReturnScalar<OtherDerived>>::value>::type>
   SOPHUS_FUNC Sim2Base<Derived>& operator*=(
       Sim2Base<OtherDerived> const& other) {
     *static_cast<Derived*>(this) = *this * other;
@@ -581,7 +581,7 @@ class Sim2 : public Sim2Base<Sim2<Scalar_, Options>> {
   ///
   template <class UniformRandomBitGenerator>
   static Sim2 sampleUniform(UniformRandomBitGenerator& generator) {
-    std::uniform_real_distribution<Scalar> uniform(Scalar(-1), Scalar(1));
+    ::std::uniform_real_distribution<Scalar> uniform(Scalar(-1), Scalar(1));
     return Sim2(RxSO2<Scalar>::sampleUniform(generator),
                 Vector2<Scalar>(uniform(generator), uniform(generator)));
   }

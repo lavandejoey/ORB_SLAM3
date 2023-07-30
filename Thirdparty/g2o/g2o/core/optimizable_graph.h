@@ -68,7 +68,7 @@ namespace g2o {
       AT_NUM_ELEMENTS, // keep as last element
     };
 
-    typedef std::set<HyperGraphAction*>    HyperGraphActionSet;
+    typedef ::std::set<HyperGraphAction*>    HyperGraphActionSet;
 
     // forward declarations
     class  Vertex;
@@ -117,9 +117,9 @@ namespace g2o {
     };
 
     //! vector container for vertices
-    typedef std::vector<OptimizableGraph::Vertex*>      VertexContainer;
+    typedef ::std::vector<OptimizableGraph::Vertex*>      VertexContainer;
     //! vector container for edges
-    typedef std::vector<OptimizableGraph::Edge*>        EdgeContainer;
+    typedef ::std::vector<OptimizableGraph::Edge*>        EdgeContainer;
 
     /**
      * \brief A general case Vertex for optimization
@@ -194,10 +194,10 @@ namespace g2o {
          * Implement setEstimateDataImpl()
          * @return true on success
          */
-        bool setEstimateData(const std::vector<double>& estimate) { 
+        bool setEstimateData(const ::std::vector<double>& estimate) {
 #ifndef NDEBUG
           int dim = estimateDimension();
-          assert((dim == -1) || (estimate.size() == std::size_t(dim)));
+          assert((dim == -1) || (estimate.size() == ::std::size_t(dim)));
 #endif
           return setEstimateData(&estimate[0]);
         };
@@ -238,10 +238,10 @@ namespace g2o {
          * Implement setMinimalEstimateDataImpl()
          * @return true on success
          */
-        bool setMinimalEstimateData(const std::vector<double>& estimate) {
+        bool setMinimalEstimateData(const ::std::vector<double>& estimate) {
 #ifndef NDEBUG
           int dim = minimalEstimateDimension();
-          assert((dim == -1) || (estimate.size() == std::size_t(dim)));
+          assert((dim == -1) || (estimate.size() == ::std::size_t(dim)));
 #endif
           return setMinimalEstimateData(&estimate[0]);
         };
@@ -411,7 +411,7 @@ namespace g2o {
          */
         virtual bool setMeasurementFromState();
 
-        //! if NOT NULL, error of this edge will be robustifed with the kernel
+        //! if NOT nullptr, error of this edge will be robustifed with the kernel
         RobustKernel* robustKernel() const { return _robustKernel;}
         /**
          * specify the robust kernel to be used in this edge
@@ -499,7 +499,7 @@ namespace g2o {
         RobustKernel* _robustKernel;
         long long _internalId;
 
-        std::vector<int> _cacheIds;
+        ::std::vector<int> _cacheIds;
 
         template <typename ParameterType>
           bool installParameter(ParameterType*& p, size_t argNo, int paramId=-1){
@@ -513,15 +513,15 @@ namespace g2o {
 
         template <typename CacheType>
           void resolveCache(CacheType*& cache, OptimizableGraph::Vertex*, 
-              const std::string& _type, 
+              const ::std::string& _type,
               const ParameterVector& parameters);
 
         bool resolveParameters();
         virtual bool resolveCaches();
 
-        std::vector<std::string> _parameterTypes;
-        std::vector<Parameter**> _parameters;
-        std::vector<int> _parameterIds;
+        ::std::vector<std::string> _parameterTypes;
+        ::std::vector<Parameter**> _parameters;
+        ::std::vector<int> _parameterIds;
     };
 
     //! returns the vertex number <i>id</i> appropriately casted
@@ -560,7 +560,7 @@ namespace g2o {
     /**
      * iterates over all vertices and returns a set of all the vertex dimensions in the graph
      */
-    std::set<int> dimensions() const;
+    ::std::set<int> dimensions() const;
 
     /**
      * carry out n iterations
@@ -620,14 +620,14 @@ namespace g2o {
      * VERTEX_CAM=VERTEX_SE3:EXPMAP,EDGE_PROJECT_P2MC=EDGE_PROJECT_XYZ:EXPMAP
      * This will change the occurance of VERTEX_CAM in the file to VERTEX_SE3:EXPMAP
      */
-    void setRenamedTypesFromString(const std::string& types);
+    void setRenamedTypesFromString(const ::std::string& types);
 
     /**
      * test whether a solver is suitable for optimizing this graph.
      * @param solverProperty the solver property to evaluate.
      * @param vertDims should equal to the set returned by dimensions() to avoid re-evaluating.
      */
-    bool isSolverSuitable(const OptimizationAlgorithmProperty& solverProperty, const std::set<int>& vertDims = std::set<int>()) const;
+    bool isSolverSuitable(const OptimizationAlgorithmProperty& solverProperty, const ::std::set<int>& vertDims = ::std::set<int>()) const;
 
     /**
      * remove the parameters of the graph
@@ -668,9 +668,9 @@ namespace g2o {
     static bool initMultiThreading();
 
   protected:
-    std::map<std::string, std::string> _renamedTypesLookup;
+    ::std::map<std::string, ::std::string> _renamedTypesLookup;
     long long _nextEdgeId;
-    std::vector<HyperGraphActionSet> _graphActions;
+    ::std::vector<HyperGraphActionSet> _graphActions;
 
     // do not watch this. To be removed soon, or integrated in a nice way
     bool _edge_has_id;

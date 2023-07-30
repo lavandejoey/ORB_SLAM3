@@ -49,7 +49,7 @@ namespace g2o {
         int _id;
     };
 
-    typedef std::vector<Parameter*> ParameterVector;
+    typedef ::std::vector<Parameter*> ParameterVector;
 
 } // end namespace
 

@@ -70,7 +70,7 @@ Factory* Factory::instance()
   return factoryInstance;
 }
 
-void Factory::registerType(const std::string& tag, AbstractHyperGraphElementCreator* c)
+void Factory::registerType(const ::std::string& tag, AbstractHyperGraphElementCreator* c)
 {
   CreatorMap::const_iterator foundIt = _creator.find(tag);
   if (foundIt != _creator.end()) {
@@ -125,7 +125,7 @@ void Factory::registerType(const std::string& tag, AbstractHyperGraphElementCrea
   delete element;
 }
 
-  void Factory::unregisterType(const std::string& tag)
+  void Factory::unregisterType(const ::std::string& tag)
   {
     // Look for the tag
     CreatorMap::iterator tagPosition = _creator.find(tag);
@@ -144,7 +144,7 @@ void Factory::registerType(const std::string& tag, AbstractHyperGraphElementCrea
     }
   }
 
-HyperGraph::HyperGraphElement* Factory::construct(const std::string& tag) const
+HyperGraph::HyperGraphElement* Factory::construct(const ::std::string& tag) const
 {
   CreatorMap::const_iterator foundIt = _creator.find(tag);
   if (foundIt != _creator.end()) {
@@ -154,9 +154,9 @@ HyperGraph::HyperGraphElement* Factory::construct(const std::string& tag) const
   return 0;
 }
 
-const std::string& Factory::tag(const HyperGraph::HyperGraphElement* e) const
+const ::std::string& Factory::tag(const HyperGraph::HyperGraphElement* e) const
 {
-  static std::string emptyStr("");
+  static ::std::string emptyStr("");
   TagLookup::const_iterator foundIt = _tagLookup.find(typeid(*e).name());
   if (foundIt != _tagLookup.end())
     return foundIt->second;
@@ -170,7 +170,7 @@ void Factory::fillKnownTypes(std::vector<std::string>& types) const
     types.push_back(it->first);
 }
 
-bool Factory::knowsTag(const std::string& tag, int* elementType) const
+bool Factory::knowsTag(const ::std::string& tag, int* elementType) const
 {
   CreatorMap::const_iterator foundIt = _creator.find(tag);
   if (foundIt == _creator.end()) {
@@ -201,7 +201,7 @@ void Factory::printRegisteredTypes(std::ostream& os, bool comment) const
   }
 }
 
-HyperGraph::HyperGraphElement* Factory::construct(const std::string& tag, const HyperGraph::GraphElemBitset& elemsToConstruct) const
+HyperGraph::HyperGraphElement* Factory::construct(const ::std::string& tag, const HyperGraph::GraphElemBitset& elemsToConstruct) const
 {
   if (elemsToConstruct.none()) {
     return construct(tag);

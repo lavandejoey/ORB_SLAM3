@@ -34,8 +34,8 @@ SOPHUS_FUNC bool isScaledOrthogonalAndPositive(Eigen::MatrixBase<D> const& sR) {
   using Scalar = typename D::Scalar;
   static int const N = D::RowsAtCompileTime;
   static int const M = D::ColsAtCompileTime;
-  using std::pow;
-  using std::sqrt;
+  using ::std::pow;
+  using ::std::sqrt;
 
   Scalar det = sR.determinant();
 
@@ -57,7 +57,7 @@ SOPHUS_FUNC bool isScaledOrthogonalAndPositive(Eigen::MatrixBase<D> const& sR) {
 /// orthogonal matrix with positive determinant.
 template <class D>
 SOPHUS_FUNC enable_if_t<
-    std::is_floating_point<typename D::Scalar>::value,
+    ::std::is_floating_point<typename D::Scalar>::value,
     Matrix<typename D::Scalar, D::RowsAtCompileTime, D::RowsAtCompileTime>>
 makeRotationMatrix(Eigen::MatrixBase<D> const& R) {
   using Scalar = typename D::Scalar;

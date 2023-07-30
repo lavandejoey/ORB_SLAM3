@@ -78,32 +78,32 @@ int main(int argc, char **argv)
         if(imageScale != 1.f)
         {
 #ifdef REGISTER_TIMES
-            std::chrono::steady_clock::time_point t_Start_Resize = std::chrono::steady_clock::now();
+            ::std::chrono::steady_clock::time_point t_Start_Resize = ::std::chrono::steady_clock::now();
 #endif
             int width = im.cols * imageScale;
             int height = im.rows * imageScale;
             cv::resize(im, im, cv::Size(width, height));
 #ifdef REGISTER_TIMES
-            std::chrono::steady_clock::time_point t_End_Resize = std::chrono::steady_clock::now();
+            ::std::chrono::steady_clock::time_point t_End_Resize = ::std::chrono::steady_clock::now();
 
-            t_resize = std::chrono::duration_cast<std::chrono::duration<double,std::milli> >(t_End_Resize - t_Start_Resize).count();
+            t_resize = ::std::chrono::duration_cast<std::chrono::duration<double,std::milli> >(t_End_Resize - t_Start_Resize).count();
             SLAM.InsertResizeTime(t_resize);
 #endif
         }
 
-        std::chrono::steady_clock::time_point t1 = std::chrono::steady_clock::now();
+        ::std::chrono::steady_clock::time_point t1 = ::std::chrono::steady_clock::now();
 
         // Pass the image to the SLAM system
         SLAM.TrackMonocular(im,tframe,vector<ORB_SLAM3::IMU::Point>(), vstrImageFilenames[ni]);
 
-        std::chrono::steady_clock::time_point t2 = std::chrono::steady_clock::now();
+        ::std::chrono::steady_clock::time_point t2 = ::std::chrono::steady_clock::now();
 
 #ifdef REGISTER_TIMES
-            t_track = t_resize + std::chrono::duration_cast<std::chrono::duration<double,std::milli> >(t2 - t1).count();
+            t_track = t_resize + ::std::chrono::duration_cast<std::chrono::duration<double,std::milli> >(t2 - t1).count();
             SLAM.InsertTrackTime(t_track);
 #endif
 
-        double ttrack= std::chrono::duration_cast<std::chrono::duration<double> >(t2 - t1).count();
+        double ttrack= ::std::chrono::duration_cast<std::chrono::duration<double> >(t2 - t1).count();
 
         vTimesTrack[ni]=ttrack;
 

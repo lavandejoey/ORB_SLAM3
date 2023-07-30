@@ -53,8 +53,8 @@ namespace g2o {
   class BaseVertex : public OptimizableGraph::Vertex {
     public:
     typedef T EstimateType;
-    typedef std::stack<EstimateType, 
-                       std::vector<EstimateType,  Eigen::aligned_allocator<EstimateType> > >
+    typedef ::std::stack<EstimateType,
+                       ::std::vector<EstimateType,  Eigen::aligned_allocator<EstimateType> > >
     BackupStackType;
 
     static const int Dimension = D;           ///< dimension of the estimate (minimal) in the manifold space

@@ -10,13 +10,13 @@ namespace details {
 template <class Scalar>
 class Pretty {
  public:
-  static std::string impl(Scalar s) { return FormatString("%", s); }
+  static ::std::string impl(Scalar s) { return FormatString("%", s); }
 };
 
 template <class Scalar, int M, int N>
 class Pretty<Eigen::Matrix<Scalar, M, N>> {
  public:
-  static std::string impl(Matrix<Scalar, M, N> const& v) {
+  static ::std::string impl(Matrix<Scalar, M, N> const& v) {
     return FormatString("\n%\n", v);
   }
 };
@@ -28,10 +28,10 @@ std::string pretty(T const& v) {
 
 template <class... Args>
 void testFailed(bool& passed, char const* func, char const* file, int line,
-                std::string const& msg) {
-  std::cerr << FormatString("Test failed in function %, file %, line %\n", func,
+                ::std::string const& msg) {
+  ::std::cerr << FormatString("Test failed in function %, file %, line %\n", func,
                             file, line);
-  std::cerr << msg << "\n\n";
+  ::std::cerr << msg << "\n\n";
   passed = false;
 }
 }  // namespace details
@@ -39,11 +39,11 @@ void testFailed(bool& passed, char const* func, char const* file, int line,
 void processTestResult(bool passed) {
   if (!passed) {
     // LCOV_EXCL_START
-    std::cerr << "failed!" << std::endl << std::endl;
+    ::std::cerr << "failed!" << ::std::endl << ::std::endl;
     exit(-1);
     // LCOV_EXCL_STOP
   }
-  std::cerr << "passed." << std::endl << std::endl;
+  ::std::cerr << "passed." << ::std::endl << ::std::endl;
 }
 }  // namespace Sophus
 
@@ -54,7 +54,7 @@ void processTestResult(bool passed) {
 #define SOPHUS_TEST(passed, condition, ...)                                    \
   do {                                                                         \
     if (!(condition)) {                                                        \
-      std::string msg = Sophus::details::FormatString(                         \
+      ::std::string msg = Sophus::details::FormatString(                         \
           "condition ``%`` is false\n", SOPHUS_STRINGIFY(condition));          \
       msg += Sophus::details::FormatString(__VA_ARGS__);                       \
       Sophus::details::testFailed(passed, SOPHUS_FUNCTION, __FILE__, __LINE__, \
@@ -67,7 +67,7 @@ void processTestResult(bool passed) {
 #define SOPHUS_TEST_EQUAL(passed, left, right, ...)                            \
   do {                                                                         \
     if (left != right) {                                                       \
-      std::string msg = Sophus::details::FormatString(                         \
+      ::std::string msg = Sophus::details::FormatString(                         \
           "% (=%) is not equal to % (=%)\n", SOPHUS_STRINGIFY(left),           \
           Sophus::details::pretty(left), SOPHUS_STRINGIFY(right),              \
           Sophus::details::pretty(right));                                     \
@@ -82,7 +82,7 @@ void processTestResult(bool passed) {
 #define SOPHUS_TEST_NEQ(passed, left, right, ...)                              \
   do {                                                                         \
     if (left == right) {                                                       \
-      std::string msg = Sophus::details::FormatString(                         \
+      ::std::string msg = Sophus::details::FormatString(                         \
           "% (=%) shoudl not be equal to % (=%)\n", SOPHUS_STRINGIFY(left),    \
           Sophus::details::pretty(left), SOPHUS_STRINGIFY(right),              \
           Sophus::details::pretty(right));                                     \
@@ -98,7 +98,7 @@ void processTestResult(bool passed) {
   do {                                                                         \
     auto nrm = Sophus::maxMetric((left), (right));                             \
     if (!(nrm < (thr))) {                                                      \
-      std::string msg = Sophus::details::FormatString(                         \
+      ::std::string msg = Sophus::details::FormatString(                         \
           "% (=%) is not approx % (=%); % is %; nrm is %\n",                   \
           SOPHUS_STRINGIFY(left), Sophus::details::pretty(left),               \
           SOPHUS_STRINGIFY(right), Sophus::details::pretty(right),             \
@@ -115,7 +115,7 @@ void processTestResult(bool passed) {
   do {                                                                         \
     auto nrm = Sophus::maxMetric((left), (right));                             \
     if (nrm < (thr)) {                                                         \
-      std::string msg = Sophus::details::FormatString(                         \
+      ::std::string msg = Sophus::details::FormatString(                         \
           "% (=%) is approx % (=%), but it should not!\n % is %; nrm is %\n",  \
           SOPHUS_STRINGIFY(left), Sophus::details::pretty(left),               \
           SOPHUS_STRINGIFY(right), Sophus::details::pretty(right),             \

@@ -158,7 +158,7 @@ class SE2Base {
   /// of SE(2).
   ///
   SOPHUS_FUNC Tangent log() const {
-    using std::abs;
+    using ::std::abs;
 
     Tangent upsilon_theta;
     Scalar theta = so2().log();
@@ -241,7 +241,7 @@ class SE2Base {
   ///   ``p_bar = bar_R_foo * p_foo + t_bar``.
   ///
   template <typename PointDerived,
-            typename = typename std::enable_if<
+            typename = typename ::std::enable_if<
                 IsFixedSizeVector<PointDerived, 2>::value>::type>
   SOPHUS_FUNC PointProduct<PointDerived> operator*(
       Eigen::MatrixBase<PointDerived> const& p) const {
@@ -251,7 +251,7 @@ class SE2Base {
   /// Group action on homogeneous 2-points. See above for more details.
   ///
   template <typename HPointDerived,
-            typename = typename std::enable_if<
+            typename = typename ::std::enable_if<
                 IsFixedSizeVector<HPointDerived, 3>::value>::type>
   SOPHUS_FUNC HomogeneousPointProduct<HPointDerived> operator*(
       Eigen::MatrixBase<HPointDerived> const& p) const {
@@ -276,8 +276,8 @@ class SE2Base {
   /// type of the multiplication is compatible with this SO2's Scalar type.
   ///
   template <typename OtherDerived,
-            typename = typename std::enable_if<
-                std::is_same<Scalar, ReturnScalar<OtherDerived>>::value>::type>
+            typename = typename ::std::enable_if<
+                ::std::is_same<Scalar, ReturnScalar<OtherDerived>>::value>::type>
   SOPHUS_FUNC SE2Base<Derived>& operator*=(SE2Base<OtherDerived> const& other) {
     *static_cast<Derived*>(this) = *this * other;
     return *this;
@@ -475,10 +475,10 @@ class SE2 : public SE2Base<SE2<Scalar_, Options>> {
   ///
   SOPHUS_FUNC static Sophus::Matrix<Scalar, num_parameters, DoF> Dx_exp_x(
       Tangent const& upsilon_theta) {
-    using std::abs;
-    using std::cos;
-    using std::pow;
-    using std::sin;
+    using ::std::abs;
+    using ::std::cos;
+    using ::std::pow;
+    using ::std::sin;
     Sophus::Matrix<Scalar, num_parameters, DoF> J;
     Sophus::Vector<Scalar, 2> upsilon = upsilon_theta.template head<2>();
     Scalar theta = upsilon_theta[2];
@@ -560,7 +560,7 @@ class SE2 : public SE2Base<SE2<Scalar_, Options>> {
     SO2<Scalar> so2 = SO2<Scalar>::exp(theta);
     Scalar sin_theta_by_theta;
     Scalar one_minus_cos_theta_by_theta;
-    using std::abs;
+    using ::std::abs;
 
     if (abs(theta) < Constants<Scalar>::epsilon()) {
       Scalar theta_sq = theta * theta;
@@ -667,7 +667,7 @@ class SE2 : public SE2Base<SE2<Scalar_, Options>> {
   ///
   template <class UniformRandomBitGenerator>
   static SE2 sampleUniform(UniformRandomBitGenerator& generator) {
-    std::uniform_real_distribution<Scalar> uniform(Scalar(-1), Scalar(1));
+    ::std::uniform_real_distribution<Scalar> uniform(Scalar(-1), Scalar(1));
     return SE2(SO2<Scalar>::sampleUniform(generator),
                Vector2<Scalar>(uniform(generator), uniform(generator)));
   }

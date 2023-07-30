@@ -130,7 +130,7 @@ namespace g2o {
           if (! _wasPDInAllIterations) {
             // simple strategy to control the damping factor
             if (solverOk) {
-              _currentLambda = std::max(minLambda, _currentLambda / (0.5 * _lamdbaFactor->value()));
+              _currentLambda = ::std::max(minLambda, _currentLambda / (0.5 * _lamdbaFactor->value()));
             } else {
               _currentLambda *= _lamdbaFactor->value();
               if (_currentLambda > maxLambda) {
@@ -197,7 +197,7 @@ namespace g2o {
 
       // update trust region based on the step quality
       if (rho > 0.75)
-        _delta = std::max(_delta, 3. * _hdl.norm());
+        _delta = ::std::max(_delta, 3. * _hdl.norm());
       else if (rho < 0.25)
         _delta *= 0.5;
     } while (!goodStep && numTries < _maxTrialsAfterFailure->value());

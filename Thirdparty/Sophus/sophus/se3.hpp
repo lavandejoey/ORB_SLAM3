@@ -226,9 +226,9 @@ class SE3Base {
     // and logarithms of orthogonal matrices", IJRA 2002.
     // https:///pdfs.semanticscholar.org/cfe3/e4b39de63c8cabd89bf3feff7f5449fc981d.pdf
     // (Sec. 6., pp. 8)
-    using std::abs;
-    using std::cos;
-    using std::sin;
+    using ::std::abs;
+    using ::std::cos;
+    using ::std::sin;
     Tangent upsilon_omega;
     auto omega_and_theta = so3().logAndTheta();
     Scalar theta = omega_and_theta.theta;
@@ -316,7 +316,7 @@ class SE3Base {
   ///   ``p_bar = bar_R_foo * p_foo + t_bar``.
   ///
   template <typename PointDerived,
-            typename = typename std::enable_if<
+            typename = typename ::std::enable_if<
                 IsFixedSizeVector<PointDerived, 3>::value>::type>
   SOPHUS_FUNC PointProduct<PointDerived> operator*(
       Eigen::MatrixBase<PointDerived> const& p) const {
@@ -326,7 +326,7 @@ class SE3Base {
   /// Group action on homogeneous 3-points. See above for more details.
   ///
   template <typename HPointDerived,
-            typename = typename std::enable_if<
+            typename = typename ::std::enable_if<
                 IsFixedSizeVector<HPointDerived, 4>::value>::type>
   SOPHUS_FUNC HomogeneousPointProduct<HPointDerived> operator*(
       Eigen::MatrixBase<HPointDerived> const& p) const {
@@ -351,8 +351,8 @@ class SE3Base {
   /// type of the multiplication is compatible with this SE3's Scalar type.
   ///
   template <typename OtherDerived,
-            typename = typename std::enable_if<
-                std::is_same<Scalar, ReturnScalar<OtherDerived>>::value>::type>
+            typename = typename ::std::enable_if<
+                ::std::is_same<Scalar, ReturnScalar<OtherDerived>>::value>::type>
   SOPHUS_FUNC SE3Base<Derived>& operator*=(SE3Base<OtherDerived> const& other) {
     *static_cast<Derived*>(this) = *this * other;
     return *this;
@@ -542,10 +542,10 @@ class SE3 : public SE3Base<SE3<Scalar_, Options>> {
   ///
   SOPHUS_FUNC static Sophus::Matrix<Scalar, num_parameters, DoF> Dx_exp_x(
       Tangent const& upsilon_omega) {
-    using std::cos;
-    using std::pow;
-    using std::sin;
-    using std::sqrt;
+    using ::std::cos;
+    using ::std::pow;
+    using ::std::sin;
+    using ::std::sqrt;
     Sophus::Matrix<Scalar, num_parameters, DoF> J;
     Sophus::Vector<Scalar, 3> upsilon = upsilon_omega.template head<3>();
     Sophus::Vector<Scalar, 3> omega = upsilon_omega.template tail<3>();
@@ -759,8 +759,8 @@ class SE3 : public SE3Base<SE3<Scalar_, Options>> {
   /// of SE(3), see below.
   ///
   SOPHUS_FUNC static SE3<Scalar> exp(Tangent const& a) {
-    using std::cos;
-    using std::sin;
+    using ::std::cos;
+    using ::std::sin;
     Vector3<Scalar> const omega = a.template tail<3>();
 
     Scalar theta;
@@ -904,7 +904,7 @@ class SE3 : public SE3Base<SE3<Scalar_, Options>> {
   ///
   template <class UniformRandomBitGenerator>
   static SE3 sampleUniform(UniformRandomBitGenerator& generator) {
-    std::uniform_real_distribution<Scalar> uniform(Scalar(-1), Scalar(1));
+    ::std::uniform_real_distribution<Scalar> uniform(Scalar(-1), Scalar(1));
     return SE3(SO3<Scalar>::sampleUniform(generator),
                Vector3<Scalar>(uniform(generator), uniform(generator),
                                uniform(generator)));

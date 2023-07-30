@@ -49,7 +49,7 @@ void OptimizationAlgorithm::printProperties(std::ostream& os) const
   os << "------------------------------------------------" << endl;
 }
 
-bool OptimizationAlgorithm::updatePropertiesFromString(const std::string& propString)
+bool OptimizationAlgorithm::updatePropertiesFromString(const ::std::string& propString)
 {
   return _properties.updateMapFromString(propString);
 }

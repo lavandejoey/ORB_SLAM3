@@ -52,9 +52,9 @@
 # define g2o_isinf(x)     isinf(x)
 # define g2o_isfinite(x)  isfinite(x)
 #else
-# define g2o_isnan(x)     std::isnan(x)
-# define g2o_isinf(x)     std::isinf(x)
-# define g2o_isfinite(x)  std::isfinite(x)
+# define g2o_isnan(x)     ::std::isnan(x)
+# define g2o_isinf(x)     ::std::isinf(x)
+# define g2o_isfinite(x)  ::std::isfinite(x)
 #endif
 
 // MSVC on Windows
@@ -116,17 +116,17 @@ Modified by Mark Pupilli from:
 
 #ifndef PVAR
   #define PVAR(s) \
-    #s << " = " << (s) << std::flush
+    #s << " = " << (s) << ::std::flush
 #endif
 
 #ifndef PVARA
 #define PVARA(s) \
-  #s << " = " << RAD2DEG(s) << "deg" << std::flush
+  #s << " = " << RAD2DEG(s) << "deg" << ::std::flush
 #endif
 
 #ifndef FIXED
 #define FIXED(s) \
-  std::fixed << s << std::resetiosflags(std::ios_base::fixed)
+  ::std::fixed << s << ::std::resetiosflags(std::ios_base::fixed)
 #endif
 
 #endif // __cplusplus

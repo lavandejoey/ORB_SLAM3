@@ -50,7 +50,7 @@ namespace g2o {
       /**
        * hash struct for storing the matrix elements needed to compute the covariance
        */
-      typedef std::tr1::unordered_map<int, double>     LookupMap;
+      typedef ::std::tr1::unordered_map<int, double>     LookupMap;
     
     public:
       MarginalCovarianceCholesky();
@@ -60,13 +60,13 @@ namespace g2o {
        * compute the marginal cov for the given block indices, write the result to the covBlocks memory (which has to
        * be provided by the caller).
        */
-      void computeCovariance(double** covBlocks, const std::vector<int>& blockIndices);
+      void computeCovariance(double** covBlocks, const ::std::vector<int>& blockIndices);
 
 
       /**
        * compute the marginal cov for the given block indices, write the result in spinv).
        */
-      void computeCovariance(SparseBlockMatrix<MatrixXd>& spinv, const std::vector<int>& rowBlockIndices, const std::vector< std::pair<int, int> >& blockIndices);
+      void computeCovariance(SparseBlockMatrix<MatrixXd>& spinv, const ::std::vector<int>& rowBlockIndices, const ::std::vector< ::std::pair<int, int> >& blockIndices);
 
 
       /**
@@ -87,7 +87,7 @@ namespace g2o {
       int* _perm;       ///< permutation of the cholesky factor. Variable re-ordering for better fill-in
 
       LookupMap _map;             ///< hash look up table for the already computed entries
-      std::vector<double> _diag;  ///< cache 1 / H_ii to avoid recalculations
+      ::std::vector<double> _diag;  ///< cache 1 / H_ii to avoid recalculations
 
       //! compute the index used for hashing
       int computeIndex(int r, int c) const { /*assert(r <= c);*/ return r*_n + c;}

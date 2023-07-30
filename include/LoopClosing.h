@@ -124,11 +124,11 @@ protected:
     //Methods to implement the new place recognition algorithm
     bool NewDetectCommonRegions();
     bool DetectAndReffineSim3FromLastKF(KeyFrame* pCurrentKF, KeyFrame* pMatchedKF, g2o::Sim3 &gScw, int &nNumProjMatches,
-                                        std::vector<MapPoint*> &vpMPs, std::vector<MapPoint*> &vpMatchedMPs);
+                                        ::std::vector<MapPoint*> &vpMPs, ::std::vector<MapPoint*> &vpMatchedMPs);
     bool DetectCommonRegionsFromBoW(std::vector<KeyFrame*> &vpBowCand, KeyFrame* &pMatchedKF, KeyFrame* &pLastCurrentKF, g2o::Sim3 &g2oScw,
-                                     int &nNumCoincidences, std::vector<MapPoint*> &vpMPs, std::vector<MapPoint*> &vpMatchedMPs);
+                                     int &nNumCoincidences, ::std::vector<MapPoint*> &vpMPs, ::std::vector<MapPoint*> &vpMatchedMPs);
     bool DetectCommonRegionsFromLastKF(KeyFrame* pCurrentKF, KeyFrame* pMatchedKF, g2o::Sim3 &gScw, int &nNumProjMatches,
-                                            std::vector<MapPoint*> &vpMPs, std::vector<MapPoint*> &vpMatchedMPs);
+                                            ::std::vector<MapPoint*> &vpMPs, ::std::vector<MapPoint*> &vpMatchedMPs);
     int FindMatchesByProjection(KeyFrame* pCurrentKF, KeyFrame* pMatchedKFw, g2o::Sim3 &g2oScw,
                                 set<MapPoint*> &spMatchedMPinOrigin, vector<MapPoint*> &vpMapPoints,
                                 vector<MapPoint*> &vpMatchedMapPoints);
@@ -148,13 +148,13 @@ protected:
     bool mbResetRequested;
     bool mbResetActiveMapRequested;
     Map* mpMapToReset;
-    std::mutex mMutexReset;
+    ::std::mutex mMutexReset;
 
     bool CheckFinish();
     void SetFinish();
     bool mbFinishRequested;
     bool mbFinished;
-    std::mutex mMutexFinish;
+    ::std::mutex mMutexFinish;
 
     Atlas* mpAtlas;
     Tracking* mpTracker;
@@ -164,9 +164,9 @@ protected:
 
     LocalMapping *mpLocalMapper;
 
-    std::list<KeyFrame*> mlpLoopKeyFrameQueue;
+    ::std::list<KeyFrame*> mlpLoopKeyFrameQueue;
 
-    std::mutex mMutexLoopQueue;
+    ::std::mutex mMutexLoopQueue;
 
     // Loop detector parameters
     float mnCovisibilityConsistencyTh;
@@ -175,11 +175,11 @@ protected:
     KeyFrame* mpCurrentKF;
     KeyFrame* mpLastCurrentKF;
     KeyFrame* mpMatchedKF;
-    std::vector<ConsistentGroup> mvConsistentGroups;
-    std::vector<KeyFrame*> mvpEnoughConsistentCandidates;
-    std::vector<KeyFrame*> mvpCurrentConnectedKFs;
-    std::vector<MapPoint*> mvpCurrentMatchedPoints;
-    std::vector<MapPoint*> mvpLoopMapPoints;
+    ::std::vector<ConsistentGroup> mvConsistentGroups;
+    ::std::vector<KeyFrame*> mvpEnoughConsistentCandidates;
+    ::std::vector<KeyFrame*> mvpCurrentConnectedKFs;
+    ::std::vector<MapPoint*> mvpCurrentMatchedPoints;
+    ::std::vector<MapPoint*> mvpLoopMapPoints;
     cv::Mat mScw;
     g2o::Sim3 mg2oScw;
 
@@ -193,8 +193,8 @@ protected:
     g2o::Sim3 mg2oLoopSlw;
     g2o::Sim3 mg2oLoopScw;
     KeyFrame* mpLoopMatchedKF;
-    std::vector<MapPoint*> mvpLoopMPs;
-    std::vector<MapPoint*> mvpLoopMatchedMPs;
+    ::std::vector<MapPoint*> mvpLoopMPs;
+    ::std::vector<MapPoint*> mvpLoopMatchedMPs;
     bool mbMergeDetected;
     int mnMergeNumCoincidences;
     int mnMergeNumNotFound;
@@ -203,9 +203,9 @@ protected:
     g2o::Sim3 mg2oMergeSmw;
     g2o::Sim3 mg2oMergeScw;
     KeyFrame* mpMergeMatchedKF;
-    std::vector<MapPoint*> mvpMergeMPs;
-    std::vector<MapPoint*> mvpMergeMatchedMPs;
-    std::vector<KeyFrame*> mvpMergeConnectedKFs;
+    ::std::vector<MapPoint*> mvpMergeMPs;
+    ::std::vector<MapPoint*> mvpMergeMatchedMPs;
+    ::std::vector<KeyFrame*> mvpMergeConnectedKFs;
 
     g2o::Sim3 mSold_new;
     //-------
@@ -216,8 +216,8 @@ protected:
     bool mbRunningGBA;
     bool mbFinishedGBA;
     bool mbStopGBA;
-    std::mutex mMutexGBA;
-    std::thread* mpThreadGBA;
+    ::std::mutex mMutexGBA;
+    ::std::thread* mpThreadGBA;
 
     // Fix scale in the stereo/RGB-D case
     bool mbFixScale;

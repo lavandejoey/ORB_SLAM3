@@ -78,7 +78,7 @@ namespace g2o {
     Vertex* vn=vertex(v->id());
     if (vn)
       return false;
-    _vertices.insert( std::make_pair(v->id(),v) );
+    _vertices.insert( ::std::make_pair(v->id(),v) );
     return true;
   }
 
@@ -98,7 +98,7 @@ namespace g2o {
 
   bool HyperGraph::addEdge(Edge* e)
   {
-    std::pair<EdgeSet::iterator, bool> result = _edges.insert(e);
+    ::std::pair<EdgeSet::iterator, bool> result = _edges.insert(e);
     if (! result.second)
       return false;
     for (std::vector<Vertex*>::iterator it = e->vertices().begin(); it != e->vertices().end(); ++it) {

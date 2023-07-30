@@ -84,16 +84,16 @@ public:
     void SetViewer(Viewer* pViewer);
 
     // Method for change components in the current map
-    void AddKeyFrame(KeyFrame* pKF);
-    void AddMapPoint(MapPoint* pMP);
+    static void AddKeyFrame(KeyFrame* pKF);
+    static void AddMapPoint(MapPoint* pMP);
     //void EraseMapPoint(MapPoint* pMP);
     //void EraseKeyFrame(KeyFrame* pKF);
 
     GeometricCamera* AddCamera(GeometricCamera* pCam);
-    std::vector<GeometricCamera*> GetAllCameras();
+    ::std::vector<GeometricCamera*> GetAllCameras();
 
     /* All methods without Map pointer work on current map */
-    void SetReferenceMapPoints(const std::vector<MapPoint*> &vpMPs);
+    void SetReferenceMapPoints(const ::std::vector<MapPoint*> &vpMPs);
     void InformNewBigChange();
     int GetLastBigChangeIdx();
 
@@ -101,9 +101,9 @@ public:
     long unsigned KeyFramesInMap();
 
     // Method for get data in current map
-    std::vector<KeyFrame*> GetAllKeyFrames();
-    std::vector<MapPoint*> GetAllMapPoints();
-    std::vector<MapPoint*> GetReferenceMapPoints();
+    ::std::vector<KeyFrame*> GetAllKeyFrames();
+    ::std::vector<MapPoint*> GetAllMapPoints();
+    ::std::vector<MapPoint*> GetReferenceMapPoints();
 
     vector<Map*> GetAllMaps();
 
@@ -141,14 +141,14 @@ public:
 
 protected:
 
-    std::set<Map*> mspMaps;
-    std::set<Map*> mspBadMaps;
+    ::std::set<Map*> mspMaps;
+    ::std::set<Map*> mspBadMaps;
     // Its necessary change the container from set to vector because libboost 1.58 and Ubuntu 16.04 have an error with this cointainer
-    std::vector<Map*> mvpBackupMaps;
+    ::std::vector<Map*> mvpBackupMaps;
 
     Map* mpCurrentMap;
 
-    std::vector<GeometricCamera*> mvpCameras;
+    ::std::vector<GeometricCamera*> mvpCameras;
 
     unsigned long int mnLastInitKFidMap;
 
@@ -160,7 +160,7 @@ protected:
     ORBVocabulary* mpORBVocabulary;
 
     // Mutex
-    std::mutex mMutexAtlas;
+    ::std::mutex mMutexAtlas;
 
 
 }; // class Atlas

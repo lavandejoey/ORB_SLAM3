@@ -95,7 +95,7 @@ namespace g2o {
       /**
        * \brief priority queue for AdjacencyMapEntry
        */
-      class PriorityQueue : public std::multimap<double, AdjacencyMapEntry*> {
+      class PriorityQueue : public ::std::multimap<double, AdjacencyMapEntry*> {
         public:
           void push(AdjacencyMapEntry* entry);
           AdjacencyMapEntry* pop();
@@ -135,7 +135,7 @@ namespace g2o {
           size_t operator ()(const OptimizableGraph::Vertex* v) const { return v->id();}
       };
 
-      typedef std::tr1::unordered_map<OptimizableGraph::Vertex*, AdjacencyMapEntry, VertexIDHashFunction> AdjacencyMap;
+      typedef ::std::tr1::unordered_map<OptimizableGraph::Vertex*, AdjacencyMapEntry, VertexIDHashFunction> AdjacencyMap;
 
     public:
       EstimatePropagator(OptimizableGraph* g);

@@ -88,7 +88,7 @@ void BowVector::normalize(LNorm norm_type)
 std::ostream& operator<< (std::ostream &out, const BowVector &v)
 {
   BowVector::const_iterator vit;
-  std::vector<unsigned int>::const_iterator iit;
+  ::std::vector<unsigned int>::const_iterator iit;
   unsigned int i = 0; 
   const unsigned int N = v.size();
   for(vit = v.begin(); vit != v.end(); ++vit, ++i)
@@ -102,9 +102,9 @@ std::ostream& operator<< (std::ostream &out, const BowVector &v)
 
 // --------------------------------------------------------------------------
 
-void BowVector::saveM(const std::string &filename, size_t W) const
+void BowVector::saveM(const ::std::string &filename, size_t W) const
 {
-  std::fstream f(filename.c_str(), std::ios::out);
+  ::std::fstream f(filename.c_str(), ::std::ios::out);
   
   WordId last = 0;
   BowVector::const_iterator bit;

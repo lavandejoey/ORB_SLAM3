@@ -163,14 +163,14 @@ class Tests {
     return true;
   }
 
-  std::vector<SO2Type, Eigen::aligned_allocator<SO2Type>> so2_vec_;
-  std::vector<Tangent, Eigen::aligned_allocator<Tangent>> tangent_vec_;
-  std::vector<Point, Eigen::aligned_allocator<Point>> point_vec_;
+  ::std::vector<SO2Type, Eigen::aligned_allocator<SO2Type>> so2_vec_;
+  ::std::vector<Tangent, Eigen::aligned_allocator<Tangent>> tangent_vec_;
+  ::std::vector<Point, Eigen::aligned_allocator<Point>> point_vec_;
 };
 
 int test_so2() {
-  using std::cerr;
-  using std::endl;
+  using ::std::cerr;
+  using ::std::endl;
 
   cerr << "Test SO2" << endl << endl;
   cerr << "Double tests: " << endl;

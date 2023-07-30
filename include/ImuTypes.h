@@ -80,7 +80,7 @@ public:
             const float &b_ang_vel_x, const float &b_ang_vel_y, const float &b_ang_vel_z):
             bax(b_acc_x), bay(b_acc_y), baz(b_acc_z), bwx(b_ang_vel_x), bwy(b_ang_vel_y), bwz(b_ang_vel_z){}
     void CopyFrom(Bias &b);
-    friend std::ostream& operator<< (std::ostream &out, const Bias &b);
+    friend ::std::ostream& operator<< (std::ostream &out, const Bias &b);
 
 public:
     float bax, bay, baz;
@@ -200,11 +200,11 @@ public:
     Bias GetUpdatedBias();
 
     void printMeasurements() const {
-        std::cout << "pint meas:\n";
+        ::std::cout << "pint meas:\n";
         for(int i=0; i<mvMeasurements.size(); i++){
-            std::cout << "meas " << mvMeasurements[i].t << std::endl;
+            ::std::cout << "meas " << mvMeasurements[i].t << ::std::endl;
         }
-        std::cout << "end pint meas:\n";
+        ::std::cout << "end pint meas:\n";
     }
 
 public:
@@ -245,9 +245,9 @@ private:
         float t;
     };
 
-    std::vector<integrable> mvMeasurements;
+    ::std::vector<integrable> mvMeasurements;
 
-    std::mutex mMutex;
+    ::std::mutex mMutex;
 };
 
 // Lie Algebra Functions

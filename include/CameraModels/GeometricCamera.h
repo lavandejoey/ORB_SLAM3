@@ -55,7 +55,7 @@ namespace ORB_SLAM3 {
 
     public:
         GeometricCamera() {}
-        GeometricCamera(const std::vector<float> &_vParameters) : mvParameters(_vParameters) {}
+        GeometricCamera(const ::std::vector<float> &_vParameters) : mvParameters(_vParameters) {}
         ~GeometricCamera() {}
 
         virtual cv::Point2f project(const cv::Point3f &p3D) = 0;
@@ -70,8 +70,8 @@ namespace ORB_SLAM3 {
 
         virtual Eigen::Matrix<double,2,3> projectJac(const Eigen::Vector3d& v3D) = 0;
 
-        virtual bool ReconstructWithTwoViews(const std::vector<cv::KeyPoint>& vKeys1, const std::vector<cv::KeyPoint>& vKeys2, const std::vector<int> &vMatches12,
-                                             Sophus::SE3f &T21, std::vector<cv::Point3f> &vP3D, std::vector<bool> &vbTriangulated) = 0;
+        virtual bool ReconstructWithTwoViews(const ::std::vector<cv::KeyPoint>& vKeys1, const ::std::vector<cv::KeyPoint>& vKeys2, const ::std::vector<int> &vMatches12,
+                                             Sophus::SE3f &T21, ::std::vector<cv::Point3f> &vP3D, ::std::vector<bool> &vbTriangulated) = 0;
 
         virtual cv::Mat toK() = 0;
         virtual Eigen::Matrix3f toK_() = 0;
@@ -98,7 +98,7 @@ namespace ORB_SLAM3 {
         static long unsigned int nNextId;
 
     protected:
-        std::vector<float> mvParameters;
+        ::std::vector<float> mvParameters;
 
         unsigned int mnId;
 

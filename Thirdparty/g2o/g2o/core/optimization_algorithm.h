@@ -67,12 +67,12 @@ namespace g2o {
        * and stores them in given SparseBlockMatrix.
        * If your solver does not support computing the marginals, return false.
        */
-      virtual bool computeMarginals(SparseBlockMatrix<MatrixXd>& spinv, const std::vector<std::pair<int, int> >& blockIndices) = 0;
+      virtual bool computeMarginals(SparseBlockMatrix<MatrixXd>& spinv, const ::std::vector<std::pair<int, int> >& blockIndices) = 0;
 
       /**
        * update the structures for online processing
        */
-      virtual bool updateStructure(const std::vector<HyperGraph::Vertex*>& vset, const HyperGraph::EdgeSet& edges) = 0;
+      virtual bool updateStructure(const ::std::vector<HyperGraph::Vertex*>& vset, const HyperGraph::EdgeSet& edges) = 0;
 
       /**
        * called by the optimizer if verbose. re-implement, if you want to print something
@@ -95,7 +95,7 @@ namespace g2o {
       /**
        * update the properties from a string, see PropertyMap::updateMapFromString()
        */
-      bool updatePropertiesFromString(const std::string& propString);
+      bool updatePropertiesFromString(const ::std::string& propString);
       
       /**
        * print the properties to a stream in a human readable fashion

@@ -168,7 +168,7 @@ class RxSO2Base {
   /// of RxSO2.
   ///
   SOPHUS_FUNC Tangent log() const {
-    using std::log;
+    using ::std::log;
     Tangent theta_sigma;
     theta_sigma[1] = log(scale());
     theta_sigma[0] = SO2<Scalar>(complex()).log();
@@ -238,7 +238,7 @@ class RxSO2Base {
   ///   ``p_bar = s * (bar_R_foo * p_foo)``.
   ///
   template <typename PointDerived,
-            typename = typename std::enable_if<
+            typename = typename ::std::enable_if<
                 IsFixedSizeVector<PointDerived, 2>::value>::type>
   SOPHUS_FUNC PointProduct<PointDerived> operator*(
       Eigen::MatrixBase<PointDerived> const& p) const {
@@ -248,7 +248,7 @@ class RxSO2Base {
   /// Group action on homogeneous 2-points. See above for more details.
   ///
   template <typename HPointDerived,
-            typename = typename std::enable_if<
+            typename = typename ::std::enable_if<
                 IsFixedSizeVector<HPointDerived, 3>::value>::type>
   SOPHUS_FUNC HomogeneousPointProduct<HPointDerived> operator*(
       Eigen::MatrixBase<HPointDerived> const& p) const {
@@ -275,8 +275,8 @@ class RxSO2Base {
   /// order to ensure the class invariant.
   ///
   template <typename OtherDerived,
-            typename = typename std::enable_if<
-                std::is_same<Scalar, ReturnScalar<OtherDerived>>::value>::type>
+            typename = typename ::std::enable_if<
+                ::std::is_same<Scalar, ReturnScalar<OtherDerived>>::value>::type>
   SOPHUS_FUNC RxSO2Base<Derived>& operator*=(
       RxSO2Base<OtherDerived> const& other) {
     *static_cast<Derived*>(this) = *this * other;
@@ -335,7 +335,7 @@ class RxSO2Base {
   /// Sets scale and leaves rotation as is.
   ///
   SOPHUS_FUNC void setScale(Scalar const& scale) {
-    using std::sqrt;
+    using ::std::sqrt;
     complex_nonconst().normalize();
     complex_nonconst() *= scale;
   }
@@ -354,7 +354,7 @@ class RxSO2Base {
   /// Setter of SO(2) rotations, leaves scale as is.
   ///
   SOPHUS_FUNC void setSO2(SO2<Scalar> const& so2) {
-    using std::sqrt;
+    using ::std::sqrt;
     Scalar saved_scale = scale();
     complex_nonconst() = so2.unit_complex();
     complex_nonconst() *= saved_scale;
@@ -468,7 +468,7 @@ class RxSO2 : public RxSO2Base<RxSO2<Scalar_, Options>> {
   /// hat()-operator of RSO2.
   ///
   SOPHUS_FUNC static RxSO2<Scalar> exp(Tangent const& a) {
-    using std::exp;
+    using ::std::exp;
 
     Scalar const theta = a[0];
     Scalar const sigma = a[1];
@@ -545,8 +545,8 @@ class RxSO2 : public RxSO2Base<RxSO2<Scalar_, Options>> {
   ///
   template <class UniformRandomBitGenerator>
   static RxSO2 sampleUniform(UniformRandomBitGenerator& generator) {
-    std::uniform_real_distribution<Scalar> uniform(Scalar(-1), Scalar(1));
-    using std::exp2;
+    ::std::uniform_real_distribution<Scalar> uniform(Scalar(-1), Scalar(1));
+    using ::std::exp2;
     return RxSO2(exp2(uniform(generator)),
                  SO2<Scalar>::sampleUniform(generator));
   }
@@ -564,7 +564,7 @@ class RxSO2 : public RxSO2Base<RxSO2<Scalar_, Options>> {
   ///                |  x  d |
   ///
   SOPHUS_FUNC static Tangent vee(Transformation const& Omega) {
-    using std::abs;
+    using ::std::abs;
     return Tangent(Omega(1, 0), Omega(0, 0));
   }
 

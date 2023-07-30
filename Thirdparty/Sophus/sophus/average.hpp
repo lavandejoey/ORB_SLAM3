@@ -65,12 +65,12 @@ optional<typename SequenceContainer::value_type> average(
 template <class SequenceContainer,
           class Scalar = typename SequenceContainer::value_type::Scalar>
 enable_if_t<
-    std::is_same<typename SequenceContainer::value_type, SO2<Scalar> >::value,
+    ::std::is_same<typename SequenceContainer::value_type, SO2<Scalar> >::value,
     optional<typename SequenceContainer::value_type> >
 average(SequenceContainer const& foo_Ts_bar) {
   // This implements rotational part of Proposition 12 from Sec. 6.2 of
   // ftp://ftp-sop.inria.fr/epidaure/Publications/Arsigny/arsigny_rr_biinvariant_average.pdf.
-  size_t N = std::distance(std::begin(foo_Ts_bar), std::end(foo_Ts_bar));
+  size_t N = ::std::distance(std::begin(foo_Ts_bar), ::std::end(foo_Ts_bar));
   SOPHUS_ENSURE(N >= 1, "N must be >= 1.");
   SO2<Scalar> foo_T_average = foo_Ts_bar.front();
   Scalar w = Scalar(1. / N);
@@ -86,10 +86,10 @@ average(SequenceContainer const& foo_Ts_bar) {
 template <class SequenceContainer,
           class Scalar = typename SequenceContainer::value_type::Scalar>
 enable_if_t<
-    std::is_same<typename SequenceContainer::value_type, RxSO2<Scalar> >::value,
+    ::std::is_same<typename SequenceContainer::value_type, RxSO2<Scalar> >::value,
     optional<typename SequenceContainer::value_type> >
 average(SequenceContainer const& foo_Ts_bar) {
-  size_t N = std::distance(std::begin(foo_Ts_bar), std::end(foo_Ts_bar));
+  size_t N = ::std::distance(std::begin(foo_Ts_bar), ::std::end(foo_Ts_bar));
   SOPHUS_ENSURE(N >= 1, "N must be >= 1.");
   RxSO2<Scalar> foo_T_average = foo_Ts_bar.front();
   Scalar w = Scalar(1. / N);
@@ -120,7 +120,7 @@ template <class SequenceContainer,
 Eigen::Quaternion<Scalar> averageUnitQuaternion(
     SequenceContainer const& foo_Ts_bar) {
   // This:  http://stackoverflow.com/a/27410865/1221742
-  size_t N = std::distance(std::begin(foo_Ts_bar), std::end(foo_Ts_bar));
+  size_t N = ::std::distance(std::begin(foo_Ts_bar), ::std::end(foo_Ts_bar));
   SOPHUS_ENSURE(N >= 1, "N must be >= 1.");
   Eigen::Matrix<Scalar, 4, Eigen::Dynamic> Q(4, N);
   int i = 0;
@@ -134,12 +134,12 @@ Eigen::Quaternion<Scalar> averageUnitQuaternion(
   // TODO: Figure out why we can't use SelfAdjointEigenSolver here.
   Eigen::EigenSolver<Eigen::Matrix<Scalar, 4, 4> > es(QQt);
 
-  std::complex<Scalar> max_eigenvalue = es.eigenvalues()[0];
+  ::std::complex<Scalar> max_eigenvalue = es.eigenvalues()[0];
   Eigen::Matrix<std::complex<Scalar>, 4, 1> max_eigenvector =
       es.eigenvectors().col(0);
 
   for (int i = 1; i < 4; i++) {
-    if (std::norm(es.eigenvalues()[i]) > std::norm(max_eigenvalue)) {
+    if (std::norm(es.eigenvalues()[i]) > ::std::norm(max_eigenvalue)) {
       max_eigenvalue = es.eigenvalues()[i];
       max_eigenvector = es.eigenvectors().col(i);
     }
@@ -160,7 +160,7 @@ Eigen::Quaternion<Scalar> averageUnitQuaternion(
 template <class SequenceContainer,
           class Scalar = typename SequenceContainer::value_type::Scalar>
 enable_if_t<
-    std::is_same<typename SequenceContainer::value_type, SO3<Scalar> >::value,
+    ::std::is_same<typename SequenceContainer::value_type, SO3<Scalar> >::value,
     optional<typename SequenceContainer::value_type> >
 average(SequenceContainer const& foo_Ts_bar) {
   return SO3<Scalar>(details::averageUnitQuaternion(foo_Ts_bar));
@@ -170,15 +170,15 @@ average(SequenceContainer const& foo_Ts_bar) {
 template <class SequenceContainer,
           class Scalar = typename SequenceContainer::value_type::Scalar>
 enable_if_t<
-    std::is_same<typename SequenceContainer::value_type, RxSO3<Scalar> >::value,
+    ::std::is_same<typename SequenceContainer::value_type, RxSO3<Scalar> >::value,
     optional<typename SequenceContainer::value_type> >
 average(SequenceContainer const& foo_Ts_bar) {
-  size_t N = std::distance(std::begin(foo_Ts_bar), std::end(foo_Ts_bar));
+  size_t N = ::std::distance(std::begin(foo_Ts_bar), ::std::end(foo_Ts_bar));
 
   SOPHUS_ENSURE(N >= 1, "N must be >= 1.");
   Scalar scale_sum = Scalar(0);
-  using std::exp;
-  using std::log;
+  using ::std::exp;
+  using ::std::log;
   for (RxSO3<Scalar> const& foo_T_bar : foo_Ts_bar) {
     scale_sum += log(foo_T_bar.scale());
   }
@@ -189,7 +189,7 @@ average(SequenceContainer const& foo_Ts_bar) {
 template <class SequenceContainer,
           class Scalar = typename SequenceContainer::value_type::Scalar>
 enable_if_t<
-    std::is_same<typename SequenceContainer::value_type, SE2<Scalar> >::value,
+    ::std::is_same<typename SequenceContainer::value_type, SE2<Scalar> >::value,
     optional<typename SequenceContainer::value_type> >
 average(SequenceContainer const& foo_Ts_bar, int max_num_iterations = 20) {
   // TODO: Implement Proposition 12 from Sec. 6.2 of
@@ -200,7 +200,7 @@ average(SequenceContainer const& foo_Ts_bar, int max_num_iterations = 20) {
 template <class SequenceContainer,
           class Scalar = typename SequenceContainer::value_type::Scalar>
 enable_if_t<
-    std::is_same<typename SequenceContainer::value_type, Sim2<Scalar> >::value,
+    ::std::is_same<typename SequenceContainer::value_type, Sim2<Scalar> >::value,
     optional<typename SequenceContainer::value_type> >
 average(SequenceContainer const& foo_Ts_bar, int max_num_iterations = 20) {
   return iterativeMean(foo_Ts_bar, max_num_iterations);
@@ -209,7 +209,7 @@ average(SequenceContainer const& foo_Ts_bar, int max_num_iterations = 20) {
 template <class SequenceContainer,
           class Scalar = typename SequenceContainer::value_type::Scalar>
 enable_if_t<
-    std::is_same<typename SequenceContainer::value_type, SE3<Scalar> >::value,
+    ::std::is_same<typename SequenceContainer::value_type, SE3<Scalar> >::value,
     optional<typename SequenceContainer::value_type> >
 average(SequenceContainer const& foo_Ts_bar, int max_num_iterations = 20) {
   return iterativeMean(foo_Ts_bar, max_num_iterations);
@@ -218,7 +218,7 @@ average(SequenceContainer const& foo_Ts_bar, int max_num_iterations = 20) {
 template <class SequenceContainer,
           class Scalar = typename SequenceContainer::value_type::Scalar>
 enable_if_t<
-    std::is_same<typename SequenceContainer::value_type, Sim3<Scalar> >::value,
+    ::std::is_same<typename SequenceContainer::value_type, Sim3<Scalar> >::value,
     optional<typename SequenceContainer::value_type> >
 average(SequenceContainer const& foo_Ts_bar, int max_num_iterations = 20) {
   return iterativeMean(foo_Ts_bar, max_num_iterations);

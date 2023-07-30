@@ -39,7 +39,7 @@ void FeatureVector::addFeature(NodeId id, unsigned int i_feature)
   else
   {
     vit = this->insert(vit, FeatureVector::value_type(id, 
-      std::vector<unsigned int>() ));
+      ::std::vector<unsigned int>() ));
     vit->second.push_back(i_feature);
   }
 }
@@ -53,7 +53,7 @@ std::ostream& operator<<(std::ostream &out,
   {
     FeatureVector::const_iterator vit = v.begin();
     
-    const std::vector<unsigned int>* f = &vit->second;
+    const ::std::vector<unsigned int>* f = &vit->second;
 
     out << "<" << vit->first << ": [";
     if(!f->empty()) out << (*f)[0];

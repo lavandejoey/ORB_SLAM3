@@ -126,7 +126,7 @@ inline double average_angle(double theta1, double theta2)
   if(x == 0 && y == 0)
     return 0;
   else
-    return std::atan2(y, x);
+    return ::std::atan2(y, x);
 }
 
 /**

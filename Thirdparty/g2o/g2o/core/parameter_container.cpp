@@ -94,7 +94,7 @@ namespace g2o {
     return true;
   }
 
-  bool ParameterContainer::read(std::istream& is, const std::map<std::string, std::string>* _renamedTypesLookup){
+  bool ParameterContainer::read(std::istream& is, const ::std::map<std::string, ::std::string>* _renamedTypesLookup){
     stringstream currentLine;
     string token;
 

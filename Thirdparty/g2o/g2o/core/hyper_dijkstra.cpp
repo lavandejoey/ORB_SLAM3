@@ -40,13 +40,13 @@ namespace g2o{
     (void) v;
     (void) vParent;
     (void) e;
-    return std::numeric_limits<double>::max();
+    return ::std::numeric_limits<double>::max();
   }
 
   double HyperDijkstra::TreeAction::perform(HyperGraph::Vertex* v, HyperGraph::Vertex* vParent, HyperGraph::Edge* e, double distance){
     if (distance==-1)
       return perform (v,vParent,e);
-    return std::numeric_limits<double>::max();
+    return ::std::numeric_limits<double>::max();
   }
 
   HyperDijkstra::AdjacencyMapEntry::AdjacencyMapEntry(HyperGraph::Vertex* child_, HyperGraph::Vertex* parent_, 
@@ -87,7 +87,7 @@ namespace g2o{
       double maxDistance, double comparisonConditioner, bool directed, double maxEdgeCost)
   {
     reset();
-    std::priority_queue< AdjacencyMapEntry > frontier;
+    ::std::priority_queue< AdjacencyMapEntry > frontier;
     for (HyperGraph::VertexSet::iterator vit=vset.begin(); vit!=vset.end(); ++vit){
       HyperGraph::Vertex* v=*vit;
       assert(v!=0);
@@ -112,7 +112,7 @@ namespace g2o{
       assert(ut!=_adjacencyMap.end());
       double uDistance=ut->second.distance();
 
-      std::pair< HyperGraph::VertexSet::iterator, bool> insertResult=_visited.insert(u); (void) insertResult;
+      ::std::pair< HyperGraph::VertexSet::iterator, bool> insertResult=_visited.insert(u); (void) insertResult;
       HyperGraph::EdgeSet::iterator et=u->edges().begin();
       while (et != u->edges().end()){
         HyperGraph::Edge* edge=*et;
@@ -179,7 +179,7 @@ namespace g2o{
   void HyperDijkstra::visitAdjacencyMap(AdjacencyMap& amap, TreeAction* action, bool useDistance)
   {
     
-    typedef std::deque<HyperGraph::Vertex*> Deque;
+    typedef ::std::deque<HyperGraph::Vertex*> Deque;
     Deque q;
     // scans for the vertices without the parent (whcih are the roots of the trees) and applies the action to them.
     for (AdjacencyMap::iterator it=amap.begin(); it!=amap.end(); ++it){
@@ -230,7 +230,7 @@ namespace g2o{
       HyperDijkstra::CostFunction* cost, double distance, 
       double comparisonConditioner, double maxEdgeCost)
   {
-    typedef std::queue<HyperGraph::Vertex*> VertexDeque;
+    typedef ::std::queue<HyperGraph::Vertex*> VertexDeque;
     visited.clear();
     connected.clear();
     VertexDeque frontier;
@@ -245,7 +245,7 @@ namespace g2o{
         visited.insert(*it);
         if (startingSet.find(*it)==startingSet.end())
           continue;
-        std::pair<HyperGraph::VertexSet::iterator, bool> insertOutcome=connected.insert(*it);
+        ::std::pair<HyperGraph::VertexSet::iterator, bool> insertOutcome=connected.insert(*it);
         if (insertOutcome.second){ // the node was not in the connectedSet;
           frontier.push(dynamic_cast<HyperGraph::Vertex*>(*it));
         }

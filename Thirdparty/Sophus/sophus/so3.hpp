@@ -246,9 +246,9 @@ class SO3Base {
   ///
   SOPHUS_FUNC TangentAndTheta logAndTheta() const {
     TangentAndTheta J;
-    using std::abs;
-    using std::atan;
-    using std::sqrt;
+    using ::std::abs;
+    using ::std::atan;
+    using ::std::sqrt;
     Scalar squared_n = unit_quaternion().vec().squaredNorm();
     Scalar w = unit_quaternion().w();
 
@@ -353,7 +353,7 @@ class SO3Base {
   /// For ``vee``-operator, see below.
   ///
   template <typename PointDerived,
-            typename = typename std::enable_if<
+            typename = typename ::std::enable_if<
                 IsFixedSizeVector<PointDerived, 3>::value>::type>
   SOPHUS_FUNC PointProduct<PointDerived> operator*(
       Eigen::MatrixBase<PointDerived> const& p) const {
@@ -368,7 +368,7 @@ class SO3Base {
 
   /// Group action on homogeneous 3-points. See above for more details.
   template <typename HPointDerived,
-            typename = typename std::enable_if<
+            typename = typename ::std::enable_if<
                 IsFixedSizeVector<HPointDerived, 4>::value>::type>
   SOPHUS_FUNC HomogeneousPointProduct<HPointDerived> operator*(
       Eigen::MatrixBase<HPointDerived> const& p) const {
@@ -391,8 +391,8 @@ class SO3Base {
   /// type of the multiplication is compatible with this SO3's Scalar type.
   ///
   template <typename OtherDerived,
-            typename = typename std::enable_if<
-                std::is_same<Scalar, ReturnScalar<OtherDerived>>::value>::type>
+            typename = typename ::std::enable_if<
+                ::std::is_same<Scalar, ReturnScalar<OtherDerived>>::value>::type>
   SOPHUS_FUNC SO3Base<Derived>& operator*=(SO3Base<OtherDerived> const& other) {
     *static_cast<Derived*>(this) = *this * other;
     return *this;
@@ -481,7 +481,7 @@ class SO3 : public SO3Base<SO3<Scalar_, Options>> {
   SOPHUS_FUNC explicit SO3(Eigen::QuaternionBase<D> const& quat)
       : unit_quaternion_(quat) {
     static_assert(
-        std::is_same<typename Eigen::QuaternionBase<D>::Scalar, Scalar>::value,
+        ::std::is_same<typename Eigen::QuaternionBase<D>::Scalar, Scalar>::value,
         "Input must be of same scalar type");
     Base::normalize();
   }
@@ -496,10 +496,10 @@ class SO3 : public SO3Base<SO3<Scalar_, Options>> {
   ///
   SOPHUS_FUNC static Sophus::Matrix<Scalar, num_parameters, DoF> Dx_exp_x(
       Tangent const& omega) {
-    using std::cos;
-    using std::exp;
-    using std::sin;
-    using std::sqrt;
+    using ::std::cos;
+    using ::std::exp;
+    using ::std::sin;
+    using ::std::sqrt;
     Scalar const c0 = omega[0] * omega[0];
     Scalar const c1 = omega[1] * omega[1];
     Scalar const c2 = omega[2] * omega[2];
@@ -583,10 +583,10 @@ class SO3 : public SO3Base<SO3<Scalar_, Options>> {
   SOPHUS_FUNC static SO3<Scalar> expAndTheta(Tangent const& omega,
                                              Scalar* theta) {
     SOPHUS_ENSURE(theta != nullptr, "must not be nullptr.");
-    using std::abs;
-    using std::cos;
-    using std::sin;
-    using std::sqrt;
+    using ::std::abs;
+    using ::std::cos;
+    using ::std::sin;
+    using ::std::sqrt;
     Scalar theta_sq = omega.squaredNorm();
 
     Scalar imag_factor;
@@ -723,8 +723,8 @@ class SO3 : public SO3Base<SO3<Scalar_, Options>> {
     static_assert(IsUniformRandomBitGenerator<UniformRandomBitGenerator>::value,
                   "generator must meet the UniformRandomBitGenerator concept");
 
-    std::uniform_real_distribution<Scalar> uniform(Scalar(0), Scalar(1));
-    std::uniform_real_distribution<Scalar> uniform_twopi(
+    ::std::uniform_real_distribution<Scalar> uniform(Scalar(0), Scalar(1));
+    ::std::uniform_real_distribution<Scalar> uniform_twopi(
         Scalar(0), 2 * Constants<Scalar>::pi());
 
     const Scalar u1 = uniform(generator);

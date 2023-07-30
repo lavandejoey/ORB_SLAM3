@@ -44,15 +44,15 @@ namespace g2o {
         public:
           friend class CacheContainer;
           CacheKey();
-          CacheKey(const std::string& type_, const ParameterVector& parameters_);
+          CacheKey(const ::std::string& type_, const ParameterVector& parameters_);
 
           bool operator<(const CacheKey& c) const;
 
-          const std::string& type() const { return _type;}
+          const ::std::string& type() const { return _type;}
           const ParameterVector& parameters() const { return _parameters;}
 
         protected:
-          std::string _type;
+          ::std::string _type;
           ParameterVector _parameters;
       };
 
@@ -84,7 +84,7 @@ namespace g2o {
        * parameter vector of C2 of the parameters needed to construct C1.
        * @returns the newly created cache
        */
-      Cache* installDependency(const std::string& type_, const std::vector<int>& parameterIndices);
+      Cache* installDependency(const ::std::string& type_, const ::std::vector<int>& parameterIndices);
 
       /**
        * Function to be called from a cache that has dependencies. It just invokes a
@@ -96,11 +96,11 @@ namespace g2o {
 
       bool _updateNeeded;
       ParameterVector _parameters;
-      std::vector<Cache*> _parentCaches;
+      ::std::vector<Cache*> _parentCaches;
       CacheContainer* _container;
   };
 
-  class  CacheContainer: public std::map<Cache::CacheKey, Cache*>
+  class  CacheContainer: public ::std::map<Cache::CacheKey, Cache*>
   {
     public:
       CacheContainer(OptimizableGraph::Vertex* vertex_);
@@ -120,7 +120,7 @@ namespace g2o {
   template <typename CacheType>
   void OptimizableGraph::Edge::resolveCache(CacheType*& cache, 
       OptimizableGraph::Vertex* v, 
-      const std::string& type_, 
+      const ::std::string& type_,
       const ParameterVector& parameters_)
   {
     cache = 0;

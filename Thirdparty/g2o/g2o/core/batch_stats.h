@@ -75,9 +75,9 @@ namespace g2o {
     static G2OBatchStatistics* _globalStats;
   };
 
-   std::ostream& operator<<(std::ostream&, const G2OBatchStatistics&);
+   ::std::ostream& operator<<(std::ostream&, const G2OBatchStatistics&);
 
-  typedef std::vector<G2OBatchStatistics> BatchStatisticsContainer;
+  typedef ::std::vector<G2OBatchStatistics> BatchStatisticsContainer;
 }
 
 #endif

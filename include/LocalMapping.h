@@ -80,7 +80,7 @@ public:
     double GetCurrKFTime();
     KeyFrame* GetCurrKF();
 
-    std::mutex mMutexImuInit;
+    ::std::mutex mMutexImuInit;
 
     Eigen::MatrixXd mcovInertial;
     Eigen::Matrix3d mRwg;
@@ -148,36 +148,36 @@ protected:
     bool mbResetRequested;
     bool mbResetRequestedActiveMap;
     Map* mpMapToReset;
-    std::mutex mMutexReset;
+    ::std::mutex mMutexReset;
 
     bool CheckFinish();
     void SetFinish();
     bool mbFinishRequested;
     bool mbFinished;
-    std::mutex mMutexFinish;
+    ::std::mutex mMutexFinish;
 
     Atlas* mpAtlas;
 
     LoopClosing* mpLoopCloser;
     Tracking* mpTracker;
 
-    std::list<KeyFrame*> mlNewKeyFrames;
+    ::std::list<KeyFrame*> mlNewKeyFrames;
 
     KeyFrame* mpCurrentKeyFrame;
 
-    std::list<MapPoint*> mlpRecentAddedMapPoints;
+    ::std::list<MapPoint*> mlpRecentAddedMapPoints;
 
-    std::mutex mMutexNewKFs;
+    ::std::mutex mMutexNewKFs;
 
     bool mbAbortBA;
 
     bool mbStopped;
     bool mbStopRequested;
     bool mbNotStop;
-    std::mutex mMutexStop;
+    ::std::mutex mMutexStop;
 
     bool mbAcceptKeyFrames;
-    std::mutex mMutexAccept;
+    ::std::mutex mMutexAccept;
 
     void InitializeIMU(float priorG = 1e2, float priorA = 1e6, bool bFirst = false);
     void ScaleRefinement();

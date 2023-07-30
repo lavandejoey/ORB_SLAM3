@@ -25,7 +25,7 @@ namespace DBoW2 {
 
 const int FORB::L=32;
 
-void FORB::meanValue(const std::vector<FORB::pDescriptor> &descriptors, 
+void FORB::meanValue(const ::std::vector<FORB::pDescriptor> &descriptors,
   FORB::TDescriptor &mean)
 {
   if(descriptors.empty())
@@ -117,7 +117,7 @@ std::string FORB::toString(const FORB::TDescriptor &a)
 
 // --------------------------------------------------------------------------
   
-void FORB::fromString(FORB::TDescriptor &a, const std::string &s)
+void FORB::fromString(FORB::TDescriptor &a, const ::std::string &s)
 {
   a.create(1, FORB::L, CV_8U);
   unsigned char *p = a.ptr<unsigned char>();
@@ -136,7 +136,7 @@ void FORB::fromString(FORB::TDescriptor &a, const std::string &s)
 
 // --------------------------------------------------------------------------
 
-void FORB::toMat32F(const std::vector<TDescriptor> &descriptors, 
+void FORB::toMat32F(const ::std::vector<TDescriptor> &descriptors,
   cv::Mat &mat)
 {
   if(descriptors.empty())
@@ -171,7 +171,7 @@ void FORB::toMat32F(const std::vector<TDescriptor> &descriptors,
 
 // --------------------------------------------------------------------------
 
-void FORB::toMat8U(const std::vector<TDescriptor> &descriptors, 
+void FORB::toMat8U(const ::std::vector<TDescriptor> &descriptors,
   cv::Mat &mat)
 {
   mat.create(descriptors.size(), 32, CV_8U);
@@ -181,7 +181,7 @@ void FORB::toMat8U(const std::vector<TDescriptor> &descriptors,
   for(size_t i = 0; i < descriptors.size(); ++i, p += 32)
   {
     const unsigned char *d = descriptors[i].ptr<unsigned char>();
-    std::copy(d, d+32, p);
+    ::std::copy(d, d+32, p);
   }
   
 }

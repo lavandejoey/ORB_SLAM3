@@ -81,7 +81,7 @@ public:
       double sigma = update[6];
       double theta = omega.norm();
       Matrix3d Omega = skew(omega);
-      s = std::exp(sigma);
+      s = ::std::exp(sigma);
       Matrix3d Omega2 = Omega*Omega;
       Matrix3d I;
       I.setIdentity();
@@ -148,7 +148,7 @@ public:
     Vector7d log() const
     {
       Vector7d res;
-      double sigma = std::log(s);
+      double sigma = ::std::log(s);
 
       
 
@@ -291,12 +291,12 @@ public:
 
   };
 
-  inline std::ostream& operator <<(std::ostream& out_str,
+  inline ::std::ostream& operator <<(std::ostream& out_str,
                                    const Sim3& sim3)
   {
-    out_str << sim3.rotation().coeffs() << std::endl;
-    out_str << sim3.translation() << std::endl;
-    out_str << sim3.scale() << std::endl;
+    out_str << sim3.rotation().coeffs() << ::std::endl;
+    out_str << sim3.translation() << ::std::endl;
+    out_str << sim3.scale() << ::std::endl;
 
     return out_str;
   }

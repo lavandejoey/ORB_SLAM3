@@ -74,7 +74,7 @@ namespace g2o {
   class  OptimizationAlgorithmFactory
   {
     public:
-      typedef std::list<AbstractOptimizationAlgorithmCreator*>      CreatorList;
+      typedef ::std::list<AbstractOptimizationAlgorithmCreator*>      CreatorList;
 
       //! return the instance
       static OptimizationAlgorithmFactory* instance();
@@ -95,7 +95,7 @@ namespace g2o {
       /**
        * construct a solver based on its name, e.g., var, fix3_2_cholmod
        */
-      OptimizationAlgorithm* construct(const std::string& tag, OptimizationAlgorithmProperty& solverProperty) const;
+      OptimizationAlgorithm* construct(const ::std::string& tag, OptimizationAlgorithmProperty& solverProperty) const;
 
       //! list the known solvers into a stream
       void listSolvers(std::ostream& os) const;
@@ -109,8 +109,8 @@ namespace g2o {
 
       CreatorList _creator;
 
-      CreatorList::const_iterator findSolver(const std::string& name) const;
-      CreatorList::iterator findSolver(const std::string& name);
+      CreatorList::const_iterator findSolver(const ::std::string& name) const;
+      CreatorList::iterator findSolver(const ::std::string& name);
 
     private:
       static OptimizationAlgorithmFactory* factoryInstance;
@@ -123,7 +123,7 @@ namespace g2o {
       {
         _creator = c;
 #ifdef G2O_DEBUG_OPTIMIZATION_ALGORITHM_FACTORY
-        std::cout << __FUNCTION__ << ": Registering " << _creator->property().name << " of type " << typeid(*_creator).name() << std::endl;
+        ::std::cout << __FUNCTION__ << ": Registering " << _creator->property().name << " of type " << typeid(*_creator).name() << ::std::endl;
 #endif
         OptimizationAlgorithmFactory::instance()->registerSolver(c);
       }
@@ -131,7 +131,7 @@ namespace g2o {
       ~RegisterOptimizationAlgorithmProxy()
       {
 #ifdef G2O_DEBUG_OPTIMIZATION_ALGORITHM_FACTORY
-        std::cout << __FUNCTION__ << ": Unregistering " << _creator->property().name << std::endl;
+        ::std::cout << __FUNCTION__ << ": Unregistering " << _creator->property().name << ::std::endl;
 #endif
         OptimizationAlgorithmFactory::instance()->unregisterSolver(_creator);
       }

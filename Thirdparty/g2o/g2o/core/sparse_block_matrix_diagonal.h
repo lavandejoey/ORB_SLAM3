@@ -55,9 +55,9 @@ namespace g2o {
       //! rows of the matrix
       int rows() const {return _blockIndices.size() ? _blockIndices.back() : 0;}
 
-      typedef std::vector<MatrixType, Eigen::aligned_allocator<MatrixType> >      DiagonalVector;
+      typedef ::std::vector<MatrixType, Eigen::aligned_allocator<MatrixType> >      DiagonalVector;
 
-      SparseBlockMatrixDiagonal(const std::vector<int>& blockIndices) :
+      SparseBlockMatrixDiagonal(const ::std::vector<int>& blockIndices) :
         _blockIndices(blockIndices)
       {}
 
@@ -72,7 +72,7 @@ namespace g2o {
       DiagonalVector& diagonal() { return _diagonal;}
 
       //! indices of the row blocks
-      const std::vector<int>& blockIndices() const { return _blockIndices;}
+      const ::std::vector<int>& blockIndices() const { return _blockIndices;}
 
       void multiply(double*& dest, const double* src) const
       {
@@ -99,7 +99,7 @@ namespace g2o {
       }
 
     protected:
-      const std::vector<int>& _blockIndices; ///< vector of the indices of the blocks along the diagonal
+      const ::std::vector<int>& _blockIndices; ///< vector of the indices of the blocks along the diagonal
       DiagonalVector _diagonal;
   };
 

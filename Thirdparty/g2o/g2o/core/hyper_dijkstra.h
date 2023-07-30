@@ -67,7 +67,7 @@ namespace g2o{
       HyperGraph::VertexSet _children;
     };
 
-    typedef std::map<HyperGraph::Vertex*, AdjacencyMapEntry> AdjacencyMap;
+    typedef ::std::map<HyperGraph::Vertex*, AdjacencyMapEntry> AdjacencyMap;
     HyperDijkstra(HyperGraph* g);
     HyperGraph::VertexSet& visited() {return _visited; }
     AdjacencyMap& adjacencyMap() {return _adjacencyMap; }

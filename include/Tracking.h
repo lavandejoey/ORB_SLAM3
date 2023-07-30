@@ -141,10 +141,10 @@ public:
     cv::Mat mImGray;
 
     // Initialization Variables (Monocular)
-    std::vector<int> mvIniLastMatches;
-    std::vector<int> mvIniMatches;
-    std::vector<cv::Point2f> mvbPrevMatched;
-    std::vector<cv::Point3f> mvIniP3D;
+    ::std::vector<int> mvIniLastMatches;
+    ::std::vector<int> mvIniMatches;
+    ::std::vector<cv::Point2f> mvbPrevMatched;
+    ::std::vector<cv::Point3f> mvIniP3D;
     Frame mInitialFrame;
 
     // Lists used to recover the full camera trajectory at the end of the execution.
@@ -235,11 +235,11 @@ protected:
     IMU::Preintegrated *mpImuPreintegratedFromLastKF;
 
     // Queue of IMU measurements between frames
-    std::list<IMU::Point> mlQueueImuData;
+    ::std::list<IMU::Point> mlQueueImuData;
 
     // Vector of IMU measurements from previous to current frame (to be filled by PreintegrateIMU)
-    std::vector<IMU::Point> mvImuFromLastFrame;
-    std::mutex mMutexImuQueue;
+    ::std::vector<IMU::Point> mvImuFromLastFrame;
+    ::std::mutex mMutexImuQueue;
 
     // Imu calibration parameters
     IMU::Calib *mpImuCalib;
@@ -271,8 +271,8 @@ protected:
 
     //Local Map
     KeyFrame* mpReferenceKF;
-    std::vector<KeyFrame*> mvpLocalKeyFrames;
-    std::vector<MapPoint*> mvpLocalMapPoints;
+    ::std::vector<KeyFrame*> mvpLocalKeyFrames;
+    ::std::vector<MapPoint*> mvpLocalMapPoints;
     
     // System
     System* mpSystem;
@@ -363,7 +363,7 @@ protected:
     bool mbStopped;
     bool mbStopRequested;
     bool mbNotStop;
-    std::mutex mMutexStop;
+    ::std::mutex mMutexStop;
 #endif
 
 public:

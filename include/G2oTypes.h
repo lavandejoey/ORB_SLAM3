@@ -80,8 +80,8 @@ public:
     ImuCamPose(Frame* pF);
     ImuCamPose(Eigen::Matrix3d &_Rwc, Eigen::Vector3d &_twc, KeyFrame* pKF);
 
-    void SetParam(const std::vector<Eigen::Matrix3d> &_Rcw, const std::vector<Eigen::Vector3d> &_tcw, const std::vector<Eigen::Matrix3d> &_Rbc,
-                  const std::vector<Eigen::Vector3d> &_tbc, const double &_bf);
+    void SetParam(const ::std::vector<Eigen::Matrix3d> &_Rcw, const ::std::vector<Eigen::Vector3d> &_tcw, const ::std::vector<Eigen::Matrix3d> &_Rbc,
+                  const ::std::vector<Eigen::Vector3d> &_tbc, const double &_bf);
 
     void Update(const double *pu); // update in the imu reference
     void UpdateW(const double *pu); // update in the world reference
@@ -95,12 +95,12 @@ public:
     Eigen::Vector3d twb;
 
     // For set of cameras
-    std::vector<Eigen::Matrix3d> Rcw;
-    std::vector<Eigen::Vector3d> tcw;
-    std::vector<Eigen::Matrix3d> Rcb, Rbc;
-    std::vector<Eigen::Vector3d> tcb, tbc;
+    ::std::vector<Eigen::Matrix3d> Rcw;
+    ::std::vector<Eigen::Vector3d> tcw;
+    ::std::vector<Eigen::Matrix3d> Rcb, Rbc;
+    ::std::vector<Eigen::Vector3d> tcb, tbc;
     double bf;
-    std::vector<GeometricCamera*> pCamera;
+    ::std::vector<GeometricCamera*> pCamera;
 
     // For posegraph 4DoF
     Eigen::Matrix3d Rwb0;

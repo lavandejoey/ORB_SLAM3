@@ -81,7 +81,7 @@ namespace g2o {
     }
   }
 
-  OptimizationAlgorithm* OptimizationAlgorithmFactory::construct(const std::string& name, OptimizationAlgorithmProperty& solverProperty) const
+  OptimizationAlgorithm* OptimizationAlgorithmFactory::construct(const ::std::string& name, OptimizationAlgorithmProperty& solverProperty) const
   {
     CreatorList::const_iterator foundIt = findSolver(name);
     if (foundIt != _creator.end()) {
@@ -102,7 +102,7 @@ namespace g2o {
   {
     size_t solverNameColumnLength = 0;
     for (CreatorList::const_iterator it = _creator.begin(); it != _creator.end(); ++it)
-      solverNameColumnLength = std::max(solverNameColumnLength, (*it)->property().name.size());
+      solverNameColumnLength = ::std::max(solverNameColumnLength, (*it)->property().name.size());
     solverNameColumnLength += 4;
 
     for (CreatorList::const_iterator it = _creator.begin(); it != _creator.end(); ++it) {
@@ -114,7 +114,7 @@ namespace g2o {
     }
   }
 
-  OptimizationAlgorithmFactory::CreatorList::const_iterator OptimizationAlgorithmFactory::findSolver(const std::string& name) const
+  OptimizationAlgorithmFactory::CreatorList::const_iterator OptimizationAlgorithmFactory::findSolver(const ::std::string& name) const
   {
     for (CreatorList::const_iterator it = _creator.begin(); it != _creator.end(); ++it) {
       const OptimizationAlgorithmProperty& sp = (*it)->property();
@@ -124,7 +124,7 @@ namespace g2o {
     return _creator.end();
   }
 
-  OptimizationAlgorithmFactory::CreatorList::iterator OptimizationAlgorithmFactory::findSolver(const std::string& name)
+  OptimizationAlgorithmFactory::CreatorList::iterator OptimizationAlgorithmFactory::findSolver(const ::std::string& name)
   {
     for (CreatorList::iterator it = _creator.begin(); it != _creator.end(); ++it) {
       const OptimizationAlgorithmProperty& sp = (*it)->property();

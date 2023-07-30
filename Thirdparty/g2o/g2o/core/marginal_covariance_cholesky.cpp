@@ -99,7 +99,7 @@ double MarginalCovarianceCholesky::computeEntry(int r, int c)
   return result;
 }
 
-void MarginalCovarianceCholesky::computeCovariance(double** covBlocks, const std::vector<int>& blockIndices)
+void MarginalCovarianceCholesky::computeCovariance(double** covBlocks, const ::std::vector<int>& blockIndices)
 {
   _map.clear();
   int base = 0;
@@ -151,7 +151,7 @@ void MarginalCovarianceCholesky::computeCovariance(double** covBlocks, const std
 }
 
 
-void MarginalCovarianceCholesky::computeCovariance(SparseBlockMatrix<MatrixXd>& spinv, const std::vector<int>& rowBlockIndices, const std::vector< std::pair<int, int> >& blockIndices)
+void MarginalCovarianceCholesky::computeCovariance(SparseBlockMatrix<MatrixXd>& spinv, const ::std::vector<int>& rowBlockIndices, const ::std::vector< ::std::pair<int, int> >& blockIndices)
 {
   // allocate the sparse
   spinv = SparseBlockMatrix<MatrixXd>(&rowBlockIndices[0], 

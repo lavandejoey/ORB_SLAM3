@@ -33,7 +33,7 @@ bool test2dGeometry() {
                        eps);
   }
 
-  std::vector<SE2<T>, Eigen::aligned_allocator<SE2<T>>> Ts_foo_line =
+  ::std::vector<SE2<T>, Eigen::aligned_allocator<SE2<T>>> Ts_foo_line =
       getTestSE2s<T>();
 
   for (SE2<T> const& T_foo_line : Ts_foo_line) {
@@ -97,7 +97,7 @@ bool test3dGeometry() {
                        eps);
   }
 
-  std::vector<SE3<T>, Eigen::aligned_allocator<SE3<T>>> Ts_foo_plane =
+  ::std::vector<SE3<T>, Eigen::aligned_allocator<SE3<T>>> Ts_foo_plane =
       getTestSE3s<T>();
 
   for (SE3<T> const& T_foo_plane : Ts_foo_plane) {
@@ -113,12 +113,12 @@ bool test3dGeometry() {
 }
 
 void runAll() {
-  std::cerr << "Geometry (Lines/Planes) tests:" << std::endl;
-  std::cerr << "Double tests: " << std::endl;
+  ::std::cerr << "Geometry (Lines/Planes) tests:" << ::std::endl;
+  ::std::cerr << "Double tests: " << ::std::endl;
   bool passed = test2dGeometry<double>();
   passed = test3dGeometry<double>();
   processTestResult(passed);
-  std::cerr << "Float tests: " << std::endl;
+  ::std::cerr << "Float tests: " << ::std::endl;
   passed = test2dGeometry<float>();
   passed = test3dGeometry<float>();
   processTestResult(passed);

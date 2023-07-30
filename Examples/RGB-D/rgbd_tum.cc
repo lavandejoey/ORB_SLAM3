@@ -94,14 +94,14 @@ int main(int argc, char **argv)
             cv::resize(imD, imD, cv::Size(width, height));
         }
 
-        std::chrono::steady_clock::time_point t1 = std::chrono::steady_clock::now();
+        ::std::chrono::steady_clock::time_point t1 = ::std::chrono::steady_clock::now();
 
         // Pass the image to the SLAM system
         SLAM.TrackRGBD(imRGB,imD,tframe);
 
-        std::chrono::steady_clock::time_point t2 = std::chrono::steady_clock::now();
+        ::std::chrono::steady_clock::time_point t2 = ::std::chrono::steady_clock::now();
 
-        double ttrack= std::chrono::duration_cast<std::chrono::duration<double> >(t2 - t1).count();
+        double ttrack= ::std::chrono::duration_cast<std::chrono::duration<double> >(t2 - t1).count();
 
         vTimesTrack[ni]=ttrack;
 

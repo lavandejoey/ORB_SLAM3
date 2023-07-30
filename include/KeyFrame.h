@@ -223,24 +223,24 @@ public:
 
     void UpdateConnections(bool upParent=true);
     void UpdateBestCovisibles();
-    std::set<KeyFrame *> GetConnectedKeyFrames();
-    std::vector<KeyFrame* > GetVectorCovisibleKeyFrames();
-    std::vector<KeyFrame*> GetBestCovisibilityKeyFrames(const int &N);
-    std::vector<KeyFrame*> GetCovisiblesByWeight(const int &w);
+    ::std::set<KeyFrame *> GetConnectedKeyFrames();
+    ::std::vector<KeyFrame* > GetVectorCovisibleKeyFrames();
+    ::std::vector<KeyFrame*> GetBestCovisibilityKeyFrames(const int &N);
+    ::std::vector<KeyFrame*> GetCovisiblesByWeight(const int &w);
     int GetWeight(KeyFrame* pKF);
 
     // Spanning tree functions
     void AddChild(KeyFrame* pKF);
     void EraseChild(KeyFrame* pKF);
     void ChangeParent(KeyFrame* pKF);
-    std::set<KeyFrame*> GetChilds();
+    ::std::set<KeyFrame*> GetChilds();
     KeyFrame* GetParent();
     bool hasChild(KeyFrame* pKF);
     void SetFirstConnection(bool bFirst);
 
     // Loop Edges
     void AddLoopEdge(KeyFrame* pKF);
-    std::set<KeyFrame*> GetLoopEdges();
+    ::std::set<KeyFrame*> GetLoopEdges();
 
     // Merge Edges
     void AddMergeEdge(KeyFrame* pKF);
@@ -252,13 +252,13 @@ public:
     void EraseMapPointMatch(const int &idx);
     void EraseMapPointMatch(MapPoint* pMP);
     void ReplaceMapPointMatch(const int &idx, MapPoint* pMP);
-    std::set<MapPoint*> GetMapPoints();
-    std::vector<MapPoint*> GetMapPointMatches();
+    ::std::set<MapPoint*> GetMapPoints();
+    ::std::vector<MapPoint*> GetMapPointMatches();
     int TrackedMapPoints(const int &minObs);
     MapPoint* GetMapPoint(const size_t &idx);
 
     // KeyPoint functions
-    std::vector<size_t> GetFeaturesInArea(const float &x, const float  &y, const float  &r, const bool bRight = false) const;
+    ::std::vector<size_t> GetFeaturesInArea(const float &x, const float  &y, const float  &r, const bool bRight = false) const;
     bool UnprojectStereo(int i, Eigen::Vector3f &x3D);
 
     // Image
@@ -293,8 +293,8 @@ public:
 
     IMU::Bias GetImuBias();
 
-    bool ProjectPointDistort(MapPoint* pMP, cv::Point2f &kp, float &u, float &v);
-    bool ProjectPointUnDistort(MapPoint* pMP, cv::Point2f &kp, float &u, float &v);
+//    bool ProjectPointDistort(MapPoint* pMP, cv::Point2f &kp, float &u, float &v);
+//    bool ProjectPointUnDistort(MapPoint* pMP, cv::Point2f &kp, float &u, float &v);
 
     void PreSave(set<KeyFrame*>& spKF,set<MapPoint*>& spMP, set<GeometricCamera*>& spCam);
     void PostLoad(map<long unsigned int, KeyFrame*>& mpKFid, map<long unsigned int, MapPoint*>& mpMPid, map<unsigned int, GeometricCamera*>& mpCamId);
@@ -378,10 +378,10 @@ public:
     const int N;
 
     // KeyPoints, stereo coordinate and descriptors (all associated by an index)
-    const std::vector<cv::KeyPoint> mvKeys;
-    const std::vector<cv::KeyPoint> mvKeysUn;
-    const std::vector<float> mvuRight; // negative value for monocular points
-    const std::vector<float> mvDepth; // negative value for monocular points
+    const ::std::vector<cv::KeyPoint> mvKeys;
+    const ::std::vector<cv::KeyPoint> mvKeysUn;
+    const ::std::vector<float> mvuRight; // negative value for monocular points
+    const ::std::vector<float> mvDepth; // negative value for monocular points
     const cv::Mat mDescriptors;
 
     //BoW
@@ -395,9 +395,9 @@ public:
     const int mnScaleLevels;
     const float mfScaleFactor;
     const float mfLogScaleFactor;
-    const std::vector<float> mvScaleFactors;
-    const std::vector<float> mvLevelSigma2;
-    const std::vector<float> mvInvLevelSigma2;
+    const ::std::vector<float> mvScaleFactors;
+    const ::std::vector<float> mvLevelSigma2;
+    const ::std::vector<float> mvInvLevelSigma2;
 
     // Image bounds and calibration
     const int mnMinX;
@@ -418,8 +418,8 @@ public:
 
     int mnDataset;
 
-    std::vector <KeyFrame*> mvpLoopCandKFs;
-    std::vector <KeyFrame*> mvpMergeCandKFs;
+    ::std::vector <KeyFrame*> mvpLoopCandKFs;
+    ::std::vector <KeyFrame*> mvpMergeCandKFs;
 
     //bool mbHasHessian;
     //cv::Mat mHessianPose;
@@ -446,34 +446,34 @@ protected:
     IMU::Bias mImuBias;
 
     // MapPoints associated to keypoints
-    std::vector<MapPoint*> mvpMapPoints;
+    ::std::vector<MapPoint*> mvpMapPoints;
     // For save relation without pointer, this is necessary for save/load function
-    std::vector<long long int> mvBackupMapPointsId;
+    ::std::vector<long long int> mvBackupMapPointsId;
 
     // BoW
     KeyFrameDatabase* mpKeyFrameDB;
     ORBVocabulary* mpORBvocabulary;
 
     // Grid over the image to speed up feature matching
-    std::vector< std::vector <std::vector<size_t> > > mGrid;
+    ::std::vector< ::std::vector <std::vector<size_t> > > mGrid;
 
-    std::map<KeyFrame*,int> mConnectedKeyFrameWeights;
-    std::vector<KeyFrame*> mvpOrderedConnectedKeyFrames;
-    std::vector<int> mvOrderedWeights;
+    ::std::map<KeyFrame*,int> mConnectedKeyFrameWeights;
+    ::std::vector<KeyFrame*> mvpOrderedConnectedKeyFrames;
+    ::std::vector<int> mvOrderedWeights;
     // For save relation without pointer, this is necessary for save/load function
-    std::map<long unsigned int, int> mBackupConnectedKeyFrameIdWeights;
+    ::std::map<long unsigned int, int> mBackupConnectedKeyFrameIdWeights;
 
     // Spanning Tree and Loop Edges
     bool mbFirstConnection;
     KeyFrame* mpParent;
-    std::set<KeyFrame*> mspChildrens;
-    std::set<KeyFrame*> mspLoopEdges;
-    std::set<KeyFrame*> mspMergeEdges;
+    ::std::set<KeyFrame*> mspChildrens;
+    ::std::set<KeyFrame*> mspLoopEdges;
+    ::std::set<KeyFrame*> mspMergeEdges;
     // For save relation without pointer, this is necessary for save/load function
     long long int mBackupParentId;
-    std::vector<long unsigned int> mvBackupChildrensId;
-    std::vector<long unsigned int> mvBackupLoopEdgesId;
-    std::vector<long unsigned int> mvBackupMergeEdgesId;
+    ::std::vector<long unsigned int> mvBackupChildrensId;
+    ::std::vector<long unsigned int> mvBackupLoopEdgesId;
+    ::std::vector<long unsigned int> mvBackupMergeEdgesId;
 
     // Bad flags
     bool mbNotErase;
@@ -496,45 +496,45 @@ protected:
     Eigen::Matrix3f mK_;
 
     // Mutex
-    std::mutex mMutexPose; // for pose, velocity and biases
-    std::mutex mMutexConnections;
-    std::mutex mMutexFeatures;
-    std::mutex mMutexMap;
+    ::std::mutex mMutexPose; // for pose, velocity and biases
+    ::std::mutex mMutexConnections;
+    ::std::mutex mMutexFeatures;
+    ::std::mutex mMutexMap;
 
 public:
     GeometricCamera* mpCamera, *mpCamera2;
 
     //Indexes of stereo observations correspondences
-    std::vector<int> mvLeftToRightMatch, mvRightToLeftMatch;
+    ::std::vector<int> mvLeftToRightMatch, mvRightToLeftMatch;
 
     Sophus::SE3f GetRelativePoseTrl();
     Sophus::SE3f GetRelativePoseTlr();
 
     //KeyPoints in the right image (for stereo fisheye, coordinates are needed)
-    const std::vector<cv::KeyPoint> mvKeysRight;
+    const ::std::vector<cv::KeyPoint> mvKeysRight;
 
     const int NLeft, NRight;
 
-    std::vector< std::vector <std::vector<size_t> > > mGridRight;
+    ::std::vector< ::std::vector <std::vector<size_t> > > mGridRight;
 
     Sophus::SE3<float> GetRightPose();
     Sophus::SE3<float> GetRightPoseInverse();
 
     Eigen::Vector3f GetRightCameraCenter();
-    Eigen::Matrix<float,3,3> GetRightRotation();
-    Eigen::Vector3f GetRightTranslation();
+//    Eigen::Matrix<float,3,3> GetRightRotation();
+//    Eigen::Vector3f GetRightTranslation();
 
-    void PrintPointDistribution(){
-        int left = 0, right = 0;
-        int Nlim = (NLeft != -1) ? NLeft : N;
-        for(int i = 0; i < N; i++){
-            if(mvpMapPoints[i]){
-                if(i < Nlim) left++;
-                else right++;
-            }
-        }
-        cout << "Point distribution in KeyFrame: left-> " << left << " --- right-> " << right << endl;
-    }
+//    void PrintPointDistribution(){
+//        int left = 0, right = 0;
+//        int Nlim = (NLeft != -1) ? NLeft : N;
+//        for(int i = 0; i < N; i++){
+//            if(mvpMapPoints[i]){
+//                if(i < Nlim) left++;
+//                else right++;
+//            }
+//        }
+//        cout << "Point distribution in KeyFrame: left-> " << left << " --- right-> " << right << endl;
+//    }
 
 
 };

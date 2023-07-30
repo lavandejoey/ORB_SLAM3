@@ -103,13 +103,13 @@ bool test(Sophus::SE3d const& T_w_targ, Sophus::SE3d const& T_w_init,
       new ceres::AutoDiffCostFunction<TestSE3CostFunctor, Sophus::SE3d::DoF,
                                       Sophus::SE3d::num_parameters>(
           new TestSE3CostFunctor(T_w_targ.inverse()));
-  problem.AddResidualBlock(cost_function1, NULL, T_wr.data());
+  problem.AddResidualBlock(cost_function1, nullptr, T_wr.data());
   ceres::CostFunction* cost_function2 =
       new ceres::AutoDiffCostFunction<TestPointCostFunctor, kNumPointParameters,
                                       Sophus::SE3d::num_parameters,
                                       kNumPointParameters>(
           new TestPointCostFunctor(T_w_targ.inverse(), point_b));
-  problem.AddResidualBlock(cost_function2, NULL, T_wr.data(), point_a.data());
+  problem.AddResidualBlock(cost_function2, nullptr, T_wr.data(), point_a.data());
 
   // Set solver options (precision / method)
   ceres::Solver::Options options;
@@ -120,7 +120,7 @@ bool test(Sophus::SE3d const& T_w_targ, Sophus::SE3d const& T_w_init,
   // Solve
   ceres::Solver::Summary summary;
   Solve(options, &problem, &summary);
-  std::cout << summary.BriefReport() << std::endl;
+  ::std::cout << summary.BriefReport() << ::std::endl;
 
   // Difference between target and parameter
   double const mse = (T_w_targ.inverse() * T_wr).log().squaredNorm();
@@ -131,7 +131,7 @@ bool test(Sophus::SE3d const& T_w_targ, Sophus::SE3d const& T_w_init,
 template <typename Scalar>
 bool CreateSE3FromMatrix(const Eigen::Matrix<Scalar, 4, 4>& mat) {
   Sophus::SE3<Scalar> se3 = Sophus::SE3<Scalar>(mat);
-  std::cout << se3.translation().x() << std::endl;
+  ::std::cout << se3.translation().x() << ::std::endl;
   return true;
 }
 
@@ -141,7 +141,7 @@ int main(int, char**) {
   using Point = SE3Type::Point;
   double const kPi = Sophus::Constants<double>::pi();
 
-  std::vector<SE3Type> se3_vec;
+  ::std::vector<SE3Type> se3_vec;
   se3_vec.push_back(
       SE3Type(SO3Type::exp(Point(0.2, 0.5, 0.0)), Point(0, 0, 0)));
   se3_vec.push_back(
@@ -163,7 +163,7 @@ int main(int, char**) {
       SE3Type(SO3Type::exp(Point(kPi, 0, 0)), Point(0, 0, 0)) *
       SE3Type(SO3Type::exp(Point(-0.3, -0.5, -0.1)), Point(0, 6, 0)));
 
-  std::vector<Point> point_vec;
+  ::std::vector<Point> point_vec;
   point_vec.emplace_back(1.012, 2.73, -1.4);
   point_vec.emplace_back(9.2, -7.3, -4.4);
   point_vec.emplace_back(2.5, 0.1, 9.1);
@@ -179,14 +179,14 @@ int main(int, char**) {
     bool const passed = test(se3_vec[i], se3_vec[other_index], point_vec[i],
                              point_vec[other_index]);
     if (!passed) {
-      std::cerr << "failed!" << std::endl << std::endl;
+      ::std::cerr << "failed!" << ::std::endl << ::std::endl;
       exit(-1);
     }
   }
 
   Eigen::Matrix<ceres::Jet<double, 28>, 4, 4> mat;
   mat.setIdentity();
-  std::cout << CreateSE3FromMatrix(mat) << std::endl;
+  ::std::cout << CreateSE3FromMatrix(mat) << ::std::endl;
 
   return 0;
 }

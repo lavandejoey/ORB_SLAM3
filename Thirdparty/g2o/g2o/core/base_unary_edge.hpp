@@ -28,7 +28,7 @@ template <int D, typename E, typename VertexXiType>
 void BaseUnaryEdge<D, E, VertexXiType>::resize(size_t size)
 {
   if (size != 1) {
-    std::cerr << "WARNING, attempting to resize unary edge " << BaseEdge<D, E>::id() << " to " << size << std::endl;
+    ::std::cerr << "WARNING, attempting to resize unary edge " << BaseEdge<D, E>::id() << " to " << size << ::std::endl;
   }
   BaseEdge<D, E>::resize(size);
 }
@@ -97,7 +97,7 @@ void BaseUnaryEdge<D, E, VertexXiType>::linearizeOplus()
   ErrorVector errorBeforeNumeric = _error;
 
   double add_vi[VertexXiType::Dimension];
-  std::fill(add_vi, add_vi + VertexXiType::Dimension, 0.0);
+  ::std::fill(add_vi, add_vi + VertexXiType::Dimension, 0.0);
   // add small step along the unit vector in each dimension
   for (int d = 0; d < VertexXiType::Dimension; ++d) {
     vi->push();
@@ -125,5 +125,5 @@ void BaseUnaryEdge<D, E, VertexXiType>::linearizeOplus()
 template <int D, typename E, typename VertexXiType>
 void BaseUnaryEdge<D, E, VertexXiType>::initialEstimate(const OptimizableGraph::VertexSet&, OptimizableGraph::Vertex*)
 {
-  std::cerr << __PRETTY_FUNCTION__ << " is not implemented, please give implementation in your derived class" << std::endl;
+  ::std::cerr << __PRETTY_FUNCTION__ << " is not implemented, please give implementation in your derived class" << ::std::endl;
 }

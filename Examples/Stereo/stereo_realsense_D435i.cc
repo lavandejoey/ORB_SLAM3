@@ -53,7 +53,7 @@ static rs2_option get_sensor_option(const rs2::sensor& sensor)
     // Sensors usually have several options to control their properties
     //  such as Exposure, Brightness etc.
 
-    std::cout << "Sensor supports the following options:\n" << std::endl;
+    ::std::cout << "Sensor supports the following options:\n" << ::std::endl;
 
     // The following loop shows how to iterate over all available options
     // Starting from 0 until RS2_OPTION_COUNT (exclusive)
@@ -61,28 +61,28 @@ static rs2_option get_sensor_option(const rs2::sensor& sensor)
     {
         rs2_option option_type = static_cast<rs2_option>(i);
         //SDK enum types can be streamed to get a string that represents them
-        std::cout << "  " << i << ": " << option_type;
+        ::std::cout << "  " << i << ": " << option_type;
 
         // To control an option, use the following api:
 
         // First, verify that the sensor actually supports this option
         if (sensor.supports(option_type))
         {
-            std::cout << std::endl;
+            ::std::cout << ::std::endl;
 
             // Get a human readable description of the option
             const char* description = sensor.get_option_description(option_type);
-            std::cout << "       Description   : " << description << std::endl;
+            ::std::cout << "       Description   : " << description << ::std::endl;
 
             // Get the current value of the option
             float current_value = sensor.get_option(option_type);
-            std::cout << "       Current Value : " << current_value << std::endl;
+            ::std::cout << "       Current Value : " << current_value << ::std::endl;
 
             //To change the value of an option, please follow the change_sensor_option() function
         }
         else
         {
-            std::cout << " is not supported" << std::endl;
+            ::std::cout << " is not supported" << ::std::endl;
         }
     }
 
@@ -111,7 +111,7 @@ int main(int argc, char **argv) {
     sigemptyset(&sigIntHandler.sa_mask);
     sigIntHandler.sa_flags = 0;
 
-    sigaction(SIGINT, &sigIntHandler, NULL);
+    sigaction(SIGINT, &sigIntHandler, nullptr);
     b_continue_session = true;
 
     double offset = 0; // ms
@@ -121,13 +121,13 @@ int main(int argc, char **argv) {
     rs2::device selected_device;
     if (devices.size() == 0)
     {
-        std::cerr << "No device connected, please connect a RealSense device" << std::endl;
+        ::std::cerr << "No device connected, please connect a RealSense device" << ::std::endl;
         return 0;
     }
     else
         selected_device = devices[0];
 
-    std::vector<rs2::sensor> sensors = selected_device.query_sensors();
+    ::std::vector<rs2::sensor> sensors = selected_device.query_sensors();
     int index = 0;
     // We can now iterate the sensors and print their names
     for (rs2::sensor sensor : sensors)
@@ -138,7 +138,7 @@ int main(int argc, char **argv) {
                 sensor.set_option(RS2_OPTION_AUTO_EXPOSURE_LIMIT,5000);
                 sensor.set_option(RS2_OPTION_EMITTER_ENABLED, 0); // switch off emitter
             }
-            // std::cout << "  " << index << " : " << sensor.get_info(RS2_CAMERA_INFO_NAME) << std::endl;
+            // ::std::cout << "  " << index << " : " << sensor.get_info(RS2_CAMERA_INFO_NAME) << ::std::endl;
             get_sensor_option(sensor);
             if (index == 2){
                 // RGB camera (not used here...)
@@ -154,8 +154,8 @@ int main(int argc, char **argv) {
     cfg.enable_stream(RS2_STREAM_INFRARED, 2, 640, 480, RS2_FORMAT_Y8, 30);
 
     // IMU callback
-    std::mutex imu_mutex;
-    std::condition_variable cond_image_rec;
+    ::std::mutex imu_mutex;
+    ::std::condition_variable cond_image_rec;
 
     cv::Mat imCV, imRightCV;
     int width_img, height_img;
@@ -165,7 +165,7 @@ int main(int argc, char **argv) {
 
     auto imu_callback = [&](const rs2::frame& frame)
     {
-        std::unique_lock<std::mutex> lock(imu_mutex);
+        ::std::unique_lock<std::mutex> lock(imu_mutex);
 
         if(rs2::frameset fs = frame.as<rs2::frameset>())
         {
@@ -199,11 +199,11 @@ int main(int argc, char **argv) {
 
     float* Rlr = cam_right.get_extrinsics_to(cam_left).rotation;
     float* tlr = cam_right.get_extrinsics_to(cam_left).translation;
-    std::cout << "Tlr  = " << std::endl;
+    ::std::cout << "Tlr  = " << ::std::endl;
     for(int i = 0; i<3; i++){
         for(int j = 0; j<3; j++)
-            std::cout << Rlr[i*3 + j] << ", ";
-        std::cout << tlr[i] << "\n";
+            ::std::cout << Rlr[i*3 + j] << ", ";
+        ::std::cout << tlr[i] << "\n";
     }
 
 
@@ -212,29 +212,29 @@ int main(int argc, char **argv) {
     width_img = intrinsics_left.width;
     height_img = intrinsics_left.height;
     cout << "Left camera: \n";
-    std::cout << " fx = " << intrinsics_left.fx << std::endl;
-    std::cout << " fy = " << intrinsics_left.fy << std::endl;
-    std::cout << " cx = " << intrinsics_left.ppx << std::endl;
-    std::cout << " cy = " << intrinsics_left.ppy << std::endl;
-    std::cout << " height = " << intrinsics_left.height << std::endl;
-    std::cout << " width = " << intrinsics_left.width << std::endl;
-    std::cout << " Coeff = " << intrinsics_left.coeffs[0] << ", " << intrinsics_left.coeffs[1] << ", " <<
-        intrinsics_left.coeffs[2] << ", " << intrinsics_left.coeffs[3] << ", " << intrinsics_left.coeffs[4] << ", " << std::endl;
-    std::cout << " Model = " << intrinsics_left.model << std::endl;
+    ::std::cout << " fx = " << intrinsics_left.fx << ::std::endl;
+    ::std::cout << " fy = " << intrinsics_left.fy << ::std::endl;
+    ::std::cout << " cx = " << intrinsics_left.ppx << ::std::endl;
+    ::std::cout << " cy = " << intrinsics_left.ppy << ::std::endl;
+    ::std::cout << " height = " << intrinsics_left.height << ::std::endl;
+    ::std::cout << " width = " << intrinsics_left.width << ::std::endl;
+    ::std::cout << " Coeff = " << intrinsics_left.coeffs[0] << ", " << intrinsics_left.coeffs[1] << ", " <<
+        intrinsics_left.coeffs[2] << ", " << intrinsics_left.coeffs[3] << ", " << intrinsics_left.coeffs[4] << ", " << ::std::endl;
+    ::std::cout << " Model = " << intrinsics_left.model << ::std::endl;
 
     rs2_intrinsics intrinsics_right = cam_right.as<rs2::video_stream_profile>().get_intrinsics();
     width_img = intrinsics_right.width;
     height_img = intrinsics_right.height;
     cout << "Right camera: \n";
-    std::cout << " fx = " << intrinsics_right.fx << std::endl;
-    std::cout << " fy = " << intrinsics_right.fy << std::endl;
-    std::cout << " cx = " << intrinsics_right.ppx << std::endl;
-    std::cout << " cy = " << intrinsics_right.ppy << std::endl;
-    std::cout << " height = " << intrinsics_right.height << std::endl;
-    std::cout << " width = " << intrinsics_right.width << std::endl;
-    std::cout << " Coeff = " << intrinsics_right.coeffs[0] << ", " << intrinsics_right.coeffs[1] << ", " <<
-        intrinsics_right.coeffs[2] << ", " << intrinsics_right.coeffs[3] << ", " << intrinsics_right.coeffs[4] << ", " << std::endl;
-    std::cout << " Model = " << intrinsics_right.model << std::endl;
+    ::std::cout << " fx = " << intrinsics_right.fx << ::std::endl;
+    ::std::cout << " fy = " << intrinsics_right.fy << ::std::endl;
+    ::std::cout << " cx = " << intrinsics_right.ppx << ::std::endl;
+    ::std::cout << " cy = " << intrinsics_right.ppy << ::std::endl;
+    ::std::cout << " height = " << intrinsics_right.height << ::std::endl;
+    ::std::cout << " width = " << intrinsics_right.width << ::std::endl;
+    ::std::cout << " Coeff = " << intrinsics_right.coeffs[0] << ", " << intrinsics_right.coeffs[1] << ", " <<
+        intrinsics_right.coeffs[2] << ", " << intrinsics_right.coeffs[3] << ", " << intrinsics_right.coeffs[4] << ", " << ::std::endl;
+    ::std::cout << " Model = " << intrinsics_right.model << ::std::endl;
 
 
     // Create SLAM system. It initializes all system threads and gets ready to process frames.
@@ -249,17 +249,17 @@ int main(int argc, char **argv) {
 
     while (!SLAM.isShutDown())
     {
-        std::vector<rs2_vector> vGyro;
-        std::vector<double> vGyro_times;
-        std::vector<rs2_vector> vAccel;
-        std::vector<double> vAccel_times;
+        ::std::vector<rs2_vector> vGyro;
+        ::std::vector<double> vGyro_times;
+        ::std::vector<rs2_vector> vAccel;
+        ::std::vector<double> vAccel_times;
 
         {
-            std::unique_lock<std::mutex> lk(imu_mutex);
+            ::std::unique_lock<std::mutex> lk(imu_mutex);
             if(!image_ready)
                 cond_image_rec.wait(lk);
 
-            std::chrono::steady_clock::time_point time_Start_Process = std::chrono::steady_clock::now();
+            ::std::chrono::steady_clock::time_point time_Start_Process = ::std::chrono::steady_clock::now();
 
             if(count_im_buffer>1)
                 cout << count_im_buffer -1 << " dropped frs\n";
@@ -275,7 +275,7 @@ int main(int argc, char **argv) {
         if(imageScale != 1.f)
         {
 #ifdef REGISTER_TIMES
-            std::chrono::steady_clock::time_point t_Start_Resize = std::chrono::steady_clock::now();
+            ::std::chrono::steady_clock::time_point t_Start_Resize = ::std::chrono::steady_clock::now();
 #endif
             int width = im.cols * imageScale;
             int height = im.rows * imageScale;
@@ -283,22 +283,22 @@ int main(int argc, char **argv) {
             cv::resize(imRight, imRight, cv::Size(width, height));
 
 #ifdef REGISTER_TIMES
-            std::chrono::steady_clock::time_point t_End_Resize = std::chrono::steady_clock::now();
+            ::std::chrono::steady_clock::time_point t_End_Resize = ::std::chrono::steady_clock::now();
 
-            t_resize = std::chrono::duration_cast<std::chrono::duration<double,std::milli> >(t_End_Resize - t_Start_Resize).count();
+            t_resize = ::std::chrono::duration_cast<std::chrono::duration<double,std::milli> >(t_End_Resize - t_Start_Resize).count();
             SLAM.InsertResizeTime(t_resize);
 #endif
         }
 
 #ifdef REGISTER_TIMES
-        std::chrono::steady_clock::time_point t_Start_Track = std::chrono::steady_clock::now();
+        ::std::chrono::steady_clock::time_point t_Start_Track = ::std::chrono::steady_clock::now();
 #endif
         // Stereo images are already rectified.
         SLAM.TrackStereo(im, imRight, timestamp);
 #ifdef REGISTER_TIMES
-        std::chrono::steady_clock::time_point t_End_Track = std::chrono::steady_clock::now();
+        ::std::chrono::steady_clock::time_point t_End_Track = ::std::chrono::steady_clock::now();
 
-        t_track = t_resize + std::chrono::duration_cast<std::chrono::duration<double,std::milli> >(t_End_Track - t_Start_Track).count();
+        t_track = t_resize + ::std::chrono::duration_cast<std::chrono::duration<double,std::milli> >(t_End_Track - t_Start_Track).count();
         SLAM.InsertTrackTime(t_track);
 #endif
     }

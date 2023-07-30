@@ -45,7 +45,7 @@ namespace g2o {
     iteration = -1;
   }
 
-  std::ostream& operator << (std::ostream& os , const G2OBatchStatistics& st)
+  ::std::ostream& operator << (std::ostream& os , const G2OBatchStatistics& st)
   {
     os << PTHING(iteration);
 

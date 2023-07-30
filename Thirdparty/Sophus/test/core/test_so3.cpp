@@ -179,7 +179,7 @@ class Tests {
   template <class S = Scalar>
   enable_if_t<std::is_floating_point<S>::value, bool> testSampleUniformSymmetry() {
     bool passed = true;
-    std::default_random_engine generator(0);
+    ::std::default_random_engine generator(0);
 
     // A non-rigorous test for checking that our sampleUniform() function is
     // giving us symmetric results
@@ -190,7 +190,7 @@ class Tests {
     // chi-square test
 
     for (size_t trial = 0; trial < 5; trial++) {
-      std::normal_distribution<Scalar> normal(0, 10);
+      ::std::normal_distribution<Scalar> normal(0, 10);
 
       // Pick a random plane to split the output space by
       Point plane_normal(normal(generator), normal(generator),
@@ -260,14 +260,14 @@ class Tests {
     return true;
   }
 
-  std::vector<SO3Type, Eigen::aligned_allocator<SO3Type>> so3_vec_;
-  std::vector<Tangent, Eigen::aligned_allocator<Tangent>> tangent_vec_;
-  std::vector<Point, Eigen::aligned_allocator<Point>> point_vec_;
+  ::std::vector<SO3Type, Eigen::aligned_allocator<SO3Type>> so3_vec_;
+  ::std::vector<Tangent, Eigen::aligned_allocator<Tangent>> tangent_vec_;
+  ::std::vector<Point, Eigen::aligned_allocator<Point>> point_vec_;
 };
 
 int test_so3() {
-  using std::cerr;
-  using std::endl;
+  using ::std::cerr;
+  using ::std::endl;
 
   cerr << "Test SO3" << endl << endl;
   cerr << "Double tests: " << endl;

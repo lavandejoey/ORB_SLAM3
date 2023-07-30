@@ -178,7 +178,7 @@ namespace g2o {
       assert(v);
       int dim = v->dimension();
       for (int j = 0; j < dim; ++j){
-        maxDiagonal = std::max(fabs(v->hessian(j,j)),maxDiagonal);
+        maxDiagonal = ::std::max(fabs(v->hessian(j,j)),maxDiagonal);
       }
     }
     return _tau*maxDiagonal;

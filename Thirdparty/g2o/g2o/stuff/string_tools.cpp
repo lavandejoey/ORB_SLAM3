@@ -45,7 +45,7 @@ namespace g2o {
 
 using namespace std;
 
-std::string trim(const std::string& s)
+std::string trim(const ::std::string& s)
 {
   if(s.length() == 0)
     return s;
@@ -53,10 +53,10 @@ std::string trim(const std::string& s)
   string::size_type e = s.find_last_not_of(" \t\n");
   if(b == string::npos)
     return "";
-  return std::string(s, b, e - b + 1);
+  return ::std::string(s, b, e - b + 1);
 }
 
-std::string trimLeft(const std::string& s)
+std::string trimLeft(const ::std::string& s)
 {
   if(s.length() == 0)
     return s;
@@ -64,10 +64,10 @@ std::string trimLeft(const std::string& s)
   string::size_type e = s.length() - 1;
   if(b == string::npos)
     return "";
-  return std::string(s, b, e - b + 1);
+  return ::std::string(s, b, e - b + 1);
 }
 
-std::string trimRight(const std::string& s)
+std::string trimRight(const ::std::string& s)
 {
   if(s.length() == 0)
     return s;
@@ -75,26 +75,26 @@ std::string trimRight(const std::string& s)
   string::size_type e = s.find_last_not_of(" \t\n");
   if(b == string::npos)
     return "";
-  return std::string(s, b, e - b + 1);
+  return ::std::string(s, b, e - b + 1);
 }
 
-std::string strToLower(const std::string& s)
+std::string strToLower(const ::std::string& s)
 {
   string ret;
-  std::transform(s.begin(), s.end(), back_inserter(ret), (int(*)(int)) std::tolower);
+  ::std::transform(s.begin(), s.end(), back_inserter(ret), (int(*)(int)) ::std::tolower);
   return ret;
 }
 
-std::string strToUpper(const std::string& s)
+std::string strToUpper(const ::std::string& s)
 {
   string ret;
-  std::transform(s.begin(), s.end(), back_inserter(ret), (int(*)(int)) std::toupper);
+  ::std::transform(s.begin(), s.end(), back_inserter(ret), (int(*)(int)) ::std::toupper);
   return ret;
 }
 
 std::string formatString(const char* fmt, ...)
 {
-  char* auxPtr = NULL;
+  char* auxPtr = nullptr;
   va_list arg_list;
   va_start(arg_list, fmt);
   int numChar = vasprintf(&auxPtr, fmt, arg_list);
@@ -111,7 +111,7 @@ std::string formatString(const char* fmt, ...)
 
 int strPrintf(std::string& str, const char* fmt, ...)
 {
-  char* auxPtr = NULL;
+  char* auxPtr = nullptr;
   va_list arg_list;
   va_start(arg_list, fmt);
   int numChars = vasprintf(&auxPtr, fmt, arg_list);
@@ -121,7 +121,7 @@ int strPrintf(std::string& str, const char* fmt, ...)
   return numChars;
 }
 
-std::string strExpandFilename(const std::string& filename)
+std::string strExpandFilename(const ::std::string& filename)
 {
 #if (defined (UNIX) || defined(CYGWIN)) && !defined(ANDROID)
   string result = filename;
@@ -135,14 +135,14 @@ std::string strExpandFilename(const std::string& filename)
   return result;
 #else
   (void) filename;
-  std::cerr << "WARNING: " << __PRETTY_FUNCTION__ << " not implemented" << std::endl;
-  return std::string();
+  ::std::cerr << "WARNING: " << __PRETTY_FUNCTION__ << " not implemented" << ::std::endl;
+  return ::std::string();
 #endif
 }
 
-std::vector<std::string> strSplit(const std::string& str, const std::string& delimiters)
+std::vector<std::string> strSplit(const ::std::string& str, const ::std::string& delimiters)
 {
-  std::vector<std::string> tokens;
+  ::std::vector<std::string> tokens;
   string::size_type lastPos = 0;
   string::size_type pos     = 0;
 
@@ -155,21 +155,21 @@ std::vector<std::string> strSplit(const std::string& str, const std::string& del
   return tokens;
 }
 
-bool strStartsWith(const std::string& s, const std::string& start)
+bool strStartsWith(const ::std::string& s, const ::std::string& start)
 {
   if (s.size() < start.size())
     return false;
   return equal(start.begin(), start.end(), s.begin());
 }
 
-bool strEndsWith(const std::string& s, const std::string& end)
+bool strEndsWith(const ::std::string& s, const ::std::string& end)
 {
   if (s.size() < end.size())
     return false;
   return equal(end.rbegin(), end.rend(), s.rbegin());
 }
 
-int readLine(std::istream& is, std::stringstream& currentLine)
+int readLine(std::istream& is, ::std::stringstream& currentLine)
 {
   if (is.eof())
     return -1;

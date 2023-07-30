@@ -66,12 +66,12 @@ protected:
     vector<cv::KeyPoint> mvIniKeys;
     vector<int> mvIniMatches;
     int mState;
-    std::vector<float> mvCurrentDepth;
+    ::std::vector<float> mvCurrentDepth;
     float mThDepth;
 
     Atlas* mpAtlas;
 
-    std::mutex mMutex;
+    ::std::mutex mMutex;
     vector<pair<cv::Point2f, cv::Point2f> > mvTracks;
 
     Frame mCurrentFrame;

@@ -59,12 +59,12 @@ namespace g2o {
   {
   }
 
-  HyperGraphElementAction::HyperGraphElementAction(const std::string& typeName_)
+  HyperGraphElementAction::HyperGraphElementAction(const ::std::string& typeName_)
   {
     _typeName = typeName_;
   }
 
-  void HyperGraphElementAction::setTypeName(const std::string& typeName_)
+  void HyperGraphElementAction::setTypeName(const ::std::string& typeName_)
   {
     _typeName = typeName_;
   }
@@ -84,7 +84,7 @@ namespace g2o {
   {
   }
 
-  HyperGraphElementActionCollection::HyperGraphElementActionCollection(const std::string& name_)
+  HyperGraphElementActionCollection::HyperGraphElementActionCollection(const ::std::string& name_)
   {
     _name = name_;
   }
@@ -163,7 +163,7 @@ namespace g2o {
     }
   }
   
-  HyperGraphElementAction* HyperGraphActionLibrary::actionByName(const std::string& name)
+  HyperGraphElementAction* HyperGraphActionLibrary::actionByName(const ::std::string& name)
   {
     HyperGraphElementAction::ActionMap::iterator it=_actionMap.find(name);
     if (it!=_actionMap.end())
@@ -217,7 +217,7 @@ namespace g2o {
   }
 
 
-  WriteGnuplotAction::WriteGnuplotAction(const std::string& typeName_)
+  WriteGnuplotAction::WriteGnuplotAction(const ::std::string& typeName_)
     : HyperGraphElementAction(typeName_)
   {
     _name="writeGnuplot";
@@ -226,7 +226,7 @@ namespace g2o {
   DrawAction::Parameters::Parameters(){
   }
 
-  DrawAction::DrawAction(const std::string& typeName_) 
+  DrawAction::DrawAction(const ::std::string& typeName_)
     : HyperGraphElementAction(typeName_)
   {
     _name="draw";
@@ -250,7 +250,7 @@ namespace g2o {
     return true;
   }
 
-  void applyAction(HyperGraph* graph, HyperGraphElementAction* action, HyperGraphElementAction::Parameters* params, const std::string& typeName)
+  void applyAction(HyperGraph* graph, HyperGraphElementAction* action, HyperGraphElementAction::Parameters* params, const ::std::string& typeName)
   {
     for (HyperGraph::VertexIDMap::iterator it=graph->vertices().begin(); 
         it!=graph->vertices().end(); ++it){

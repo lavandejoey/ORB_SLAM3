@@ -41,7 +41,7 @@ Vector3<Scalar> transformVelocity(SE3<Scalar> const& foo_T_bar,
 //
 template <class Scalar>
 Vector3<Scalar> finiteDifferenceRotationalVelocity(
-    std::function<SO3<Scalar>(Scalar)> const& foo_R_bar, Scalar t,
+    ::std::function<SO3<Scalar>(Scalar)> const& foo_R_bar, Scalar t,
     Scalar h = Constants<Scalar>::epsilon()) {
   // https://en.wikipedia.org/w/index.php?title=Angular_velocity&oldid=791867792#Angular_velocity_tensor
   //
@@ -61,7 +61,7 @@ Vector3<Scalar> finiteDifferenceRotationalVelocity(
 //
 template <class Scalar>
 Vector3<Scalar> finiteDifferenceRotationalVelocity(
-    std::function<SE3<Scalar>(Scalar)> const& foo_T_bar, Scalar t,
+    ::std::function<SE3<Scalar>(Scalar)> const& foo_T_bar, Scalar t,
     Scalar h = Constants<Scalar>::epsilon()) {
   return finiteDifferenceRotationalVelocity<Scalar>(
       [&foo_T_bar](Scalar t) -> SO3<Scalar> { return foo_T_bar(t).so3(); }, t,

@@ -71,7 +71,7 @@ namespace g2o {
         HGET_NUM_ELEMS // keep as last elem
       };
 
-      typedef std::bitset<HyperGraph::HGET_NUM_ELEMS> GraphElemBitset;
+      typedef ::std::bitset<HyperGraph::HGET_NUM_ELEMS> GraphElemBitset;
 
       class  Vertex;
       class  Edge;
@@ -87,11 +87,11 @@ namespace g2o {
         virtual HyperGraphElementType elementType() const = 0;
       };
 
-      typedef std::set<Edge*>                           EdgeSet;
-      typedef std::set<Vertex*>                         VertexSet;
+      typedef ::std::set<Edge*>                           EdgeSet;
+      typedef ::std::set<Vertex*>                         VertexSet;
 
-      typedef std::tr1::unordered_map<int, Vertex*>     VertexIDMap;
-      typedef std::vector<Vertex*>                      VertexContainer;
+      typedef ::std::tr1::unordered_map<int, Vertex*>     VertexIDMap;
+      typedef ::std::vector<Vertex*>                      VertexContainer;
 
       //! abstract Vertex, your types must derive from that one
       class  Vertex : public HyperGraphElement {

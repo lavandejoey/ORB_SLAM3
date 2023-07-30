@@ -122,19 +122,19 @@ int main(int argc, char **argv)
 
             double tframe = vTimestampsCam[seq][ni];
 
-            std::chrono::steady_clock::time_point t1 = std::chrono::steady_clock::now();
+            ::std::chrono::steady_clock::time_point t1 = ::std::chrono::steady_clock::now();
 
             // Pass the images to the SLAM system
             SLAM.TrackStereo(imLeft,imRight,tframe, vector<ORB_SLAM3::IMU::Point>(), vstrImageLeft[seq][ni]);
 
-            std::chrono::steady_clock::time_point t2 = std::chrono::steady_clock::now();
+            ::std::chrono::steady_clock::time_point t2 = ::std::chrono::steady_clock::now();
 
 #ifdef REGISTER_TIMES
-            t_track = t_resize + t_rect + std::chrono::duration_cast<std::chrono::duration<double,std::milli> >(t2 - t1).count();
+            t_track = t_resize + t_rect + ::std::chrono::duration_cast<std::chrono::duration<double,std::milli> >(t2 - t1).count();
             SLAM.InsertTrackTime(t_track);
 #endif
 
-            double ttrack= std::chrono::duration_cast<std::chrono::duration<double> >(t2 - t1).count();
+            double ttrack= ::std::chrono::duration_cast<std::chrono::duration<double> >(t2 - t1).count();
 
             vTimesTrack[ni]=ttrack;
 

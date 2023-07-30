@@ -81,7 +81,7 @@ namespace g2o {
 
       virtual void initialEstimate(const OptimizableGraph::VertexSet&, OptimizableGraph::Vertex*)
       {
-        std::cerr << "inititialEstimate() is not implemented, please give implementation in your derived class" << std::endl;
+        ::std::cerr << "inititialEstimate() is not implemented, please give implementation in your derived class" << ::std::endl;
       }
 
     protected:

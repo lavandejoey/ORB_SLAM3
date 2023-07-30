@@ -656,7 +656,7 @@ bool OptimizableGraph::saveSubset(ostream& os, HyperGraph::EdgeSet& eset)
 {
   if (!_parameters.write(os))
     return false;
-  std::set<OptimizableGraph::Vertex*> vset;
+  ::std::set<OptimizableGraph::Vertex*> vset;
   for (HyperGraph::EdgeSet::const_iterator it = eset.begin(); it != eset.end(); ++it) {
     HyperGraph::Edge* e = *it;
     for (vector<HyperGraph::Vertex*>::const_iterator it = e->vertices().begin(); it != e->vertices().end(); ++it) {
@@ -711,7 +711,7 @@ int OptimizableGraph::maxDimension() const{
   return maxDim;
 }
 
-void OptimizableGraph::setRenamedTypesFromString(const std::string& types)
+void OptimizableGraph::setRenamedTypesFromString(const ::std::string& types)
 {
   Factory* factory = Factory::instance();
   vector<string> typesMap = strSplit(types, ",");
@@ -732,14 +732,14 @@ void OptimizableGraph::setRenamedTypesFromString(const std::string& types)
   }
 
   cerr << "# load look up table" << endl;
-  for (std::map<std::string, std::string>::const_iterator it = _renamedTypesLookup.begin(); it != _renamedTypesLookup.end(); ++it) {
+  for (std::map<std::string, ::std::string>::const_iterator it = _renamedTypesLookup.begin(); it != _renamedTypesLookup.end(); ++it) {
     cerr << "#\t" << it->first << " -> " << it->second << endl;
   }
 }
 
-bool OptimizableGraph::isSolverSuitable(const OptimizationAlgorithmProperty& solverProperty, const std::set<int>& vertDims_) const
+bool OptimizableGraph::isSolverSuitable(const OptimizationAlgorithmProperty& solverProperty, const ::std::set<int>& vertDims_) const
 {
-  std::set<int> auxDims;
+  ::std::set<int> auxDims;
   if (vertDims_.size() == 0) {
     auxDims = dimensions();
   }
@@ -762,7 +762,7 @@ bool OptimizableGraph::isSolverSuitable(const OptimizationAlgorithmProperty& sol
 
 std::set<int> OptimizableGraph::dimensions() const
 {
-  std::set<int> auxDims;
+  ::std::set<int> auxDims;
   for (VertexIDMap::const_iterator it = vertices().begin(); it != vertices().end(); ++it) {
     OptimizableGraph::Vertex* v = static_cast<OptimizableGraph::Vertex*>(it->second);
     auxDims.insert(v->dimension());
@@ -794,13 +794,13 @@ void OptimizableGraph::postIteration(int iter)
 
 bool OptimizableGraph::addPostIterationAction(HyperGraphAction* action)
 {
-  std::pair<HyperGraphActionSet::iterator, bool> insertResult = _graphActions[AT_POSTITERATION].insert(action);
+  ::std::pair<HyperGraphActionSet::iterator, bool> insertResult = _graphActions[AT_POSTITERATION].insert(action);
   return insertResult.second;
 }
 
 bool OptimizableGraph::addPreIterationAction(HyperGraphAction* action)
 {
-  std::pair<HyperGraphActionSet::iterator, bool> insertResult = _graphActions[AT_PREITERATION].insert(action);
+  ::std::pair<HyperGraphActionSet::iterator, bool> insertResult = _graphActions[AT_PREITERATION].insert(action);
   return insertResult.second;
 }
 

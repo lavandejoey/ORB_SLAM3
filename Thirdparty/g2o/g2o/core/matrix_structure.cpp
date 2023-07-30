@@ -91,8 +91,8 @@ bool MatrixStructure::write(const char* filename) const
   const int& rows = m;
 
   string name = filename;
-  std::string::size_type lastDot = name.find_last_of('.');
-  if (lastDot != std::string::npos) 
+  ::std::string::size_type lastDot = name.find_last_of('.');
+  if (lastDot != ::std::string::npos)
     name = name.substr(0, lastDot);
 
   vector<pair<int, int> > entries;
@@ -108,15 +108,15 @@ bool MatrixStructure::write(const char* filename) const
 
   sort(entries.begin(), entries.end(), ColSort());
 
-  std::ofstream fout(filename);
-  fout << "# name: " << name << std::endl;
-  fout << "# type: sparse matrix" << std::endl;
-  fout << "# nnz: " << entries.size() << std::endl;
-  fout << "# rows: " << rows << std::endl;
-  fout << "# columns: " << cols << std::endl;
+  ::std::ofstream fout(filename);
+  fout << "# name: " << name << ::std::endl;
+  fout << "# type: sparse matrix" << ::std::endl;
+  fout << "# nnz: " << entries.size() << ::std::endl;
+  fout << "# rows: " << rows << ::std::endl;
+  fout << "# columns: " << cols << ::std::endl;
   for (vector<pair<int, int> >::const_iterator it = entries.begin(); it != entries.end(); ++it) {
     const pair<int, int>& entry = *it;
-    fout << entry.first << " " << entry.second << " 0" << std::endl; // write a constant value of 0
+    fout << entry.first << " " << entry.second << " 0" << ::std::endl; // write a constant value of 0
   }
 
   return fout.good();

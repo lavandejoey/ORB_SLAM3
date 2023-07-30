@@ -59,7 +59,7 @@ namespace g2o {
       /**
        * update the structures for online processing
        */
-      virtual bool updateStructure(const std::vector<HyperGraph::Vertex*>& vset, const HyperGraph::EdgeSet& edges) = 0;
+      virtual bool updateStructure(const ::std::vector<HyperGraph::Vertex*>& vset, const HyperGraph::EdgeSet& edges) = 0;
       /**
        * build the current system
        */
@@ -74,7 +74,7 @@ namespace g2o {
        * computes the block diagonal elements of the pattern specified in the input
        * and stores them in given SparseBlockMatrix
        */
-      virtual bool computeMarginals(SparseBlockMatrix<MatrixXd>& spinv, const std::vector<std::pair<int, int> >& blockIndices) = 0;
+      virtual bool computeMarginals(SparseBlockMatrix<MatrixXd>& spinv, const ::std::vector<std::pair<int, int> >& blockIndices) = 0;
 
       /**
        * update the system while performing Levenberg, i.e., modifying the diagonal
@@ -129,7 +129,7 @@ namespace g2o {
       virtual bool writeDebug() const = 0;
 
       //! write the hessian to disk using the specified file name
-      virtual bool saveHessian(const std::string& /*fileName*/) const = 0;
+      virtual bool saveHessian(const ::std::string& /*fileName*/) const = 0;
 
     protected:
       SparseOptimizer* _optimizer;

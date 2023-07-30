@@ -74,10 +74,10 @@ namespace g2o {
       struct  Parameters{
         virtual ~Parameters();
       };
-      typedef std::map<std::string, HyperGraphElementAction*> ActionMap;
+      typedef ::std::map<std::string, HyperGraphElementAction*> ActionMap;
       //! an action should be instantiated with the typeid.name of the graph element 
       //! on which it operates
-      HyperGraphElementAction(const std::string& typeName_="");
+      HyperGraphElementAction(const ::std::string& typeName_="");
 
       //! redefine this to do the action stuff. If successful, the action returns a pointer to itself
       virtual HyperGraphElementAction* operator()(HyperGraph::HyperGraphElement* element, Parameters* parameters);
@@ -89,17 +89,17 @@ namespace g2o {
       virtual ~HyperGraphElementAction();
 
       //! returns the typeid name of the action
-      const std::string& typeName() const { return _typeName;}
+      const ::std::string& typeName() const { return _typeName;}
 
       //! returns the name of an action, e.g "draw"
-      const std::string& name() const{ return _name;}
+      const ::std::string& name() const{ return _name;}
 
       //! sets the type on which an action has to operate
-      void setTypeName(const std::string& typeName_);
+      void setTypeName(const ::std::string& typeName_);
 
     protected:
-      std::string _typeName;
-      std::string _name;
+      ::std::string _typeName;
+      ::std::string _name;
   };
 
   /**
@@ -111,7 +111,7 @@ namespace g2o {
   class  HyperGraphElementActionCollection: public HyperGraphElementAction{
     public:
       //! constructor. name_ is the name of the action e.g.draw).
-      HyperGraphElementActionCollection(const std::string& name_);
+      HyperGraphElementActionCollection(const ::std::string& name_);
       //! destructor: it deletes all actions in the pool.
       virtual ~HyperGraphElementActionCollection();
       //! calling functions, they return a pointer to the instance of action in actionMap
@@ -141,7 +141,7 @@ namespace g2o {
       static void destroy();
 
       // returns a pointer to a collection indexed by name
-      HyperGraphElementAction* actionByName(const std::string& name);
+      HyperGraphElementAction* actionByName(const ::std::string& name);
       // registers a basic action in the pool. If necessary a container is created
       bool registerAction(HyperGraphElementAction* action);
       bool unregisterAction(HyperGraphElementAction* action);
@@ -158,7 +158,7 @@ namespace g2o {
   /**
    * apply an action to all the elements of the graph.
    */
-  void  applyAction(HyperGraph* graph, HyperGraphElementAction* action, HyperGraphElementAction::Parameters* parameters=0, const std::string& typeName="");
+  void  applyAction(HyperGraph* graph, HyperGraphElementAction* action, HyperGraphElementAction::Parameters* parameters=0, const ::std::string& typeName="");
 
   /**
    * brief write into gnuplot
@@ -166,9 +166,9 @@ namespace g2o {
   class  WriteGnuplotAction: public HyperGraphElementAction{
     public:
       struct  Parameters: public HyperGraphElementAction::Parameters{
-        std::ostream* os;
+        ::std::ostream* os;
       };
-      WriteGnuplotAction(const std::string& typeName_);
+      WriteGnuplotAction(const ::std::string& typeName_);
   };
 
   /**
@@ -181,7 +181,7 @@ namespace g2o {
     public:
       Parameters();
     };
-    DrawAction(const std::string& typeName_);
+    DrawAction(const ::std::string& typeName_);
   protected:
     virtual bool refreshPropertyPtrs(HyperGraphElementAction::Parameters* params_);
     Parameters* _previousParams;
@@ -195,7 +195,7 @@ namespace g2o {
       RegisterActionProxy()
           {
 #ifdef G2O_DEBUG_ACTIONLIB
-            std::cout << __FUNCTION__ << ": Registering action of type " << typeid(T).name() << std::endl;
+            ::std::cout << __FUNCTION__ << ": Registering action of type " << typeid(T).name() << ::std::endl;
 #endif
             _action = new T();
             HyperGraphActionLibrary::instance()->registerAction(_action);
@@ -204,7 +204,7 @@ namespace g2o {
         ~RegisterActionProxy()
           {
 #ifdef G2O_DEBUG_ACTIONLIB
-            std::cout << __FUNCTION__ << ": Unregistering action of type " << typeid(T).name() << std::endl;
+            ::std::cout << __FUNCTION__ << ": Unregistering action of type " << typeid(T).name() << ::std::endl;
 #endif
             HyperGraphActionLibrary::instance()->unregisterAction(_action);
             delete _action;

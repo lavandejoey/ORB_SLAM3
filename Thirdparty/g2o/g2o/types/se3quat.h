@@ -295,9 +295,9 @@ namespace g2o {
       }
   };
 
-  inline std::ostream& operator <<(std::ostream& out_str, const SE3Quat& se3)
+  inline ::std::ostream& operator <<(std::ostream& out_str, const SE3Quat& se3)
   {
-    out_str << se3.to_homogeneous_matrix()  << std::endl;
+    out_str << se3.to_homogeneous_matrix()  << ::std::endl;
     return out_str;
   }
 

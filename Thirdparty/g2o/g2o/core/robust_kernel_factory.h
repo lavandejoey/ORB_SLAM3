@@ -77,22 +77,22 @@ namespace g2o {
       /**
        * register a tag for a specific creator
        */
-      void registerRobustKernel(const std::string& tag, AbstractRobustKernelCreator* c);
+      void registerRobustKernel(const ::std::string& tag, AbstractRobustKernelCreator* c);
 
       /**
        * unregister a tag for a specific creator
        */
-      void unregisterType(const std::string& tag);
+      void unregisterType(const ::std::string& tag);
 
       /**
        * construct a robust kernel based on its tag
        */
-      RobustKernel* construct(const std::string& tag) const;
+      RobustKernel* construct(const ::std::string& tag) const;
 
       /**
        * return the creator for a specific tag
        */
-      AbstractRobustKernelCreator* creator(const std::string& tag) const;
+      AbstractRobustKernelCreator* creator(const ::std::string& tag) const;
 
       /**
        * get a list of all known robust kernels
@@ -101,7 +101,7 @@ namespace g2o {
 
     protected:
 
-      typedef std::map<std::string, AbstractRobustKernelCreator*>              CreatorMap;
+      typedef ::std::map<std::string, AbstractRobustKernelCreator*>              CreatorMap;
       RobustKernelFactory();
       ~RobustKernelFactory();
 
@@ -115,7 +115,7 @@ namespace g2o {
   class RegisterRobustKernelProxy
   {
     public:
-      RegisterRobustKernelProxy(const std::string& name) : _name(name)
+      RegisterRobustKernelProxy(const ::std::string& name) : _name(name)
       {
         RobustKernelFactory::instance()->registerRobustKernel(_name, new RobustKernelCreator<T>());
       }
@@ -126,7 +126,7 @@ namespace g2o {
       }
 
     private:
-      std::string _name;
+      ::std::string _name;
   };
 
 #if defined _MSC_VER && defined G2O_SHARED_LIBS

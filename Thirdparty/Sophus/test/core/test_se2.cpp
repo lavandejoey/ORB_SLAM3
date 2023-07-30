@@ -233,14 +233,14 @@ class Tests {
     return true;
   }
 
-  std::vector<SE2Type, Eigen::aligned_allocator<SE2Type>> se2_vec_;
-  std::vector<Tangent, Eigen::aligned_allocator<Tangent>> tangent_vec_;
-  std::vector<Point, Eigen::aligned_allocator<Point>> point_vec_;
+  ::std::vector<SE2Type, Eigen::aligned_allocator<SE2Type>> se2_vec_;
+  ::std::vector<Tangent, Eigen::aligned_allocator<Tangent>> tangent_vec_;
+  ::std::vector<Point, Eigen::aligned_allocator<Point>> point_vec_;
 };
 
 int test_se2() {
-  using std::cerr;
-  using std::endl;
+  using ::std::cerr;
+  using ::std::endl;
 
   cerr << "Test SE2" << endl << endl;
   cerr << "Double tests: " << endl;

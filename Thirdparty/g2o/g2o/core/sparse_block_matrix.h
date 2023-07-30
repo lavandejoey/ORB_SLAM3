@@ -70,7 +70,7 @@ class SparseBlockMatrix {
     //! rows of the matrix
     inline int rows() const {return _rowBlockIndices.size() ? _rowBlockIndices.back() : 0;}
 
-    typedef std::map<int, SparseMatrixBlock*> IntBlockMap;
+    typedef ::std::map<int, SparseMatrixBlock*> IntBlockMap;
 
     /**
      * constructs a sparse block matrix having a specific layout
@@ -175,16 +175,16 @@ class SparseBlockMatrix {
     void fillBlockStructure(MatrixStructure& ms) const;
 
     //! the block matrices per block-column
-    const std::vector<IntBlockMap>& blockCols() const { return _blockCols;}
-    std::vector<IntBlockMap>& blockCols() { return _blockCols;}
+    const ::std::vector<IntBlockMap>& blockCols() const { return _blockCols;}
+    ::std::vector<IntBlockMap>& blockCols() { return _blockCols;}
 
     //! indices of the row blocks
-    const std::vector<int>& rowBlockIndices() const { return _rowBlockIndices;}
-    std::vector<int>& rowBlockIndices() { return _rowBlockIndices;}
+    const ::std::vector<int>& rowBlockIndices() const { return _rowBlockIndices;}
+    ::std::vector<int>& rowBlockIndices() { return _rowBlockIndices;}
 
     //! indices of the column blocks
-    const std::vector<int>& colBlockIndices() const { return _colBlockIndices;}
-    std::vector<int>& colBlockIndices() { return _colBlockIndices;}
+    const ::std::vector<int>& colBlockIndices() const { return _colBlockIndices;}
+    ::std::vector<int>& colBlockIndices() { return _colBlockIndices;}
 
     /**
      * write the content of this matrix to a stream loadable by Octave
@@ -211,11 +211,11 @@ class SparseBlockMatrix {
     void takePatternFromHash(SparseBlockMatrixHashMap<MatrixType>& hashMatrix);
 
   protected:
-    std::vector<int> _rowBlockIndices; ///< vector of the indices of the blocks along the rows.
-    std::vector<int> _colBlockIndices; ///< vector of the indices of the blocks along the cols
+    ::std::vector<int> _rowBlockIndices; ///< vector of the indices of the blocks along the rows.
+    ::std::vector<int> _colBlockIndices; ///< vector of the indices of the blocks along the cols
     //! array of maps of blocks. The index of the array represent a block column of the matrix
     //! and the block column is stored as a map row_block -> matrix_block_ptr.
-    std::vector <IntBlockMap> _blockCols;
+    ::std::vector <IntBlockMap> _blockCols;
     bool _hasStorage;
 };
 

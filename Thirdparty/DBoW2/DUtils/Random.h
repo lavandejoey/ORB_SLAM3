@@ -174,7 +174,7 @@ protected:
   int m_max;
 
   /// Available values
-  std::vector<int> m_values;
+  ::std::vector<int> m_values;
 
 };
 

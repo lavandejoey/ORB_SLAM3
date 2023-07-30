@@ -142,7 +142,7 @@ namespace g2o{
     int maxDim=0;
     for (HyperGraph::VertexIDMap::iterator it=vertices().begin(); it!=vertices().end(); ++it){
       OptimizableGraph::Vertex* v=static_cast<OptimizableGraph::Vertex*>(it->second); 
-      maxDim = std::max(maxDim,v->dimension());
+      maxDim = ::std::max(maxDim,v->dimension());
     }
 
     for (HyperGraph::VertexIDMap::iterator it=vertices().begin(); it!=vertices().end(); ++it){
@@ -306,7 +306,7 @@ namespace g2o{
   void SparseOptimizer::computeInitialGuess(EstimatePropagatorCost& costFunction)
   {
     OptimizableGraph::VertexSet emptySet;
-    std::set<Vertex*> backupVertices;
+    ::std::set<Vertex*> backupVertices;
     HyperGraph::VertexSet fixedVertices; // these are the root nodes where to start the initialization
     for (EdgeContainer::iterator it = _activeEdges.begin(); it != _activeEdges.end(); ++it) {
       OptimizableGraph::Edge* e = *it;
@@ -325,7 +325,7 @@ namespace g2o{
           }
         }
         if (v->hessianIndex() == -1) {
-          std::set<Vertex*>::const_iterator foundIt = backupVertices.find(v);
+          ::std::set<Vertex*>::const_iterator foundIt = backupVertices.find(v);
           if (foundIt == backupVertices.end()) {
             v->push();
             backupVertices.insert(v);
@@ -445,7 +445,7 @@ namespace g2o{
 
   bool SparseOptimizer::updateInitialization(HyperGraph::VertexSet& vset, HyperGraph::EdgeSet& eset)
   {
-    std::vector<HyperGraph::Vertex*> newVertices;
+    ::std::vector<HyperGraph::Vertex*> newVertices;
     newVertices.reserve(vset.size());
     _activeVertices.reserve(_activeVertices.size() + vset.size());
     _activeEdges.reserve(_activeEdges.size() + eset.size());
@@ -567,7 +567,7 @@ namespace g2o{
       _algorithm->setOptimizer(this);
   }
 
-  bool SparseOptimizer::computeMarginals(SparseBlockMatrix<MatrixXd>& spinv, const std::vector<std::pair<int, int> >& blockIndices){
+  bool SparseOptimizer::computeMarginals(SparseBlockMatrix<MatrixXd>& spinv, const ::std::vector<std::pair<int, int> >& blockIndices){
     return _algorithm->computeMarginals(spinv, blockIndices);
   }
 
@@ -588,7 +588,7 @@ namespace g2o{
 
   bool SparseOptimizer::addComputeErrorAction(HyperGraphAction* action)
   {
-    std::pair<HyperGraphActionSet::iterator, bool> insertResult = _graphActions[AT_COMPUTEACTIVERROR].insert(action);
+    ::std::pair<HyperGraphActionSet::iterator, bool> insertResult = _graphActions[AT_COMPUTEACTIVERROR].insert(action);
     return insertResult.second;
   }
 

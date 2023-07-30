@@ -42,9 +42,9 @@ namespace g2o {
       }
     };
     /** Helper class to sort pair based on first elem */
-    template<class T1, class T2, class Pred = std::less<T1> >
+    template<class T1, class T2, class Pred = ::std::less<T1> >
     struct CmpPairFirst {
-      bool operator()(const std::pair<T1,T2>& left, const std::pair<T1,T2>& right) {
+      bool operator()(const ::std::pair<T1,T2>& left, const ::std::pair<T1,T2>& right) {
         return Pred()(left.first, right.first);
       }
     };
@@ -100,7 +100,7 @@ namespace g2o {
         int cb=colsOfBlock(c);
         _block=new typename SparseBlockMatrix<MatrixType>::SparseMatrixBlock(rb,cb);
         _block->setZero();
-        std::pair < typename SparseBlockMatrix<MatrixType>::IntBlockMap::iterator, bool> result
+        ::std::pair < typename SparseBlockMatrix<MatrixType>::IntBlockMap::iterator, bool> result
           =_blockCols[c].insert(std::make_pair(r,_block)); (void) result;
         assert (result.second);
       }
@@ -376,21 +376,21 @@ namespace g2o {
   }
 
   template <class MatrixType>
-  std::ostream& operator << (std::ostream& os, const SparseBlockMatrix<MatrixType>& m){
+  ::std::ostream& operator << (std::ostream& os, const SparseBlockMatrix<MatrixType>& m){
     os << "RBI: " << m.rowBlockIndices().size();
     for (size_t i=0; i<m.rowBlockIndices().size(); ++i)
       os << " " << m.rowBlockIndices()[i];
-    os << std::endl;
+    os << ::std::endl;
     os << "CBI: " << m.colBlockIndices().size();
     for (size_t i=0; i<m.colBlockIndices().size(); ++i)
       os << " " << m.colBlockIndices()[i];
-    os << std::endl;
+    os << ::std::endl;
 
     for (size_t i=0; i<m.blockCols().size(); ++i){
       for (typename SparseBlockMatrix<MatrixType>::IntBlockMap::const_iterator it=m.blockCols()[i].begin(); it!=m.blockCols()[i].end(); ++it){
         const typename SparseBlockMatrix<MatrixType>::SparseMatrixBlock* b=it->second;
-        os << "BLOCK: " << it->first << " " << i << std::endl;
-        os << *b << std::endl;
+        os << "BLOCK: " << it->first << " " << i << ::std::endl;
+        os << *b << ::std::endl;
       }
     }
     return os;
@@ -464,7 +464,7 @@ namespace g2o {
   template <class MatrixType>
   int SparseBlockMatrix<MatrixType>::fillCCS(double* Cx, bool upperTriangle) const
   {
-    assert(Cx && "Target destination is NULL");
+    assert(Cx && "Target destination is nullptr");
     double* CxStart = Cx;
     for (size_t i=0; i<_blockCols.size(); ++i){
       int cstart=i ? _colBlockIndices[i-1] : 0;
@@ -489,7 +489,7 @@ namespace g2o {
   template <class MatrixType>
   int SparseBlockMatrix<MatrixType>::fillCCS(int* Cp, int* Ci, double* Cx, bool upperTriangle) const
   {
-    assert(Cp && Ci && Cx && "Target destination is NULL");
+    assert(Cp && Ci && Cx && "Target destination is nullptr");
     int nz=0;
     for (size_t i=0; i<_blockCols.size(); ++i){
       int cstart=i ? _colBlockIndices[i-1] : 0;
@@ -547,12 +547,12 @@ namespace g2o {
   template <class MatrixType>
   bool SparseBlockMatrix<MatrixType>::writeOctave(const char* filename, bool upperTriangle) const
   {
-    std::string name = filename;
-    std::string::size_type lastDot = name.find_last_of('.');
-    if (lastDot != std::string::npos) 
+    ::std::string name = filename;
+    ::std::string::size_type lastDot = name.find_last_of('.');
+    if (lastDot != ::std::string::npos)
       name = name.substr(0, lastDot);
 
-    std::vector<TripletEntry> entries;
+    ::std::vector<TripletEntry> entries;
     for (size_t i = 0; i<_blockCols.size(); ++i){
       const int& c = i;
       for (typename SparseBlockMatrix<MatrixType>::IntBlockMap::const_iterator it=_blockCols[i].begin(); it!=_blockCols[i].end(); ++it) {
@@ -571,19 +571,19 @@ namespace g2o {
     }
 
     int nz = entries.size();
-    std::sort(entries.begin(), entries.end(), TripletColSort());
+    ::std::sort(entries.begin(), entries.end(), TripletColSort());
 
-    std::ofstream fout(filename);
-    fout << "# name: " << name << std::endl;
-    fout << "# type: sparse matrix" << std::endl;
-    fout << "# nnz: " << nz << std::endl;
-    fout << "# rows: " << rows() << std::endl;
-    fout << "# columns: " << cols() << std::endl;
-    fout << std::setprecision(9) << std::fixed << std::endl;
+    ::std::ofstream fout(filename);
+    fout << "# name: " << name << ::std::endl;
+    fout << "# type: sparse matrix" << ::std::endl;
+    fout << "# nnz: " << nz << ::std::endl;
+    fout << "# rows: " << rows() << ::std::endl;
+    fout << "# columns: " << cols() << ::std::endl;
+    fout << ::std::setprecision(9) << ::std::fixed << ::std::endl;
 
     for (std::vector<TripletEntry>::const_iterator it = entries.begin(); it != entries.end(); ++it) {
       const TripletEntry& entry = *it;
-      fout << entry.r+1 << " " << entry.c+1 << " " << entry.x << std::endl;
+      fout << entry.r+1 << " " << entry.c+1 << " " << entry.x << ::std::endl;
     }
     return fout.good();
   }
@@ -628,22 +628,22 @@ namespace g2o {
   {
     // sort the sparse columns and add them to the map structures by
     // exploiting that we are inserting a sorted structure
-    typedef std::pair<int, MatrixType*> SparseColumnPair;
+    typedef ::std::pair<int, MatrixType*> SparseColumnPair;
     typedef typename SparseBlockMatrixHashMap<MatrixType>::SparseColumn HashSparseColumn;
     for (size_t i = 0; i < hashMatrix.blockCols().size(); ++i) {
       // prepare a temporary vector for sorting
       HashSparseColumn& column = hashMatrix.blockCols()[i];
       if (column.size() == 0)
         continue;
-      std::vector<SparseColumnPair> sparseRowSorted; // temporary structure
+      ::std::vector<SparseColumnPair> sparseRowSorted; // temporary structure
       sparseRowSorted.reserve(column.size());
       for (typename HashSparseColumn::const_iterator it = column.begin(); it != column.end(); ++it)
         sparseRowSorted.push_back(*it);
-      std::sort(sparseRowSorted.begin(), sparseRowSorted.end(), CmpPairFirst<int, MatrixType*>());
+      ::std::sort(sparseRowSorted.begin(), sparseRowSorted.end(), CmpPairFirst<int, MatrixType*>());
       // try to free some memory early
       HashSparseColumn aux;
       swap(aux, column);
-      // now insert sorted vector to the std::map structure
+      // now insert sorted vector to the ::std::map structure
       IntBlockMap& destColumnMap = blockCols()[i];
       destColumnMap.insert(sparseRowSorted[0]);
       for (size_t j = 1; j < sparseRowSorted.size(); ++j) {

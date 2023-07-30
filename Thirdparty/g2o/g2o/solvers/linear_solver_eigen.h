@@ -104,7 +104,7 @@ class LinearSolverEigen: public LinearSolver<MatrixType>
       _cholesky.factorize(_sparseMatrix);
       if (_cholesky.info() != Eigen::Success) { // the matrix is not positive definite
         if (_writeDebug) {
-          std::cerr << "Cholesky failure, writing debug.txt (Hessian loadable by Octave)" << std::endl;
+          ::std::cerr << "Cholesky failure, writing debug.txt (Hessian loadable by Octave)" << ::std::endl;
           A.writeOctave("debug.txt");
         }
         return false;
@@ -156,7 +156,7 @@ class LinearSolverEigen: public LinearSolver<MatrixType>
         Eigen::PermutationMatrix<Eigen::Dynamic,Eigen::Dynamic> blockP;
         {
           // prepare a block structure matrix for calling AMD
-          std::vector<Triplet> triplets;
+          ::std::vector<Triplet> triplets;
           for (size_t c = 0; c < A.blockCols().size(); ++c){
             const typename SparseBlockMatrix<MatrixType>::IntBlockMap& column = A.blockCols()[c];
             for (typename SparseBlockMatrix<MatrixType>::IntBlockMap::const_iterator it = column.begin(); it != column.end(); ++it) {
@@ -207,7 +207,7 @@ class LinearSolverEigen: public LinearSolver<MatrixType>
       } else {
 
         // create from triplet structure
-        std::vector<Triplet> triplets;
+        ::std::vector<Triplet> triplets;
         triplets.reserve(A.nonZeros());
         for (size_t c = 0; c < A.blockCols().size(); ++c) {
           int colBaseOfBlock = A.colBaseOfBlock(c);

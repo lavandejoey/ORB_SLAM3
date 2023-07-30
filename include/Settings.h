@@ -55,12 +55,12 @@ namespace ORB_SLAM3 {
         /*
          * Constructor from file
          */
-        Settings(const std::string &configFile, const int& sensor);
+        Settings(const ::std::string &configFile, const int& sensor);
 
         /*
          * Ostream operator overloading to dump settings to the terminal
          */
-        friend std::ostream &operator<<(std::ostream &output, const Settings &s);
+        friend ::std::ostream &operator<<(std::ostream &output, const Settings &s);
 
         /*
          * Getter methods
@@ -112,8 +112,8 @@ namespace ORB_SLAM3 {
         float viewPointF() {return viewPointF_;}
         float imageViewerScale() {return imageViewerScale_;}
 
-        std::string atlasLoadFile() {return sLoadFrom_;}
-        std::string atlasSaveFile() {return sSaveto_;}
+        ::std::string atlasLoadFile() {return sLoadFrom_;}
+        ::std::string atlasSaveFile() {return sSaveto_;}
 
         float thFarPoints() {return thFarPoints_;}
 
@@ -124,15 +124,15 @@ namespace ORB_SLAM3 {
 
     private:
         template<typename T>
-        T readParameter(cv::FileStorage& fSettings, const std::string& name, bool& found,const bool required = true){
+        T readParameter(cv::FileStorage& fSettings, const ::std::string& name, bool& found,const bool required = true){
             cv::FileNode node = fSettings[name];
             if(node.empty()){
                 if(required){
-                    std::cerr << name << " required parameter does not exist, aborting..." << std::endl;
+                    ::std::cerr << name << " required parameter does not exist, aborting..." << ::std::endl;
                     exit(-1);
                 }
                 else{
-                    std::cerr << name << " optional parameter does not exist..." << std::endl;
+                    ::std::cerr << name << " optional parameter does not exist..." << ::std::endl;
                     found = false;
                     return T();
                 }
@@ -164,7 +164,7 @@ namespace ORB_SLAM3 {
          */
         GeometricCamera* calibration1_, *calibration2_;   //Camera calibration
         GeometricCamera* originalCalib1_, *originalCalib2_;
-        std::vector<float> vPinHoleDistorsion1_, vPinHoleDistorsion2_;
+        ::std::vector<float> vPinHoleDistorsion1_, vPinHoleDistorsion2_;
 
         cv::Size originalImSize_, newImSize_;
         float fps_;
@@ -221,7 +221,7 @@ namespace ORB_SLAM3 {
         /*
          * Save & load maps
          */
-        std::string sLoadFrom_, sSaveto_;
+        ::std::string sLoadFrom_, sSaveto_;
 
         /*
          * Other stuff

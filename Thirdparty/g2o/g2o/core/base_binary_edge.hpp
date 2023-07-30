@@ -39,7 +39,7 @@ template <int D, typename E, typename VertexXiType, typename VertexXjType>
 void BaseBinaryEdge<D, E, VertexXiType, VertexXjType>::resize(size_t size)
 {
   if (size != 2) {
-    std::cerr << "WARNING, attempting to resize binary edge " << BaseEdge<D, E>::id() << " to " << size << std::endl;
+    ::std::cerr << "WARNING, attempting to resize binary edge " << BaseEdge<D, E>::id() << " to " << size << ::std::endl;
   }
   BaseEdge<D, E>::resize(size);
 }
@@ -93,8 +93,8 @@ void BaseBinaryEdge<D, E, VertexXiType, VertexXjType>::constructQuadraticForm()
       Eigen::Vector3d rho;
       this->robustKernel()->robustify(error, rho);
       InformationType weightedOmega = this->robustInformation(rho);
-      //std::cout << PVAR(rho.transpose()) << std::endl;
-      //std::cout << PVAR(weightedOmega) << std::endl;
+      //std::cout << PVAR(rho.transpose()) << ::std::endl;
+      //std::cout << PVAR(weightedOmega) << ::std::endl;
 
       omega_r *= rho[1];
       if (fromNotFixed) {
@@ -152,7 +152,7 @@ void BaseBinaryEdge<D, E, VertexXiType, VertexXjType>::linearizeOplus()
   if (iNotFixed) {
     //Xi - estimate the jacobian numerically
     double add_vi[VertexXiType::Dimension];
-    std::fill(add_vi, add_vi + VertexXiType::Dimension, 0.0);
+    ::std::fill(add_vi, add_vi + VertexXiType::Dimension, 0.0);
     // add small step along the unit vector in each dimension
     for (int d = 0; d < VertexXiType::Dimension; ++d) {
       vi->push();
@@ -176,7 +176,7 @@ void BaseBinaryEdge<D, E, VertexXiType, VertexXjType>::linearizeOplus()
   if (jNotFixed) {
     //Xj - estimate the jacobian numerically
     double add_vj[VertexXjType::Dimension];
-    std::fill(add_vj, add_vj + VertexXjType::Dimension, 0.0);
+    ::std::fill(add_vj, add_vj + VertexXjType::Dimension, 0.0);
     // add small step along the unit vector in each dimension
     for (int d = 0; d < VertexXjType::Dimension; ++d) {
       vj->push();

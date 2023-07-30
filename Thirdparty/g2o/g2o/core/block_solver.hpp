@@ -295,7 +295,7 @@ bool BlockSolver<Traits>::buildStructure(bool zeroBlocks)
 }
 
 template <typename Traits>
-bool BlockSolver<Traits>::updateStructure(const std::vector<HyperGraph::Vertex*>& vset, const HyperGraph::EdgeSet& edges)
+bool BlockSolver<Traits>::updateStructure(const ::std::vector<HyperGraph::Vertex*>& vset, const HyperGraph::EdgeSet& edges)
 {
   for (std::vector<HyperGraph::Vertex*>::const_iterator vit = vset.begin(); vit != vset.end(); ++vit) {
     OptimizableGraph::Vertex* v = static_cast<OptimizableGraph::Vertex*>(*vit);
@@ -311,7 +311,7 @@ bool BlockSolver<Traits>::updateStructure(const std::vector<HyperGraph::Vertex*>
       PoseMatrixType* m = _Hpp->block(ind, ind, true);
       v->mapHessianMemory(m->data());
     } else {
-      std::cerr << "updateStructure(): Schur not supported" << std::endl;
+      ::std::cerr << "updateStructure(): Schur not supported" << ::std::endl;
       abort();
     }
   }
@@ -340,7 +340,7 @@ bool BlockSolver<Traits>::updateStructure(const std::vector<HyperGraph::Vertex*>
           PoseMatrixType* m = _Hpp->block(ind1, ind2, true);
           e->mapHessianMemory(m->data(), viIdx, vjIdx, transposedBlock);
         } else { 
-          std::cerr << __PRETTY_FUNCTION__ << ": not supported" << std::endl;
+          ::std::cerr << __PRETTY_FUNCTION__ << ": not supported" << ::std::endl;
         }
       }
     }
@@ -487,7 +487,7 @@ bool BlockSolver<Traits>::solve(){
 
 
 template <typename Traits>
-bool BlockSolver<Traits>::computeMarginals(SparseBlockMatrix<MatrixXd>& spinv, const std::vector<std::pair<int, int> >& blockIndices)
+bool BlockSolver<Traits>::computeMarginals(SparseBlockMatrix<MatrixXd>& spinv, const ::std::vector<std::pair<int, int> >& blockIndices)
 {
   double t = get_monotonic_time();
   bool ok = _linearSolver->solvePattern(spinv, blockIndices, *_Hpp);
@@ -626,7 +626,7 @@ void BlockSolver<Traits>::setWriteDebug(bool writeDebug)
 }
 
 template <typename Traits>
-bool BlockSolver<Traits>::saveHessian(const std::string& fileName) const
+bool BlockSolver<Traits>::saveHessian(const ::std::string& fileName) const
 {
   return _Hpp->writeOctave(fileName.c_str(), true);
 }

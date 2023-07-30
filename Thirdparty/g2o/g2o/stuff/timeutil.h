@@ -116,7 +116,7 @@ class  ScopeTime {
     ScopeTime(const char* title);
     ~ScopeTime();
   private:
-    std::string _title;
+    ::std::string _title;
     double _startTime;
 };
 

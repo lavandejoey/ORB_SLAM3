@@ -131,7 +131,7 @@ void RobustKernelCauchy::robustify(double e2, Eigen::Vector3d& rho) const
   double aux = dsqrReci * e2 + 1.0;
   rho[0] = dsqr * log(aux);
   rho[1] = 1. / aux;
-  rho[2] = -dsqrReci * std::pow(rho[1], 2); 
+  rho[2] = -dsqrReci * ::std::pow(rho[1], 2);
 }
 
 void RobustKernelSaturated::robustify(double e2, Eigen::Vector3d& rho) const

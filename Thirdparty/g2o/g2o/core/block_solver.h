@@ -122,10 +122,10 @@ namespace g2o {
 
       virtual bool init(SparseOptimizer* optmizer, bool online = false);
       virtual bool buildStructure(bool zeroBlocks = false);
-      virtual bool updateStructure(const std::vector<HyperGraph::Vertex*>& vset, const HyperGraph::EdgeSet& edges);
+      virtual bool updateStructure(const ::std::vector<HyperGraph::Vertex*>& vset, const HyperGraph::EdgeSet& edges);
       virtual bool buildSystem();
       virtual bool solve();
-      virtual bool computeMarginals(SparseBlockMatrix<MatrixXd>& spinv, const std::vector<std::pair<int, int> >& blockIndices);
+      virtual bool computeMarginals(SparseBlockMatrix<MatrixXd>& spinv, const ::std::vector<std::pair<int, int> >& blockIndices);
       virtual bool setLambda(double lambda, bool backup = false);
       virtual void restoreDiagonal();
       virtual bool supportsSchur() {return true;}
@@ -137,7 +137,7 @@ namespace g2o {
       virtual void setWriteDebug(bool writeDebug);
       virtual bool writeDebug() const {return _linearSolver->writeDebug();}
 
-      virtual bool saveHessian(const std::string& fileName) const;
+      virtual bool saveHessian(const ::std::string& fileName) const;
 
       virtual void multiplyHessian(double* dest, const double* src) const { _Hpp->multiplySymmetricUpperTriangle(dest, src);}
 
@@ -159,11 +159,11 @@ namespace g2o {
 
       LinearSolver<PoseMatrixType>* _linearSolver;
 
-      std::vector<PoseVectorType, Eigen::aligned_allocator<PoseVectorType> > _diagonalBackupPose;
-      std::vector<LandmarkVectorType, Eigen::aligned_allocator<LandmarkVectorType> > _diagonalBackupLandmark;
+      ::std::vector<PoseVectorType, Eigen::aligned_allocator<PoseVectorType> > _diagonalBackupPose;
+      ::std::vector<LandmarkVectorType, Eigen::aligned_allocator<LandmarkVectorType> > _diagonalBackupLandmark;
 
 #    ifdef G2O_OPENMP
-      std::vector<OpenMPMutex> _coefficientsMutex;
+      ::std::vector<OpenMPMutex> _coefficientsMutex;
 #    endif
 
       bool _doSchur;

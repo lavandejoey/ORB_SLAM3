@@ -116,7 +116,7 @@ void serializeMatrix(Archive& ar, const cv::Mat& mat, const unsigned int version
 }
 
 template<class Archive>
-void serializeVectorKeyPoints(Archive& ar, const std::vector<cv::KeyPoint>& vKP, const unsigned int version)
+void serializeVectorKeyPoints(Archive& ar, const ::std::vector<cv::KeyPoint>& vKP, const unsigned int version)
 {
     int NumEl;
 
@@ -126,7 +126,7 @@ void serializeVectorKeyPoints(Archive& ar, const std::vector<cv::KeyPoint>& vKP,
 
     ar & NumEl;
 
-    std::vector<cv::KeyPoint> vKPaux = vKP;
+    ::std::vector<cv::KeyPoint> vKPaux = vKP;
     if (Archive::is_loading::value)
         vKPaux.reserve(NumEl);
 
@@ -155,7 +155,7 @@ void serializeVectorKeyPoints(Archive& ar, const std::vector<cv::KeyPoint>& vKP,
 
     if (Archive::is_loading::value)
     {
-        std::vector<cv::KeyPoint> *ptr;
+        ::std::vector<cv::KeyPoint> *ptr;
         ptr = (std::vector<cv::KeyPoint>*)( &vKP );
         *ptr = vKPaux;
     }

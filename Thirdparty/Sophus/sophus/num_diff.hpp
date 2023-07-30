@@ -33,7 +33,7 @@ template <class Scalar, int N, int M>
 class VectorField {
  public:
   static Eigen::Matrix<Scalar, N, M> num_diff(
-      std::function<Sophus::Vector<Scalar, N>(Sophus::Vector<Scalar, M>)>
+      ::std::function<Sophus::Vector<Scalar, N>(Sophus::Vector<Scalar, M>)>
           vector_field,
       Sophus::Vector<Scalar, M> const& a, Scalar eps) {
     static_assert(std::is_floating_point<Scalar>::value,
@@ -56,7 +56,7 @@ template <class Scalar, int N>
 class VectorField<Scalar, N, 1> {
  public:
   static Eigen::Matrix<Scalar, N, 1> num_diff(
-      std::function<Sophus::Vector<Scalar, N>(Scalar)> vector_field,
+      ::std::function<Sophus::Vector<Scalar, N>(Scalar)> vector_field,
       Scalar const& a, Scalar eps) {
     return details::Curve<Scalar>::num_diff(std::move(vector_field), a, eps);
   }

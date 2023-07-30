@@ -72,7 +72,7 @@ namespace g2o {
     return initState;
   }
 
-  bool OptimizationAlgorithmWithHessian::computeMarginals(SparseBlockMatrix<MatrixXd>& spinv, const std::vector<std::pair<int, int> >& blockIndices)
+  bool OptimizationAlgorithmWithHessian::computeMarginals(SparseBlockMatrix<MatrixXd>& spinv, const ::std::vector<std::pair<int, int> >& blockIndices)
   {
     return _solver ? _solver->computeMarginals(spinv, blockIndices) : false;
   }
@@ -88,7 +88,7 @@ namespace g2o {
       _solver->buildSystem();
   }
 
-  bool OptimizationAlgorithmWithHessian::updateStructure(const std::vector<HyperGraph::Vertex*>& vset, const HyperGraph::EdgeSet& edges)
+  bool OptimizationAlgorithmWithHessian::updateStructure(const ::std::vector<HyperGraph::Vertex*>& vset, const HyperGraph::EdgeSet& edges)
   {
     return _solver ? _solver->updateStructure(vset, edges) : false;
   }

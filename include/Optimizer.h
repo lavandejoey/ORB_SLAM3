@@ -47,12 +47,12 @@ class Optimizer
 {
 public:
 
-    void static BundleAdjustment(const std::vector<KeyFrame*> &vpKF, const std::vector<MapPoint*> &vpMP,
-                                 int nIterations = 5, bool *pbStopFlag=NULL, const unsigned long nLoopKF=0,
+    void static BundleAdjustment(const ::std::vector<KeyFrame*> &vpKF, const ::std::vector<MapPoint*> &vpMP,
+                                 int nIterations = 5, bool *pbStopFlag=nullptr, const unsigned long nLoopKF=0,
                                  const bool bRobust = true);
-    void static GlobalBundleAdjustemnt(Map* pMap, int nIterations=5, bool *pbStopFlag=NULL,
+    void static GlobalBundleAdjustemnt(Map* pMap, int nIterations=5, bool *pbStopFlag=nullptr,
                                        const unsigned long nLoopKF=0, const bool bRobust = true);
-    void static FullInertialBA(Map *pMap, int its, const bool bFixLocal=false, const unsigned long nLoopKF=0, bool *pbStopFlag=NULL, bool bInit=false, float priorG = 1e2, float priorA=1e6, Eigen::VectorXd *vSingVal = NULL, bool *bHess=NULL);
+    void static FullInertialBA(Map *pMap, int its, const bool bFixLocal=false, const unsigned long nLoopKF=0, bool *pbStopFlag=nullptr, bool bInit=false, float priorG = 1e2, float priorA=1e6, Eigen::VectorXd *vSingVal = nullptr, bool *bHess=nullptr);
 
     void static LocalBundleAdjustment(KeyFrame* pKF, bool *pbStopFlag, Map *pMap, int& num_fixedKF, int& num_OptKF, int& num_MPs, int& num_edges);
 
@@ -77,7 +77,7 @@ public:
 
 
     // if bFixScale is true, optimize SE3 (stereo,rgbd), Sim3 otherwise (mono) (NEW)
-    static int OptimizeSim3(KeyFrame* pKF1, KeyFrame* pKF2, std::vector<MapPoint *> &vpMatches1,
+    static int OptimizeSim3(KeyFrame* pKF1, KeyFrame* pKF2, ::std::vector<MapPoint *> &vpMatches1,
                             g2o::Sim3 &g2oS12, const float th2, const bool bFixScale,
                             Eigen::Matrix<double,7,7> &mAcumHessian, const bool bAllPoints=false);
 

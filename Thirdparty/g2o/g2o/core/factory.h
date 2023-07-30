@@ -59,31 +59,31 @@ namespace g2o {
       /**
        * register a tag for a specific creator
        */
-      void registerType(const std::string& tag, AbstractHyperGraphElementCreator* c);
+      void registerType(const ::std::string& tag, AbstractHyperGraphElementCreator* c);
 
       /**
        * unregister a tag for a specific creator
        */
-      void unregisterType(const std::string& tag);
+      void unregisterType(const ::std::string& tag);
 
       /**
        * construct a graph element based on its tag
        */
-      HyperGraph::HyperGraphElement* construct(const std::string& tag) const;
+      HyperGraph::HyperGraphElement* construct(const ::std::string& tag) const;
 
       /**
        * construct a graph element based on its tag, but only if it's type (a bitmask) matches. A bitmask without any
        * bit set will construct any item. Otherwise a bit has to be set to allow construction of a graph element.
        */
-      HyperGraph::HyperGraphElement* construct(const std::string& tag, const HyperGraph::GraphElemBitset& elemsToConstruct) const;
+      HyperGraph::HyperGraphElement* construct(const ::std::string& tag, const HyperGraph::GraphElemBitset& elemsToConstruct) const;
 
       /**
        * return whether the factory knows this tag or not
        */
-      bool knowsTag(const std::string& tag, int* elementType = 0) const;
+      bool knowsTag(const ::std::string& tag, int* elementType = 0) const;
 
       //! return the TAG given a vertex
-      const std::string& tag(const HyperGraph::HyperGraphElement* v) const;
+      const ::std::string& tag(const HyperGraph::HyperGraphElement* v) const;
 
       /**
        * get a list of all known types
@@ -109,14 +109,14 @@ namespace g2o {
         
           ~CreatorInformation()
           {
-            std::cout << "Deleting " << (void*) creator << std::endl;
+            ::std::cout << "Deleting " << (void*) creator << ::std::endl;
             
             delete creator;
           }
       };
 
-      typedef std::map<std::string, CreatorInformation*>               CreatorMap;
-      typedef std::map<std::string, std::string>                      TagLookup;
+      typedef ::std::map<std::string, CreatorInformation*>               CreatorMap;
+      typedef ::std::map<std::string, ::std::string>                      TagLookup;
       Factory();
       ~Factory();
 
@@ -131,10 +131,10 @@ namespace g2o {
   class RegisterTypeProxy
   {
     public:
-      RegisterTypeProxy(const std::string& name) : _name(name)
+      RegisterTypeProxy(const ::std::string& name) : _name(name)
       {
 #ifdef G2O_DEBUG_FACTORY
-        std::cout << __FUNCTION__ << ": Registering " << _name << " of type " << typeid(T).name() << std::endl;
+        ::std::cout << __FUNCTION__ << ": Registering " << _name << " of type " << typeid(T).name() << ::std::endl;
 #endif
         Factory::instance()->registerType(_name, new HyperGraphElementCreator<T>());
       }
@@ -142,13 +142,13 @@ namespace g2o {
       ~RegisterTypeProxy()
       {
 #ifdef G2O_DEBUG_FACTORY
-        std::cout << __FUNCTION__ << ": Unregistering " << _name << " of type " << typeid(T).name() << std::endl;
+        ::std::cout << __FUNCTION__ << ": Unregistering " << _name << " of type " << typeid(T).name() << ::std::endl;
 #endif
         Factory::instance()->unregisterType(_name);
       }
 
     private:
-      std::string _name;
+      ::std::string _name;
   };
 
 #if defined _MSC_VER && defined G2O_SHARED_LIBS

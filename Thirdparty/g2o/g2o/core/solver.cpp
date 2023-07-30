@@ -59,7 +59,7 @@ void Solver::resizeVector(size_t sx)
       memcpy(_x, _b, oldSize * sizeof(double));
       delete[] _b;
       _b = new double[_maxXSize];
-      std::swap(_b, _x);
+      ::std::swap(_b, _x);
     } else {
       _b = new double[_maxXSize];
 #ifndef NDEBUG

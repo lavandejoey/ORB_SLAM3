@@ -88,7 +88,7 @@ void BaseMultiEdge<D, E>::linearizeOplus()
 #else
     double add_vi[vi_dim];
 #endif
-    std::fill(add_vi, add_vi + vi_dim, 0.0);
+    ::std::fill(add_vi, add_vi + vi_dim, 0.0);
     assert(_dimension >= 0);
     assert(_jacobianOplus[i].rows() == _dimension && _jacobianOplus[i].cols() == vi_dim && "jacobian cache dimension does not match");
       _jacobianOplus[i].resize(_dimension, vi_dim);

@@ -15,11 +15,11 @@ class IsStreamable {
  private:
   template <class TT>
   static auto test(int)
-      -> decltype(std::declval<std::stringstream&>() << std::declval<TT>(),
-                  std::true_type());
+      -> decltype(std::declval<std::stringstream&>() << ::std::declval<TT>(),
+                  ::std::true_type());
 
   template <class>
-  static auto test(...) -> std::false_type;
+  static auto test(...) -> ::std::false_type;
 
  public:
   static bool const value = decltype(test<T>(0))::value;
@@ -29,7 +29,7 @@ template <class T>
 class ArgToStream {
  public:
   static void impl(std::stringstream& stream, T&& arg) {
-    stream << std::forward<T>(arg);
+    stream << ::std::forward<T>(arg);
   }
 };
 
@@ -46,8 +46,8 @@ void FormatStream(std::stringstream& stream, char const* text, T&& arg,
                 "One of the args has no ostream overload!");
   for (; *text != '\0'; ++text) {
     if (*text == '%') {
-      ArgToStream<T&&>::impl(stream, std::forward<T>(arg));
-      FormatStream(stream, text + 1, std::forward<Args>(args)...);
+      ArgToStream<T&&>::impl(stream, ::std::forward<T>(arg));
+      FormatStream(stream, text + 1, ::std::forward<Args>(args)...);
       return;
     }
     stream << *text;
@@ -59,12 +59,12 @@ void FormatStream(std::stringstream& stream, char const* text, T&& arg,
 
 template <class... Args>
 std::string FormatString(char const* text, Args&&... args) {
-  std::stringstream stream;
-  FormatStream(stream, text, std::forward<Args>(args)...);
+  ::std::stringstream stream;
+  FormatStream(stream, text, ::std::forward<Args>(args)...);
   return stream.str();
 }
 
-inline std::string FormatString() { return std::string(); }
+inline ::std::string FormatString() { return ::std::string(); }
 
 }  // namespace details
 }  // namespace Sophus

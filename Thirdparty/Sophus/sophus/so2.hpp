@@ -160,7 +160,7 @@ class SO2Base {
   /// of SO(2).
   ///
   SOPHUS_FUNC Scalar log() const {
-    using std::atan2;
+    using ::std::atan2;
     return atan2(unit_complex().y(), unit_complex().x());
   }
 
@@ -170,7 +170,7 @@ class SO2Base {
   /// this function directly.
   ///
   SOPHUS_FUNC void normalize() {
-    using std::sqrt;
+    using ::std::sqrt;
     Scalar length = sqrt(unit_complex().x() * unit_complex().x() +
                          unit_complex().y() * unit_complex().y());
     SOPHUS_ENSURE(length >= Constants<Scalar>::epsilon(),
@@ -240,7 +240,7 @@ class SO2Base {
   ///  ``bar_R_foo`` (= rotation matrix): ``p_bar = bar_R_foo * p_foo``.
   ///
   template <typename PointDerived,
-            typename = typename std::enable_if<
+            typename = typename ::std::enable_if<
                 IsFixedSizeVector<PointDerived, 2>::value>::type>
   SOPHUS_FUNC PointProduct<PointDerived> operator*(
       Eigen::MatrixBase<PointDerived> const& p) const {
@@ -256,7 +256,7 @@ class SO2Base {
   /// element ``bar_R_foo`` (= rotation matrix): ``p_bar = bar_R_foo * p_foo``.
   ///
   template <typename HPointDerived,
-            typename = typename std::enable_if<
+            typename = typename ::std::enable_if<
                 IsFixedSizeVector<HPointDerived, 3>::value>::type>
   SOPHUS_FUNC HomogeneousPointProduct<HPointDerived> operator*(
       Eigen::MatrixBase<HPointDerived> const& p) const {
@@ -281,8 +281,8 @@ class SO2Base {
   /// type of the multiplication is compatible with this SO2's Scalar type.
   ///
   template <typename OtherDerived,
-            typename = typename std::enable_if<
-                std::is_same<Scalar, ReturnScalar<OtherDerived>>::value>::type>
+            typename = typename ::std::enable_if<
+                ::std::is_same<Scalar, ReturnScalar<OtherDerived>>::value>::type>
   SOPHUS_FUNC SO2Base<Derived> operator*=(SO2Base<OtherDerived> const& other) {
     *static_cast<Derived*>(this) = *this * other;
     return *this;
@@ -422,8 +422,8 @@ class SO2 : public SO2Base<SO2<Scalar_, Options>> {
   /// hat()-operator of SO(2).
   ///
   SOPHUS_FUNC static SO2<Scalar> exp(Tangent const& theta) {
-    using std::cos;
-    using std::sin;
+    using ::std::cos;
+    using ::std::sin;
     return SO2<Scalar>(cos(theta), sin(theta));
   }
 
@@ -431,8 +431,8 @@ class SO2 : public SO2Base<SO2<Scalar_, Options>> {
   ///
   SOPHUS_FUNC static Sophus::Matrix<Scalar, num_parameters, DoF> Dx_exp_x(
       Tangent const& theta) {
-    using std::cos;
-    using std::sin;
+    using ::std::cos;
+    using ::std::sin;
     return Sophus::Matrix<Scalar, num_parameters, DoF>(-sin(theta), cos(theta));
   }
 
@@ -504,7 +504,7 @@ class SO2 : public SO2Base<SO2<Scalar_, Options>> {
   static SO2 sampleUniform(UniformRandomBitGenerator& generator) {
     static_assert(IsUniformRandomBitGenerator<UniformRandomBitGenerator>::value,
                   "generator must meet the UniformRandomBitGenerator concept");
-    std::uniform_real_distribution<Scalar> uniform(-Constants<Scalar>::pi(),
+    ::std::uniform_real_distribution<Scalar> uniform(-Constants<Scalar>::pi(),
                                                    Constants<Scalar>::pi());
     return SO2(uniform(generator));
   }
@@ -522,7 +522,7 @@ class SO2 : public SO2Base<SO2<Scalar_, Options>> {
   ///                |  a  0 |
   ///
   SOPHUS_FUNC static Tangent vee(Transformation const& Omega) {
-    using std::abs;
+    using ::std::abs;
     return Omega(1, 0);
   }
 

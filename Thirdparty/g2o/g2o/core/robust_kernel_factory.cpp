@@ -56,7 +56,7 @@ RobustKernelFactory* RobustKernelFactory::instance()
   return factoryInstance;
 }
 
-void RobustKernelFactory::registerRobustKernel(const std::string& tag, AbstractRobustKernelCreator* c)
+void RobustKernelFactory::registerRobustKernel(const ::std::string& tag, AbstractRobustKernelCreator* c)
 {
   CreatorMap::const_iterator foundIt = _creator.find(tag);
   if (foundIt != _creator.end()) {
@@ -67,7 +67,7 @@ void RobustKernelFactory::registerRobustKernel(const std::string& tag, AbstractR
   _creator[tag] = c;
 }
 
-void RobustKernelFactory::unregisterType(const std::string& tag)
+void RobustKernelFactory::unregisterType(const ::std::string& tag)
 {
   CreatorMap::iterator tagPosition = _creator.find(tag);
   if (tagPosition != _creator.end()) {
@@ -77,7 +77,7 @@ void RobustKernelFactory::unregisterType(const std::string& tag)
   }
 }
 
-RobustKernel* RobustKernelFactory::construct(const std::string& tag) const
+RobustKernel* RobustKernelFactory::construct(const ::std::string& tag) const
 {
   CreatorMap::const_iterator foundIt = _creator.find(tag);
   if (foundIt != _creator.end()) {
@@ -86,7 +86,7 @@ RobustKernel* RobustKernelFactory::construct(const std::string& tag) const
   return 0;
 }
 
-AbstractRobustKernelCreator* RobustKernelFactory::creator(const std::string& tag) const
+AbstractRobustKernelCreator* RobustKernelFactory::creator(const ::std::string& tag) const
 {
   CreatorMap::const_iterator foundIt = _creator.find(tag);
   if (foundIt != _creator.end()) {
